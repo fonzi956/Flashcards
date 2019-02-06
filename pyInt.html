@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=1000">
+	<style>
+		@font-face {
+		font-family: myFirstFont;
+		src: url(SansForgetica-Regular.otf);
+		}
+		body {
+			font-family: myFirstFont;
+		}
+		div#test {
+			border: #000 1px solid;
+			padding: 10px 40px 40px 40px;
+		}
+
+		input {
+			float: right;
+		}
+
+		
+	</style>
+	<script>
+		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+		//
+		var questions = [
+
+			["Python",
+			"is a high-level programming language, with applications in numerous areas, including web programming, scripting, scientific computing, and artificial intelligence. And is processed at runtime by the interpreter."],
+
+			["What are the three major version of Python?", 
+			"1.x, 2.x and 3.x; Both Python Version 2.x and 3.x are used currently; Code written for Python 3.x is guaranteed to work in all future versions."],
+			
+			["How to print text?", 
+			"The print statement can also be used to output multiple lines of text. <br><br> >>> print('Hello world!') <br> Hello world!"],
+
+			["How to get input from the user in Python", 
+			"use the intuitively named input function. The function prompts the user for input, and returns what they enter as a string <br><br> >>> input(\"Enter something please: \") <br> Enter something please: This is what the user enters! <br> This is what the user enters!"],
+
+			["Concatenation", 
+			"integers and floats, strings in Python can be added together; You can’t concatenate strings with numbers (integers)"],
+
+			["Type Conversion", 
+			"Turning string numbers into numbers(int, float, str) <br> >>> int(\"2\") + int(\"3\") <br> 5"],
+
+			["example of type conversion", 
+			"is turning user input (which is a string) to numbers (integers or floats), to allow for the performance of calculations. <br> "
+			+">>> float(input(\"Enter a number: \")) + float(input(\"Enter another number: \"))"
+			+"<br> Enter a number: 40"
+			+"<br> Enter another number: 2"
+			+"<br> 42.0"],
+
+			["What is a variable", 
+			"A variable allows you to store a value by assigning it to a name, which can be used to refer to the value later in the program. To assign a variable, use one equals sign"],
+
+			["can variables be reassigned and be specific to a type?", 
+			"Variables can be reassigned as many times as you want, in order to change their value. In Python, variables don't have specific types, so you can assign a string to a variable, and later assign an integer to the same variable."],
+
+			["Variable Names", 
+			"Certain restrictions apply in regard to the characters that may be used in Python variable names. The only characters that are allowed are letters, numbers, and underscores. Also, they can't start with numbers."
+			+"Not following these rules results in errors."],
+
+			["remove a variable", 
+			"use the del statement; means the reference from the name to the value is deleted, and trying to use the variable causes an error. Deleted variables can be reassigned to later as normal."],
+
+			["In-place operators", 
+			"allow you to write code like 'x = x + 3' more concisely, as 'x += 3'. "
+			+"The same thing is possible with other operators such as -, *, / and % as well as strings too"],
+
+			//Basic Concepts end
+
+			["Booleans", 
+			"is a type. There are two Boolean values: True and False. "
+			+"They can be created by comparing values, for instance by using the equal operator ==."
+			+"<br><br> >>> my_boolean = True"
+			+"<br> >>> my_boolean"
+			+"<br> True"],
+
+			["Comparison operator", 
+			"comparison operator, the not equal operator (!=), evaluates to True if the items being compared aren't equal, and False if they are."
+			+"<br><br> >>> 1 != 1"
+			+"<br> False"
+			+"<br> >>> \"eleven\" != \"seven\" "
+			+"<br> True"],
+
+			["Comparison whether one number is greater or less than another.", 
+			"operators are > and < and The greater than or equal to, and smaller than or equal to operators are >= and <="
+			+"<br><br> >>> 7 > 5"
+			+"<br> True"
+			+"<br><br> >>> 9 >= 9.0"
+			+"<br> True"],
+
+			["if statements", 
+			"to run code if a certain condition holds. "
+			+"If an expression evaluates to True, some statements are carried out. Otherwise, they aren't carried out. "
+			+"To perform more complex checks, if statements can be nested, one inside the other. "
+			+"This means that the inner if statement is the statement part of the outer one."
+			+"<br><br> if 10 > 5:"
+			+"<br> &nbsp; print(\"10 greater than 5\")"
+
+			+"<br>print(\"Program ended\")"
+			+"<br><br> >>>"
+			+"<br> 10 greater than 5"
+			+"<br> Program ended"
+			+"<br> >>>"],
+
+			["else Statements", 
+			"An else statement follows an if statement, and contains code that is called when the if statement evaluates to False. "
+			+"You can chain if and else statements to determine which option in a series of possibilities is true. "],
+
+			["elif Statements", 
+			"The elif (short for else if) statement is a shortcut to use when chaining if and else statements. "
+			+"A series of if elif statements can have a final else block, which is called if none of the if or elif expressions is True."],
+
+			["Boolean Logic", 
+			"Boolean logic is used to make more complicated conditions for if statements that rely on more than one condition. "
+			+"Python's Boolean operators are and, or, and not. "
+			+"The and operator takes two arguments, and evaluates as True if, and only if, both of its arguments are True. Otherwise, it evaluates to False."
+			+"<br><br> >>> 1 == 1 and 2 == 2"
+			+"<br> True"
+			+"<br> >>> 1 != 1 or 2 == 2"
+			+"<br> True"
+			+"<br> >>> not 1 == 1"
+			+"<br> False"],
+
+			["Operator precedenc", 
+			"is a very important concept in programming. It is an extension of the mathematical idea of order of operations (multiplication being performed before addition, etc.) to include other operators, such as those in Boolean logic."],
+
+			["while Loops", 
+			"A while statement is similar to if statement, except that it can be run more than once. The statements inside it are repeatedly executed, as long as the condition holds. Once it evaluates to False, the next section of code is executed. Loop is also called iteration"
+			+"<br><br> i = 1"
+			+"<br> while i <=5:"
+			+"<br> &nbsp; print(i)"
+			+"<br> &nbsp; i = i + 1"
+			+"<br> <br> "
+			+"print(\"Finished!\")"
+			+"<br><br> >>>"
+			+"<br> 1"
+			+"<br> 2"
+			+"<br> 3"
+			+"<br> 4"
+			+"<br> 5"
+			+"<br> Finished!"],
+
+			["infinite loop", 
+			"is a special kind of while loop; it never stops running. Its condition always remains True. stop the program's execution by using the Ctrl-C shortcut or by closing the program."],
+
+			["break", 
+			"To end a while loop prematurely, the break statement can be used. "
+			+"When encountered inside a loop, the break statement causes the loop to finish immediately."],
+
+			["continue", 
+			"Another statement that can be used within loops is continue. "
+			+"Unlike break, continue jumps back to the top of the loop, rather than stopping it."],
+
+			["Lists", 
+			"Lists are another type of object in Python. They are used to store an indexed list of items. "
+			+"A list is created using square brackets with commas separating items. "
+			+"The certain item in the list can be accessed by using its index in square brackets."
+			+"<br><br> words = [\"Hello\", \"world\", \"!\"]"
+			+"<br> print(words[0])"
+			+"<br> print(words[1])"
+			+"<br> print(words[2])"
+			+"<br><br>Hello <br>world <br>!"],
+
+			["empty list", 
+			"is created with an empty pair of square brackets. //prints out []"],
+
+			["Can List have different types", 
+			"yes, Typically, a list will contain items of a single item type, but it is also possible to include several different types. "
+			+"Lists can also be nested within other lists."],
+
+			["Indexing out of the bounds", 
+			"causes an IndexError. Some types, such as strings, can be indexed like lists. Indexing strings behaves as though you are indexing a list containing each character in the string. "
+			+" For other types, such as integers, indexing them isn't possible, and it causes a TypeError."],
+
+			["Lists of lists", 
+			"are often used to represent 2D grids, as Python lacks the multidimensional arrays that would be used for this in other languages."],
+
+			["To check if an item is in a list,", 
+			"the in operator can be used. It returns True if the item occurs one or more times in the list, and False if it doesn't."
+			+"<br><br> words = [\"spam\", \"egg\", \"spam\", \"sausage\"]"
+			+"<br> print(\"spam\" in words)"
+			+"<br> print(\"egg\" in words)"
+			+"<br> print(\"tomato\" in words)"
+			+"<br><br> True"
+			+"<br> True"
+			+"<br> False"],
+
+			["To check if an item is not in a list", 
+			"use the not operator with the in operator"
+			+"<br><br> nums = [1, 2, 3]"
+			+"<br> print(not 4 in nums)"
+			+"<br> print(4 not in nums)"
+			+"<br> print(not 3 in nums)"
+			+"<br> print(3 not in nums)"
+			+"<br> True <br> True <br> False <br> False"],
+
+			["List Functions append method", 
+			"adds an item to the end of an existing list. The dot before append is there because it is a method of the list class. "
+			+"<br><br> nums = [1, 2, 3]"
+			+"<br> nums.append(4)"
+			+"<br> print(nums)"
+			+"<br> <br> [1,2,3,4]"],
+
+			["List Functions len", 
+			"gets the number of items in a list Unlike append, len is a normal function, rather than a method. This means it is written before the list it is being called on, without a dot. "
+			+"<br><br> nums = [1, 3, 5, 2, 4] <br> print(len(nums)) <br><br> 5"],
+
+			["List Functions insert", 
+			"The insert method is similar to append, except that it allows you to insert a new item at any position in the list, as opposed to just at the end."
+			+"<br><br> words = [\"Python\", \"fun\"]"
+			+"<br> index = 1"
+			+"<br> words.insert(index, \"is\")"
+			+"<br> print(words)"
+			+"<br> <br> [\'Python\', \'is\', \'fun\']"],
+
+			["List Functions index", 
+			"The index method finds the first occurrence of a list item and returns its index. If the item isn't in the list, it raises a ValueError."
+			+"<br><br>letters = [\'p\', \'q\', \'r\', \'s\', \'p\', \'u\']"
+			+"<br> print(letters.index(\'r\'))"
+			+"<br> print(letters.index(\'p\'))"
+			+"<br> print(letters.index(\'z\'))"
+			+"<br><br> 2 <br> 0 <br> ValueError: 'z' is not in list"],
+
+			["There are a few more useful functions and methods for lists. ", 
+			"<br> max(list): Returns the list item with the maximum value"
+			+"<br> min(list): Returns the list item with minimum value"
+			+"<br> list.count(obj): Returns a count of how many times an item occurs in a list"
+			+"<br> list.remove(obj): Removes an object from a list"
+			+"<br> list.reverse(): Reverses objects in a list"],
+
+			["Range", 
+			"The range function creates a sequential list of numbers. The code below generates a list containing all of the integers, up to 10."
+			+"<br><br> numbers = list(range(10))"
+			+"<br> print(numbers)"
+			+"<br> <br> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] <br> <br> The call to list is necessary because range by itself creates a range object, and this must be converted to a list if you want to use it as one."],
+
+			["If range is called with one argument", 
+			"it produces an object with values from 0 to that argument. If it is called with two arguments, it produces values from the first to the second."
+			+"<br> <br> numbers = list(range(3, 8)) <br> print(numbers) <br> <br> [3, 4, 5, 6, 7]"],
+
+			["range can have a third argument", 
+			"which determines the interval of the sequence produced. This third argument must be an integer."
+			+"<br> <br> numbers = list(range(5, 20, 2)) <br> print(numbers) <br> <br> [5, 7, 9, 11, 13, 15, 17, 19]"],
+
+			["for Loop", 
+			"Iterating through a list using a while loop requires quite a lot of code, so Python provides the for loop as a shortcut that accomplishes the same thing."
+			+"<br> <br> words = [\"hello\", \"world\", \"spam\", \"eggs\"]"
+			+"<br> for word in words:"
+  			+"<br> nbsp; print(word + \"!\")"
+			+"<br> hello! <br> world! <br> spam! <br> eggs!"],
+
+			["for Loops with range", 
+			"The for loop is commonly used to repeat some code a certain number of times. This is done by combining for loops with range objects."
+			+"<br> <br> for i in range(5): <br>  &nbsp; print(\"hello!\") <br> <br> "
+			+"hello! <br> hello! <br> hello! <br> hello! <br> hello!"],
+
+			//Control Stuctures end
+
+			["Reusing Code", 
+			"Code reuse is a very important part of programming in any language. Increasing code size makes it harder to maintain. "
+			+"<br> For a large programming project to be successful, it is essential to abide by the Don't Repeat Yourself, or DRY, principle. We've already looked at one way of doing this: by using loops and FUNCTIONS"
+			+"<br> Bad, repetitive code is said to abide by the WET principle, which stands for Write Everything Twice, or We Enjoy Typing"],
+
+			["Functions", 
+			"Any statement that consists of a word followed by information in parentheses is a function call. and the comma-separated values inside the parentheses are function arguments."],
+
+			["pre-defined functions", 
+			"create your own functions by using the def statement. The code block within every function starts with a colon (:) and is indented. You must define functions before they are called"
+			+"<br> <br> def my_func():"
+			+"<br>  &nbsp; print(\"spam\")"
+			+"<br>  &nbsp; print(\"spam\")"
+			+"<br>  &nbsp; print(\"spam\")"
+			+"<br> my_func()"
+			+"<br> <br> spam <br> spam <br> spam <br> spam"],
+
+			["functions with one argument", 
+			"the argument is defined inside the parentheses. <br> <br> def print_with_exclamation(word):"
+			+"<br>  &nbsp; print(word + \"!\")"
+			+"<br> "
+			+"<br> print_with_exclamation(\"spam\")"
+			+"<br> print_with_exclamation(\"eggs\")"
+			+"<br> print_with_exclamation(\"python\")"
+			+"<br> <br> spam! <br> eggs! <br> python!"],
+
+			["Can functions have more than one arguments", 
+			"yes separate them with commas"
+			+"<br> <br> def print_sum_twice(x, y): "
+			+"<br>  &nbsp; print(x + y)"
+			+"<br>  &nbsp; print(x + y)"
+			+"<br> "
+			+"<br> print_sum_twice(5, 8) <br> <br> 13 <br> 13"],
+
+			["Can Function arguments be used as variables inside the function definition", 
+			"yes However, they cannot be referenced outside of the function's definition. This also applies to other variables created inside a function."
+			+"<br> <br> def function(variable): "
+			+"<br> &nbsp; variable += 1"
+			+"<br> &nbsp; print(variable)"
+			+"<br> "
+			+"<br> function(7)"
+			+"<br> print(variable) <br> <br> 8 <br> NameError: name \'variable\' is not defined "],
+
+			["Returning from Functions", 
+			"Certain functions, such as int or str, return a value that can be used later.  To do this for your defined functions, you can use the return statement. The return statement cannot be used outside of a function definition. Once you return a value from a function, it immediately stops being executed. Any code after the return statement will never happen."
+			+"<br> <br> def max(x, y): "
+			+"<br> &nbsp; if x >=y:"
+			+"<br> &nbsp; &nbsp; return x"
+			+"<br> &nbsp; else:"
+			+"<br> &nbsp; &nbsp; return y"
+			+"<br> "   
+			+"<br> print(max(4, 7))"
+			+"<br> z = max(8, 5)"
+			+"<br> print(z) <br> <br> 7 <br> 8"],
+
+			["Comments and Docstrings", 
+			"Comments are annotations to code used to make it easier to understand. They don't affect how code is run. In Python, a comment is created by inserting an octothorpe (otherwise known as a number sign or hash symbol: #). All text after it on that line is ignored"
+			+"Docstrings (documentation strings) serve a similar purpose to comments, as they are designed to explain code. However, they are more specific and have a different syntax. They are created by putting a multiline string containing. Unlike conventional comments, docstrings are retained throughout the runtime of the program. This allows the programmer to inspect these comments at run time."],
+
+			["Can functions be assigned and reassigned  to a variable", 
+			"yes <br> "
+			+"<br> def multiply(x, y): "
+			+"<br> &nbsp; return x * y"
+			+"<br> "
+			+"<br> a = 4"
+			+"<br> b = 7"
+			+"<br> operation = multiply"
+			+"<br> print(operation(a, b)) <br> <br> 28"],
+
+			["Can functions be used as argument of other functions", 
+			"yes <br> "
+			+"<br> def add(x, y):"
+			+"<br> &nbsp; return x + y"
+			+"<br> "
+			+"<br> def do_twice(func, x, y):"
+			+"<br> &nbsp; return func(func(x, y), func(x, y))"
+			+"<br> "
+			+"<br> a = 5"
+			+"<br> b = 10"
+			+"<br> "
+			+"<br> print(do_twice(add, a, b)) <br> <br> 30"],
+
+			["Modules", 
+			"Modules are pieces of code that other people have written to fulfill common tasks, such as generating random numbers, performing mathematical operations, etc. "
+			+"<br> "
+			+"The basic way to use a module is to add import module_name at the top of your code, and then using module_name.var to access functions and values with the name var in the module."],
+
+			["Modules from", 
+			"There is another kind of import that can be used if you only need certain functions from a module. "
+			+"These take the form from module_name import var, and then var can be used as if it were defined normally in your code. imports all objects from a module. For example: from math import *"
+			+"This is generally discouraged, as it confuses variables in your code with variables in the external module."],
+
+			["Modules as and if no module exists", 
+			"You can import a module or object under a different name using the as keyword. This is mainly used when a module or object has a long or confusing name. Trying to import a module that isn't available causes an ImportError."],
+
+			["three main types of modules in Python", 
+			"those you write yourself, those you install from external sources, and those that are preinstalled with Python. (standard library)"],
+
+			["The Standard Library", 
+			"Some of the modules in the standard library are written in Python, and some are written in C. Most are available on all platforms, but some are Windows or Unix specific. "],
+
+			["third-party Python modules", 
+			"are stored on the Python Package Index (PyPI) The best way to install these is using a program called pip. This comes installed by default with modern distributions of Python. and enter pip install library_name"],
+
+			//Functions & Modules end
+
+			["Exceptions", 
+			"They occur when something goes wrong, due to incorrect code or input. When an exception occurs, the program immediately stops."],
+
+			["Exception Handling", 
+			"To handle exceptions, and to call code when an exception occurs, you can use a try/except statement. "
+			+"The try block contains code that might throw an exception. If that exception occurs, the code in the try block stops being executed, and the code in the except block is run. If no error occurs, the code in the except block doesn't run. And can have multiple different except blocks to handle different exceptions. "
+			+"Multiple exceptions can also be put into a single except block using parentheses, to have the except block handle all of them."],
+
+			[" except statement without any exception", 
+			"specified will catch all errors. These should be used sparingly, as they can catch unexpected errors and hide programming mistakes. "
+			+"<br> <br> try: "
+			+"<br> &nbsp; word = \"spam\""
+			+"<br> &nbsp; print(word / 0)"
+			+"<br> except:"
+			+"<br> &nbsp; print(\"An error occurred\") <br> <br> An error occurred"],
+
+			["finally", 
+			"To ensure some code runs no matter what errors occur, you can use a finally statement. The finally statement is placed at the bottom of a try/except statement. Code within a finally statement always runs after execution of the code in the try, and possibly in the except, blocks even runs if an uncaught exception occurs in one of the preceding blocks."
+			+"<br> <br> try: "
+			+"<br> &nbsp; print(1)"
+			+"<br> &nbsp; print(10 / 0)"
+			+"<br> except ZeroDivisionError:"
+			+"<br> &nbsp; print(unknown_var)"
+			+"<br> finally:"
+			+"&nbsp; print(\"This is executed last\")"
+			+"<br> <br> 1 "
+			+"<br> This is executed last"
+			+"<br> "
+			+"<br> ZeroDivisionError: division by zero"
+			+"<br> During handling of the above exception, another exception occurred:"
+			+"<br> NameError: name 'unknown_var' is not defined"],
+
+			["How to raise Exceptions", 
+			"You can raise exceptions by using the raise statement , Exceptions can be raised with arguments that give detail about them In except blocks, the raise statement can be used without arguments to re-raise whatever exception occurred."
+			+"<br> <br> try:"
+			+"<br> &nbsp; num = 5 / 0"
+			+"<br> except:"
+			+"<br> &nbsp; print(\"An error occurred\")"
+			+"<br> &nbsp; raise"
+			+"<br> <br> An error occurred"
+			+"<br> "
+			+"<br> ZeroDivisionError: division by zero"],
+
+			["Assertions", 
+			"An assertion is a sanity-check that you can turn on or turn off when you have finished testing the program. An expression is tested, and if the result comes up false, an exception is raised. "
+			+"Assertions are carried out through use of the assert statement. Programmers often place assertions at the start of a function to check for valid input, and after a function call to check for valid output."
+			+"<br> <br> print(1)"
+			+"<br> assert 2 + 2 == 4"
+			+"<br> print(2)"
+			+"<br> assert 1 + 1 == 3"
+			+"<br> print(3)"
+			+"<br> <br> 1<br> 2<br> AssertionError"],
+
+
+			["Can assert take a second argument", 
+			"The assert can take a second argument that is passed to the AssertionError raised if the assertion fails. AssertionError exceptions can be caught and handled like any other exception using the try-except statement, but if not handled, this type of exception will terminate the program."
+			+"<br> <br> temp = -10"
+			+"<br> assert (temp >= 0), \"Colder than absolute zero!\""
+			+"<br> <br> AssertionError: Colder than absolute zero!"],
+
+			["Files", 
+			"You can use Python to read and write the contents of files. Text files are the easiest to manipulate. Before a file can be edited, it must be opened, using the open function. The argument of the open function is the path to the file. If the file is in the current working directory of the program, you can specify only its name."
+			+"<br> myfile = open(\"filename.txt\")"],
+
+
+			["specify the mode used to open a file", 
+			"by applying a second argument to the open function. "
+			+"<br> Sending \"r\" means open in read mode, which is the default. "
+			+"<br> Sending \"w\" means write mode, for rewriting the contents of a file."
+			+"<br> Sending \"a\" means append mode, for adding new content to the end of the file."
+			+"<br> "
+			+"<br> Adding \"b\" to a mode opens it in binary mode, which is used for non-text files (such as image and sound files)."
+			+"<br><br> # binary write modeopen(\"filename.txt\", \"wb\")"],
+
+
+			["close method", 
+			"Once a file has been opened and used, you should close it. This is done with the close method of the file object."
+			+"<br> file = open(\"filename.txt\", \"w\")"
+			+"<br> # do stuff to the file"
+			+"<br> file.close()"],
+
+			["Reading Files", 
+			"The contents of a file that has been opened in text mode can be read using the read method."
+			+"<br> <br> file = open(\"filename.txt\", \"r\")"
+			+"<br> cont = file.read()"
+			+"<br> # This will print all of the contents of the file \"filename.txt\"."
+			+"<br> print(cont)"
+			+"<br> file.close()"],
+
+			["read only a certain amount of a file", 
+			"you can provide a number as an argument to the read function. This determines the number of bytes that should be read. You can make more calls to read on the same file object to read more of the file byte by byte. With no argument, read returns the rest of the file."
+			+"<br> Just like passing no arguments, negative values will return the entire contents."
+			+"<br> <br> file = open(\"filename.txt\", \"r\")"
+			+"<br> print(file.read(16))"
+			+"<br> print(file.read(4))"
+			+"<br> print(file.read(4))"
+			+"<br> print(file.read())"
+			+"<br> file.close()"],
+			
+			["After all contents in a file have been read", 
+			"any attempts to read further from that file will return an empty string, because you are trying to read from the end of the file."],
+
+			["To retrieve each line in a file", 
+			"use the readlines method to return a list in which each element is a line in the file. or \"for line in file:\" "],
+
+			["Writing Files", 
+			"To write to files you use the write method, which writes a string to the file. The \"w\" mode will create a file, if it does not already exist. When a file is opened in write mode, the file's existing content is deleted. The write method returns the number of bytes written to a file, if successful."
+			+"<br> <br> file = open(\"newfile.txt\", \"w\")"
+			+"<br> file.write(\"This has been written to a file\")"
+			+"<br> file.close()"
+			+"<br> "
+			+"<br> file = open(\"newfile.txt\", \"r\")"
+			+"<br> print(file.read())"
+			+"<br> file.close() <br> <br> This has been written to a file"],
+
+			["Working with Files: It is good practice to avoid wasting resources by ", 
+			"making sure that files are always closed after they have been used. One way of doing this is to use try and finally. And An alternative way of doing this is using with statements. This creates a temporary variable (often called f), which is only accessible in the indented block of the with statement."
+			+"<br> <br> with open(\"filename.txt\") as f: "
+   			+"<br> &nbsp;print(f.read())"],
+
+			//Exceptions & Files end
+
+			["None", 
+			"The None object is used to represent the absence of a value. It is similar to null in other programming languages.  Like other \"empty\" values, such as 0, [] and the empty string, it is False when converted to a Boolean variable.  When entered at the Python console, it is displayed as the empty string."],
+
+			[" None object", 
+			"is returned by any function that doesn't explicitly return anything else."
+			+"<br> <br> def some_func():"
+			+"<br> &nbsp; print(\"Hi!\")"
+			+"<br> "
+			+"<br> var = some_func()"
+			+"<br> print(var) <br> <br> Hi! <br> None"],
+
+			["Dictionaries", 
+			"Dictionaries are data structures used to map arbitrary keys to values. Lists can be thought of as dictionaries with integer keys within a certain range. Dictionaries can be indexed in the same way as lists, using square brackets containing keys."
+			+"<br> <br> ages = {\"Dave\": 24, \"Mary\": 42, \"John\": 58}"
+			+"<br> print(ages[\"Dave\"]) # Each element in a dictionary is represented by a key:value pair."
+			+"<br> print(ages[\"Mary\"]) <br> <br> 24 <br> 42"],
+
+			["index a key that isn't part of the dictionary", 
+			"returns a KeyError and An empty dictionary is defined as {}."],
+
+			["Dictionaries immutable", 
+			"Only immutable objects can be used as keys to dictionaries. Immutable objects are those that can't be changed. So far, the only mutable objects you've come across are lists and dictionaries. Trying to use a mutable object as a dictionary key causes a TypeError"
+			+"<br> <br> bad_dict = {"
+			+"<br> &nbsp; [1, 2, 3]: \"one two three\", "
+			+"<br> } <br> <br> TypeError: unhashable type: 'list'"],
+			
+			["dictionary keys", 
+			"Just like lists, dictionary keys can be assigned to different values. However, unlike lists, a new dictionary key can also be assigned a value, not just ones that already exist."
+			+"<br> <br> squares = {1: 1, 2: 4, 3: \"error\", 4: 16,}"
+			+"<br> squares[8] = 64"
+			+"<br> squares[3] = 9"
+			+"<br> print(squares) <br> <br> {8: 64, 1: 1, 2: 4, 3: 9, 4: 16}"],
+			
+
+			["To determine whether a key is in a dictionary, ", 
+			"you can use in and not in, just as you can for a list."
+			+"<br> <br> nums = {"
+			+"<br> &nbsp; 1: \"one\","
+			+"<br> &nbsp; 2: \"two\","
+			+"<br> &nbsp; 3: \"three\","
+			+"<br> }"
+			+"<br> print(1 in nums)"
+			+"<br> print(\"three\" in nums)"
+			+"<br> print(4 not in nums) <br> <br> True <br> False <br> True"],
+
+			["dictionary method get", 
+			"It does the same thing as indexing, but if the key is not found in the dictionary it returns another specified value instead ('None', by default). "
+			+"<br> <br> pairs = {1: \"apple\","
+			+"<br> &nbsp; \"orange\": [2, 3, 4], "
+			+"<br> &nbsp; True: False, "
+			+"<br> &nbsp; None: \"True\","
+			+"<br> }"
+			+"<br> "
+			+"<br> print(pairs.get(\"orange\"))"
+			+"<br> print(pairs.get(7))"
+			+"<br> print(pairs.get(12345, \"not in dictionary\"))"
+			+"<br> <br> [2, 3, 4] <br> None <br> not in dictionary"],
+
+			["Tuples", 
+			"Tuples are very similar to lists, except that they are immutable (they cannot be changed). Also, they are created using parentheses, rather than square brackets. Trying to reassign a value in a tuple causes a TypeError. tuples can be nested within each other. Tuples can be created without the parentheses, by just separating the values with commas. An empty tuple is created using an empty parenthesis pair. Tuples are faster than lists, but they cannot be changed. "],
+
+			["List slices", 
+			"List slices provide a more advanced way of retrieving values from a list. Basic list slicing involves indexing a list with two colon-separated integers. This returns a new list containing all the values in the old list between the indices. Like the arguments to range, the first index provided in a slice is included in the result, but the second isn't."
+			+"<br> <br> squares = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]"
+			+"<br> print(squares[2:6])"
+			+"<br> print(squares[3:8])"
+			+"<br> print(squares[0:1])"
+			+"<br> <br> [4, 9, 16, 25] <br> [9, 16, 25, 36, 49] <br> [0]"],
+
+
+			["List Slices omitted", 
+			"If the first number in a slice is omitted, it is taken to be the start of the list. If the second number is omitted, it is taken to be the end. Slicing can also be done on tuples."
+			+"<br> <br> squares = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]"
+			+"<br> print(squares[:7])"
+			+"<br> print(squares[7:])"
+			+"<br> <br> [0, 1, 4, 9, 16, 25, 36] <br> [49, 64, 81]"],
+
+			["Does List slices have a third number", 
+			"yes representing the step, to include only alternate values in the slice."
+			+"<br> <br> squares = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]"
+			+"<br> print(squares[::2])"
+			+"<br> print(squares[2:8:3])"
+			+"<br> <br> [0, 4, 16, 36, 64] <br> [4, 25]"],
+
+			["List Slices Negative", 
+			"Negative values can be used in list slicing (and normal list indexing). When negative values are used for the first and second values in a slice (or a normal index), they count from the end of the list. If a negative value is used for the step, the slice is done backwards. Using [::-1] as a slice is a common and idiomatic way to reverse a list."
+			+"<br> <br> squares = [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]"
+			+"<br> print(squares[1:-1])"
+			+"<br> <br> [1, 4, 9, 16, 25, 36, 49, 64]"],
+
+			["List Comprehensions", 
+			"List comprehensions are a useful way of quickly creating lists whose contents obey a simple rule. List comprehensions are inspired by set-builder notation in mathematics."
+			+"<br> <br> # a list comprehension"
+			+"<br> cubes = [i**3 for i in range(5)]"
+			+"<br> "
+			+"<br> print(cubes)"
+			+"<br> <br> [0, 1, 8, 27, 64]"],
+
+			["List Comprehensions if", 
+			"A list comprehension can also contain an if statement to enforce a condition on values in the list"
+			+"<br> <br> evens=[i**2 for i in range(10) if i**2 % 2 == 0]"
+			+"<br> "
+			+"<br> print(evens)"
+			+"<br> <br> [0, 4, 16, 36, 64]"],
+
+			["List Comprehensions MemoryError", 
+			"Trying to create a list in a very extensive range will result in a MemoryError."
+			+"<br> <br> even = [2*i for i in range(10**100)]"
+			+"<br> <br> MemoryError # This issue is solved by generators"],
+
+			["String Formatting", 
+			"So far, to combine strings and non-strings, you've converted the non-strings to strings and added them. String formatting provides a more powerful way to embed non-strings within strings. String formatting uses a string's format method to substitute a number of arguments in the string."
+			+"<br> <br> # string formatting"
+			+"<br> nums = [4, 5, 6]"
+			+"<br> msg = \"Numbers: {0} {1} {2}\". format(nums[0], nums[1], nums[2])"
+			+"<br> print(msg)"
+			+"<br> <br> Numbers: 4 5 6"
+			+"<br> <br> # Each argument of the format function is placed in the string at the corresponding position, which is determined using the curly braces { }."],
+
+			["can String formatting be done with named arguments.", 
+			"yes "
+			+"<br> <br> a = \"{x}, {y}\".format(x=5, y=12)"
+			+"<br> print(a)"
+			+"<br> <br> 5, 12"],
+
+			["Useful String Functions", 
+			"Python contains many useful built-in functions and methods to accomplish common tasks. "
+			+"<br> join - joins a list of strings with another string as a separator. "
+			+"<br> replace - replaces one substring in a string with another."
+			+"<br> startswith and endswith - determine if there is a substring at the start and end of a string, respectively. "
+			+"<br> To change the case of a string, you can use lower and upper."
+			+"<br> The method split is the opposite of join, turning a string with a certain separator into a list."],
+
+			["Useful Numeric Functions", 
+			"<br> To find the maximum or minimum of some numbers or a list, you can use max or min."
+			+"<br> To find the distance of a number from zero (its absolute value), use abs."
+			+"<br> To round a number to a certain number of decimal places, use round."
+			+"<br> To find the total of a list, use sum."],
+
+			["Useful List Functions", 
+			"Often used in conditional statements, all and any take a list as an argument, and return True if all or any (respectively) of their arguments evaluate to True (and False otherwise). "
+			+"The function enumerate can be used to iterate through the values and indices of a list simultaneously."],
+
+			//More Types end
+
+			["Functional programming", 
+			"Functional programming is a style of programming that (as the name suggests) is based around functions. A key part of functional programming is higher-order functions. We have seen this idea briefly in the previous lesson on functions as objects. Higher-order functions take other functions as arguments, or return them as results."
+			+"<br> <br> def apply_twice(func, arg):"
+			+"<br> &nbsp; return func(func(arg))"
+			+"<br> "
+			+"<br> def add_five(x):"
+			+"<br> &nbsp; return x + 5"
+			+"<br> "
+			+"<br> print(apply_twice(add_five, 10))"
+			+"<br> <br> 20 <br> <br> he function apply_twice takes another function as its argument, and calls it twice inside its body."],
+
+			["Pure Functions", 
+			"Functional programming seeks to use pure functions. Pure functions have no side effects, and return a value that depends only on their arguments. This is how functions in math work: for example, The cos(x) will, for the same value of x, always return the same result."
+			+"<br> <br> #Pure function: "
+			+"<br> def pure_function(x, y):"
+			+"<br> &nbsp; temp = x + 2*y"
+			+"<br> &nbsp; return temp / (2*x + y) "
+			+"<br> <br> #Impure function:"
+			+"<br> some_list = []"
+			+"<br> "
+			+"<br> def impure(arg):"
+			+"<br> &nbsp; some_list.append(arg)"
+			+"<br> <br> The function above is not pure, because it changed the state of some_list."],
+
+			["advantages and disadvantages of using pure functions", 
+			"<br> - easier to reason about and test."
+			+"<br> - more efficient. Once the function has been evaluated for an input, the result can be stored and referred to the next time the function of that input is needed, reducing the number of times the function is called. This is called memoization."
+			+"<br> - easier to run in parallel."
+			+"<br> <br> The main disadvantage of using only pure functions is that they majorly complicate the otherwise simple task of I/O, since this appears to inherently require side effects. "
+			+"They can also be more difficult to write in some situations."],
+
+			["Lambdas", 
+			"Creating a function normally (using def) assigns it to a variable automatically. This is different from the creation of other objects - such as strings and integers - which can be created on the fly, without assigning them to a variable. The same is possible with functions, provided that they are created using lambda syntax. Functions created this way are known as anonymous. This approach is most commonly used when passing a simple function as an argument to another function."
+			+"<br> <br> def my_func(f, arg):"
+			+"<br> &nbsp; return f(arg)"
+			+"<br> "
+			+"<br> my_func(lambda x: 2*x*x, 5)"],
+
+			["why use Lambdas", 
+			"Lambda functions aren't as powerful as named functions. "
+			+"They can only do things that require a single expression - usually equivalent to a single line of code."
+			+"<br> <br> #named function"
+			+"<br> def polynomial(x):"
+			+"<br> &nbsp; return x**2 + 5*x + 4"
+			+"print(polynomial(-4))"
+			+"<br> "
+			+"<br> #lambda"
+			+"<br> print((lambda x: x**2 + 5*x + 4) (-4))"
+			+"<br> <br> 0 <br> 0 <br> <br> In the code above, we created an anonymous function on the fly and called it with an argument."],
+
+			["can Lambdas be assigned to variable", 
+			"yes and use like normal functions"
+			+"<br> <br> double = lambda x: x * 2"
+			+"<br> print(double(7)) <br> <br> 14 <br> <br> However, there is rarely a good reason to do this - it is usually better to define a function with def instead."],
+
+			["map", 
+			"The built-in functions map and filter are very useful higher-order functions that operate on lists (or similar objects called iterables). The function map takes a function and an iterable as arguments, and returns a new iterable with the function applied to each argument. "
+			+"<br> <br> def add_five(x):"
+			+"<br> &nbsp; return x + 5"
+			+"<br> "
+			+"<br> nums = [11, 22, 33, 44, 55]"
+			+"<br> result = list(map(add_five, nums))"
+			+"<br> print(result)"
+			+"<br> <br> [16, 27, 38, 49, 60] <br> <br> We could have achieved the same result more easily by using lambda syntax"
+			+"<br> <br> nums = [11, 22, 33, 44, 55]"
+			+"<br> "
+			+"<br> result = list(map(lambda x: x+5, nums))"
+			+"<br> print(result)<br> <br> To convert the result into a list, we used list explicitly."],
+
+			["filter", 
+			"The function filter filters an iterable by removing items that don't match a predicate (a function that returns a Boolean). "
+			+"<br> <br> nums = [11, 22, 33, 44, 55]"
+			+"<br> res = list(filter(lambda x: x%2==0, nums))"
+			+"<br> print(res)"
+			+"<br> <br> [22,44]<br> <br> Like map, the result has to be explicitly converted to a list if you want to print it."],
+
+			["Generators", 
+			"Generators are a type of iterable, like lists or tuples. Unlike lists, they don't allow indexing with arbitrary indices, but they can still be iterated through with for loops. They can be created using functions and the yield statement."
+			+"<br> <br> def countdown():"
+			+"<br> i=5"
+			+"<br> while i > 0:"
+			+"<br> &nbsp; yield i"
+			+"<br> &nbsp; i -= 1"
+			+"<br> "  
+			+"<br> for i in countdown():"
+			+"<br> &nbsp; print(i)"
+			+"<br> <br> 5<br> 4<br> 3<br> 2<br> 1<br> <br> The yield statement is used to define a generator, replacing the return of a function to provide a result to its caller without destroying local variables."],
+
+
+			["Do generators have memory restrictions", 
+			"no, Due to the fact that they yield one item at a time, generators don't have the memory restrictions of lists. In fact, they can be infinite!"
+			+"<br> <br> def infinite_sevens():"
+			+"<br> &nbsp; while True:"
+			+"<br> &nbsp; &nbsp; yield 7"
+			+"<br> "     
+			+"<br> for i in infinite_sevens():"
+			+"<br> &nbsp; print(i)"
+			+"<br> <br> 7<br> 7<br> 7<br> 7<br> ...<br> <br> In short, generators allow you to declare a function that behaves like an iterator, i.e. it can be used in a for loop."],
+
+
+			["Finite generators", 
+			"Finite generators can be converted into lists by passing them as arguments to the list function. Using generators results in improved performance, which is the result of the lazy (on demand) generation of values, which translates to lower memory usage. Furthermore, we do not need to wait until all the elements have been generated before we start to use them."
+			+"<br> <br> def numbers(x):"
+			+"<br> &nbsp; for i in range(x):"
+			+"<br> &nbsp; &nbsp; if i % 2 == 0:"
+			+"<br> &nbsp; &nbsp; &nbsp; yield i"
+			+"<br> "
+			+"<br> print(list(numbers(11)))"
+			+"<br> <br> [0, 2, 4, 6, 8, 10]"],
+
+			["Decorators", 
+			"Decorators provide a way to modify functions using other functions. This is ideal when you need to extend the functionality of functions that you don't want to modify."
+			+"<br> <br> def decor(func):"
+			+"<br> &nbsp; def wrap():"
+			+"<br> &nbsp; &nbsp; print(\"============\")"
+			+"<br> &nbsp; &nbsp; func()"
+			+"<br> &nbsp; &nbsp; print(\"============\")"
+			+"<br> &nbsp; return wrap"
+			+""
+			+"<br> def print_text():"
+			+"<br> &nbsp; print(\"Hello world!\")"
+			+""
+			+"<br> decorated = decor(print_text)"
+			+"<br> decorated()"
+			+"<br> <br> We defined a function named decor that has a single parameter func. Inside decor, we defined a nested function named wrap. The wrap function will print a string, then call func(), and print another string. The decor function returns the wrap function as its result. We could say that the variable decorated is a decorated version of print_text - it's print_text plus something. In fact, if we wrote a useful decorator we might want to replace print_text with the decorated version altogether so we always got our \"plus something\" version of print_text. This is done by re-assigning the variable that contains our function:"
+			+"<br> <br> print_text = decor(print_text) <br> print_text() # Now print_text corresponds to our decorated version."],
+
+			["What are decorators?", 
+			"Functions that modify other functions"],
+
+			["Which statement can be used to achieve the same behavior as my_func = my_dec(my_func)?", 
+			"@my_dec"],
+
+			["Recursion", 
+			"Recursion is a very important concept in functional programming. The fundamental part of recursion is self-reference - functions calling themselves. It is used to solve problems that can be broken up into easier sub-problems of the same type. A classic example of a function that is implemented recursively is the factorial function, which finds the product of all positive integers below a specified number. n! = n * (n-1)!. Furthermore, 1! = 1. This is known as the base case, as it can be calculated without performing any more factorials. The base case acts as the exit condition of the recursion."
+			+"<br> <br> def factorial(x):"
+			+"<br> &nbsp;if x == 1:"
+			+"<br> &nbsp; &nbsp;return 1"
+			+"<br> &nbsp;else: "
+			+"<br> &nbsp; &nbsp;return x * factorial(x-1)"
+			+"<br> "
+			+"<br> print(factorial(5))<br> <br> 120"],
+
+			["can recursion be indirect", 
+			"One function can call a second, which calls the first, which calls the second, and so on. This can occur with any number of functions. added note Recursive functions can be infinite, just like infinite while loops"
+			+"<br><br>def is_even(x):"
+			+"<br> if x == 0:"
+			+"<br> return True"
+			+"<br> else:"
+			+"<br> return is_odd(x-1)"
+			+"<br>"
+			+"<br> def is_odd(x):"
+			+"<br> return not is_even(x)"
+			+"<br>"
+			+"<br>"
+			+"<br> print(is_odd(17))"
+			+"<br> print(is_even(23))"
+			+"<br><br> True <br>False"],
+
+			["Sets", 
+			"Sets are data structures, similar to lists or dictionaries. They are created using curly braces, or the set function. They share some functionality with lists, such as the use of in to check whether they contain a particular item."
+			+"<br> <br> num_set = {1, 2, 3, 4, 5}"
+			+"<br> word_set = set([\"spam\", \"eggs\", \"sausage\"])"
+			+"<br> "
+			+"<br> print(3 in num_set)"
+			+"<br> print(\"spam\" not in word_set)"
+			+"<br> <br> True <br> False <br> <br> To create an empty set, you must use set(), as {} creates an empty dictionary."],
+
+
+			["Sets differ from lists in several ways", 
+			"but share several list operations such as len. They are unordered, which means that they can't be indexed. They cannot contain duplicate elements. Due to the way they're stored, it's faster to check whether an item is part of a set, rather than part of a list. Instead of using append to add to a set, use add. The method remove removes a specific element from a set; pop removes an arbitrary element."
+			+"<br> <br> nums = {1, 2, 1, 3, 1, 4, 5, 6}"
+			+"<br> print(nums)"
+			+"<br> nums.add(-7)"
+			+"<br> nums.remove(3)"
+			+"<br> print(nums)"
+			+"<br> <br> {1, 2, 3, 4, 5, 6} <br>  {1, 2, 4, 5, 6, -7}"
+			+"<br> <br> Basic uses of sets include membership testing and the elimination of duplicate entries."],
+
+			["Can sets be combined", 
+			"Sets can be combined using mathematical operations. "
+			+"<br> The union operator | combines two sets to form a new one containing items in either." 
+			+"<br> The intersection operator & gets items only in both. "
+			+"<br> The difference operator - gets items in the first set but not in the second. "
+			+"<br> The symmetric difference operator ^ gets items in either set, but not both."
+			+"<br> <br> first = {1, 2, 3, 4, 5, 6}"
+			+"<br> second = {4, 5, 6, 7, 8, 9}"
+			+"<br> "
+			+"<br> print(first | second)"
+			+"<br> print(first & second)"
+			+"<br> print(first - second)"
+			+"<br> print(second - first)"
+			+"<br> print(first ^ second)"
+			+"<br> <br> {1, 2, 3, 4, 5, 6, 7, 8, 9}"
+			+"<br> {4, 5, 6}"
+			+"<br> {1, 2, 3}"
+			+"<br> {8, 9, 7}"
+			+"<br> {1, 2, 3, 7, 8, 9}"],
+
+			["Data Structures", 
+			"Python supports the following data structures: lists, dictionaries, tuples, sets. "
+			+"<br> <br> When to use a dictionary:"
+			+"<br> - When you need a logical association between a key:value pair."
+			+"<br> - When you need fast lookup for your data, based on a custom key."
+			+"<br> - When your data is being constantly modified. Remember, dictionaries are mutable."
+			+"<br> <br> When to use the other types:"
+			+"<br> - Use lists if you have a collection of data that does not need random access. Try to choose lists when you need a simple, iterable collection that is modified frequently."
+			+"<br> - Use a set if you need uniqueness for the elements. "
+			+"<br> - Use tuples when your data cannot change. <br> <br> Many times, a tuple is used in combination with a dictionary, for example, a tuple might represent a key, because it's immutable."],
+
+			["itertools", 
+			"The module itertools is a standard library that contains several functions that are useful in functional programming. One type of function it produces is infinite iterators. The function count counts up infinitely from a value. The function cycle infinitely iterates through an iterable (for instance a list or string). The function repeat repeats an object, either infinitely or a specific number of times."
+			+"from itertools import count"
+			+"<br>"
+			+"<br>for i in count(3):"
+			+"<br>  &nbsp; print(i)"
+			+"<br>  &nbsp; if i >=11:"
+			+"<br>   &nbsp;  &nbsp; break"
+			+"<br> 3<br> 4<br> 5<br> 6<br> 7<br> 8<br> 9<br> 10<br> 11 "],
+
+			["many functions in itertools", 
+			"takewhile - takes items from an iterable while a predicate function remains true; chain - combines several iterables into one long one;  accumulate - returns a running total of values in an iterable. <br> Product and permutation. These are used when you want to accomplish a task with all possible combinations of some items"],
+
+			//Functional Programming end
+
+			["Classes", 
+			"Another very popular paradigm is object-oriented programming (OOP). Objects are created using classes, which are actually the focal point of OOP. The class describes what the object will be, but is separate from the object itself. In other words, a class can be described as an object's blueprint, description, or definition. You can use the same class as a blueprint for creating multiple different objects. Classes are created using the keyword class and an indented block, which contains class methods (which are functions). "
+			+"<br> <br> class Cat:"
+			+"<br> &nbsp; def __init__(self, color, legs):"
+			+"<br> &nbsp; &nbsp; self.color = color"
+			+"<br> &nbsp; &nbsp; self.legs = legs"
+			+"<br> "
+			+"<br> felix = Cat(\"ginger\", 4)"
+			+"<br> rover = Cat(\"dog-colored\", 4)"
+			+"<br> stumpy = Cat(\"brown\", 3)"
+			+"This code defines a class named Cat, which has two attributes: color and legs. Then the class is used to create 3 separate objects of that class."],
+
+			["__init__", 
+			"The __init__ method is the most important method in a class. This is called when an instance (object) of the class is created, using the class name as a function. All methods must have self as their first parameter, although it isn't explicitly passed, Python adds the self argument to the list for you; you do not need to include it when you call the methods. Within a method definition, self refers to the instance calling the method."
+			+"<br> Instances of a class have attributes, which are pieces of data associated with them. In this example, Cat instances have attributes color and legs. These can be accessed by putting a dot, and the attribute name after an instance. In an __init__ method, self.attribute can therefore be used to set the initial value of an instance's attributes."
+			+"<br> <br> class Cat:"
+			+"<br> &nbsp; def __init__(self, color, legs):"
+			+"<br> &nbsp; &nbsp; self.color = color"
+			+"<br> &nbsp; &nbsp; self.legs = legs"
+			+"<br> "
+			+"<br> felix = Cat(\"ginger\", 4)"
+			+"<br> print(felix.color)"
+			+"<br> <br> ginger <br> <br> #In the example above, the __init__ method takes two arguments and assigns them to the object's attributes. The __init__ method is called the class constructor"],
+
+			["Methods", 
+			"Classes can have other methods defined to add functionality to them. Remember, that all methods must have self as their first parameter. These methods are accessed using the same dot syntax as attributes. "
+			+"<br> <br> class Dog:"
+			+"<br> &nbsp; def __init__(self, name, color):"
+			+"<br> &nbsp; &nbsp; self.name = name"
+			+"<br> &nbsp; &nbsp; self.color = color"
+			+"<br> "
+			+"<br> &nbsp; def bark(self):"
+			+"<br> &nbsp; &nbsp; print(\"Woof!\")"
+			+"<br> "
+			+"<br> fido = Dog(\"Fido\", \"brown\")"
+			+"<br> print(fido.name)"
+			+"<br> fido.bark()"
+			+"<br> <br> Fido <br> Woof!"],
+
+			["class attributes", 
+			"Classes can also have class attributes, created by assigning variables within the body of the class. These can be accessed either from instances of the class, or the class itself."
+			+"<br> <br> class Dog:"
+			+"<br> &nbsp; legs = 4"
+			+"<br> &nbsp; def __init__(self, name, color):"
+			+"<br> &nbsp; &nbsp; self.name = name"
+			+"<br> &nbsp; &nbsp; self.color = color"
+			+"<br> "
+			+"<br> fido = Dog(\"Fido\", \"brown\")"
+			+"<br> print(fido.legs)"
+			+"<br> print(Dog.legs)"
+			+"<br> <br> 4 <br> 4 <br> #Class attributes are shared by all instances of the class. Trying to access an attribute of an instance that isn't defined causes an AttributeError. This also applies when you call an undefined method."],
+
+			["Inheritance", 
+			"Inheritance provides a way to share functionality between classes. To inherit a class from another class, put the superclass name in parentheses after the class name."
+			+"<br> <br> class Animal: "
+			+"<br> &nbsp; def __init__(self, name, color):"
+			+"<br> &nbsp; &nbsp; self.name = name"
+			+"<br> &nbsp; &nbsp; self.color = color"
+			+"<br> "
+			+"<br> class Cat(Animal):"
+			+"<br> &nbsp; def purr(self):"
+			+"<br> &nbsp; &nbsp; print(\"Purr...\")"
+			+"<br> "
+			+"<br> class Dog(Animal):"
+			+"<br> &nbsp; def bark(self):"
+			+"<br> &nbsp; &nbsp; print(\"Woof!\")"
+			+"<br> "
+			+"<br> fido = Dog(\"Fido\", \"brown\")"
+			+"<br> print(fido.color)"
+			+"<br> fido.bark()"
+			+"<br> <br> brown <br> Woof!"],
+
+			["superclass and subclass", 
+			"A class that inherits from another class is called a subclass. A class that is inherited from is called a superclass. If a class inherits from another with the same attributes or methods, it overrides them."
+			+"<br> <br> class Wolf: "
+			+"<br> &nbsp; def __init__(self, name, color):"
+			+"<br> &nbsp; &nbsp; self.name = name"
+			+"<br> &nbsp; &nbsp; self.color = color"
+			+"<br> "
+			+"<br> &nbsp; def bark(self):"
+			+"<br> &nbsp; &nbsp; print(\"Grr...\")"
+			+"<br> "
+			+"<br> class Dog(Wolf):"
+			+"<br> &nbsp; def bark(self):"
+			+"<br> &nbsp; &nbsp; print(\"Woof\")"
+			+"<br> "
+			+"<br> husky = Dog(\"Max\", \"grey\")"
+			+"<br> husky.bark()"
+			+"<br> <br> Woof <br> <br> In the example, Wolf is the superclass, Dog is the subclass"],
+
+			["cam Inheritance be indirect.", 
+			"yes One class can inherit from another, and that class can inherit from a third class. "
+			+"<br> <br> class A:"
+			+"<br> &nbsp; def method(self):"
+			+"<br> &nbsp; &nbsp; print(\"A method\")"
+			+"<br> "
+			+"<br> class B(A):"
+			+"<br> &nbsp; def another_method(self):"
+			+"<br> &nbsp; &nbsp; print(\"B method\")"
+			+"<br> "
+			+"<br> class C(B):"
+			+"<br> &nbsp; def third_method(self):"
+			+"<br> &nbsp; &nbsp; print(\"C method\")"
+			+"<br> "
+			+"<br> c = C()"
+			+"<br> c.method()"
+			+"<br> c.another_method()"
+			+"<br> c.third_method()"
+			+"<br> <br> A method <br> B method <br> C method <br> <br> However, circular inheritance is not possible."],
+
+			["function super", 
+			"The function super is a useful inheritance-related function that refers to the parent class. It can be used to find the method with a certain name in an object's superclass."
+			+"<br> <br> class A:"
+			+"<br> &nbsp; def spam(self):"
+			+"<br> &nbsp; &nbsp; print(1)"
+			+"<br> "
+			+"<br> class B(A):"
+			+"<br> &nbsp; def spam(self):"
+			+"<br> &nbsp; &nbsp; print(2)"
+			+"<br> &nbsp; &nbsp; super().spam()"
+			+"<br> "
+			+"<br> B().spam()"
+			+"<br> <br> 2 <br> 1 <br> <br> super().spam() calls the spam method of the superclass."],
+
+			["Magic methods", 
+			"Magic methods are special methods which have double underscores at the beginning and end of their names. They are also known as dunders. So far, the only one we have encountered is __init__, but there are several others. They are used to create functionality that can't be represented as a normal method. <br> One common use of them is operator overloading. This means defining operators for custom classes that allow operators such as + and * to be used on them. An example magic method is __add__ for +."
+			+"<br> <br> class Vector2D:"
+			+"<br> &nbsp; def __init__(self, x, y):"
+			+"<br> &nbsp; &nbsp; self.x = x"
+			+"<br> &nbsp; &nbsp; self.y = y"
+			+"<br> &nbsp; def __add__(self, other):"
+			+"<br> &nbsp; &nbsp; return Vector2D(self.x + other.x, self.y + other.y)"
+			+"<br> "
+			+"<br> first = Vector2D(5, 7)"
+			+"<br> second = Vector2D(3, 9)"
+			+"<br> result = first + second"
+			+"<br> print(result.x)"
+			+"<br> print(result.y)"
+			+"<br><br> 8<br> 16<br> <br><br> The __add__ method allows for the definition of a custom behavior for the + operator in our class. As you can see, it adds the corresponding attributes of the objects and returns a new object, containing the result. Once it's defined, we can add two objects of the class together."],
+
+			["Object Lifecycle", 
+			"The lifecycle of an object is made up of its creation, manipulation, and destruction. <br> The first stage of the life-cycle of an object is the definition of the class to which it belongs. The next stage is the instantiation of an instance, when __init__ is called. Memory is allocated to store the instance. Just before this occurs, the __new__ method of the class is called. This is usually overridden only in special cases. After this has happened, the object is ready to be used. <br> Other code can then interact with the object, by calling functions on it and accessing its attributes. Eventually, it will finish being used, and can be destroyed."],
+
+			["Object Lifecycle When an object is destroyed", 
+			"When an object is destroyed, the memory allocated to it is freed up, and can be used for other purposes. "
+			+"<br> Destruction of an object occurs when its reference count reaches zero. Reference count is the number of variables and other elements that refer to an object."
+			+"<br> If nothing is referring to it (it has a reference count of zero) nothing can interact with it, so it can be safely deleted. <br>"
+			+"<br> In some situations, two (or more) objects can be referred to by each other only, and therefore can be deleted as well. "
+			+"<br> The del statement reduces the reference count of an object by one, and this often leads to its deletion."
+			+"<br> The magic method for the del statement is __del__. "
+			+"<br> The process of deleting objects when they are no longer needed is called garbage collection."
+			+"<br> In summary, an object's reference count increases when it is assigned a new name or placed in a container (list, tuple, or dictionary). The object's reference count decreases when it's deleted with del, its reference is reassigned, or its reference goes out of scope. When an object's reference count reaches zero, Python automatically deletes it."
+			+"<br> <br> a = 42  # Create object <42>"
+			+"<br> b = a  # Increase ref. count  of <42> "
+			+"<br> c = [a]  # Increase ref. count  of <42> "
+			+"<br> "
+			+"<br> del a  # Decrease ref. count  of <42>"
+			+"<br> b = 100  # Decrease ref. count  of <42> "
+			+"<br> c[0] = -1  # Decrease ref. count  of <42>"],
+
+			["Data Hiding",
+			"A key part of object-oriented programming is encapsulation, which involves packaging of related variables and functions into a single easy-to-use object - an instance of a class. "
+			+"<br> A related concept is data hiding, which states that implementation details of a class should be hidden, and a clean standard interface be presented for those who want to use the class. "
+			+"<br> In other programming languages, this is usually done with private methods and attributes, which block external access to certain methods and attributes in a class. "
+			+"<br> "
+			+"<br> The Python philosophy is slightly different. It is often stated as \"we are all consenting adults here\", meaning that you shouldn't put arbitrary restrictions on accessing parts of a class. Hence there are no ways of enforcing a method or attribute be strictly private. "
+			+"<br> However, there are ways to discourage people from accessing parts of a class, such as by denoting that it is an implementation detail, and should be used at their own risk."],
+
+			["Weakly private methods and attributes",
+			"Weakly private methods and attributes have a single underscore at the beginning. This signals that they are private, and shouldn't be used by external code. However, it is mostly only a convention, and does not stop external code from accessing them. Its only actual effect is that from module_name import * won't import variables that start with a single underscore."
+			+"<br> <br> class Queue:"
+			+"<br> &nbsp; def __init__(self, contents):"
+			+"<br> &nbsp; &nbsp; self._hiddenlist = list(contents)"
+			+"<br> "
+			+"<br> &nbsp; def push(self, value):"
+			+"<br> &nbsp; &nbsp; self._hiddenlist.insert(0, value)"
+			+"<br> "
+			+"<br> &nbsp; def pop(self):"
+			+"<br> &nbsp; &nbsp; return self._hiddenlist.pop(-1)"
+			+"<br> "
+			+"<br> &nbsp; def __repr__(self):"
+			+"<br> &nbsp; &nbsp; return \"Queue({})\".format(self._hiddenlist)"
+			+"<br> "
+			+"<br> queue = Queue([1, 2, 3])"
+			+"<br> print(queue)"
+			+"<br> queue.push(0)"
+			+"<br> print(queue)"
+			+"<br> queue.pop()"
+			+"<br> print(queue)"
+			+"<br> <br> print(queue._hiddenlist)"
+			+"<br> <br> Queue([1, 2, 3])"
+			+"<br> Queue([0, 1, 2, 3])"
+			+"<br> Queue([0, 1, 2])"
+			+"<br> [0, 1, 2]"
+			+"<br> <br> In the code above, the attribute _hiddenlist is marked as private, but it can still be accessed in the outside code. The __repr__ magic method is used for string representation of the instance."],
+
+			["Strongly private methods and attributes ",
+			"Strongly private methods and attributes have a double underscore at the beginning of their names. This causes their names to be mangled, which means that they can't be accessed from outside the class. "
+			+"<br> The purpose of this isn't to ensure that they are kept private, but to avoid bugs if there are subclasses that have methods or attributes with the same names."
+			+"<br> Name mangled methods can still be accessed externally, but by a different name. The method __privatemethod of class Spam could be accessed externally with _Spam__privatemethod."
+			+"<br> <br> class Spam:"
+			+"<br> &nbsp; __egg = 7"
+			+"<br> &nbsp; def print_egg(self):"
+			+"<br> &nbsp; &nbsp; print(self.__egg)"
+			+"<br> "
+			+"<br> s = Spam()"
+			+"<br> s.print_egg()"
+			+"<br> print(s._Spam__egg)"
+			+"<br> print(s.__egg)"
+			+"<br> <br> 7<br> 7<br> attributeError: 'Spam' object has no attribute '_egg'"
+			+"<br> <br> Basically, Python protects those members by internally changing the name to include the class name."],
+
+			["Class Methods",
+			"Methods of objects we've looked at so far are called by an instance of a class, which is then passed to the self parameter of the method. Class methods are different - they are called by a class, which is passed to the cls parameter of the method. A common use of these are factory methods, which instantiate an instance of a class, using different parameters than those usually passed to the class constructor. Class methods are marked with a classmethod decorator."
+			+"<br> <br> class Rectangle:"
+			+"<br> &nbsp; def __init__(self, width, height):"
+			+"<br> &nbsp; &nbsp; self.width = width"
+			+"<br> &nbsp; &nbsp; self.height = height"
+			+"<br> "
+			+"<br> &nbsp; def calculate_area(self):"
+			+"<br> &nbsp; &nbsp; return self.width * self.height"
+			+"<br> "
+			+"<br> &nbsp; @classmethod"
+			+"<br> &nbsp; def new_square(cls, side_length):"
+			+"<br> &nbsp; &nbsp; return cls(side_length, side_length)"
+			+"<br> "
+			+"<br> square = Rectangle.new_square(5)"
+			+"<br> print(square.calculate_area())"
+			+"<br> <br> 25 <br> <br> "
+			+"new_square is a class method and is called on the class, rather than on an instance of the class. It returns a new object of the class cls. "
+			+"<br> Technically, the parameters self and cls are just conventions; they could be changed to anything else. However, they are universally followed, so it is wise to stick to using them."],
+
+			["Static Methods",
+			"Static methods are similar to class methods, except they don't receive any additional arguments; they are identical to normal functions that belong to a class. They are marked with the staticmethod decorator."
+			+"<br> <br> class Pizza:"
+			+"<br> &nbsp; def __init__(self, toppings):"
+			+"<br> &nbsp; &nbsp; self.toppings = toppings"
+			+"<br> "
+			+"<br> &nbsp; @staticmethod"
+			+"<br> &nbsp; def validate_topping(topping):"
+			+"<br> &nbsp; &nbsp; if topping == \"pineapple\":"
+			+"<br> &nbsp; &nbsp; &nbsp; raise ValueError(\"No pineapples!\")"
+			+"<br> &nbsp; &nbsp; else:"
+			+"<br> &nbsp; &nbsp; &nbsp; return True"
+			+"<br> "
+			+"<br> ingredients = [\"cheese\", \"onions\", \"spam\"]"
+			+"<br> if all(Pizza.validate_topping(i) for i in ingredients):"
+			+"<br> pizza = Pizza(ingredients) "
+			+"<br> <br> Static methods behave like plain functions, except for the fact that you can call them from an instance of the class."],
+
+
+			["Properties",
+			"Properties provide a way of customizing access to instance attributes. They are created by putting the property decorator above a method, which means when the instance attribute with the same name as the method is accessed, the method will be called instead. One common use of a property is to make an attribute read-only."
+			+"<br> <br> class Pizza:"
+			+"<br> &nbsp; def __init__(self, toppings):"
+			+"<br> &nbsp; &nbsp; self.toppings = toppings"
+			+"<br> "
+			+"<br> &nbsp; @property"
+			+"<br> &nbsp; def pineapple_allowed(self):"
+			+"<br> &nbsp; &nbsp; return False"
+			+"<br> "
+			+"<br> pizza = Pizza([\"cheese\", \"tomato\"])"
+			+"<br> print(pizza.pineapple_allowed)"
+			+"<br> pizza.pineapple_allowed = True"
+			+"<br> <br> False <br> attributeError: can't set attribute"],
+
+
+			["Properties setter/getter",
+			"Properties can also be set by defining setter/getter functions. The setter function sets the corresponding property's value. The getter gets the value. To define a setter, you need to use a decorator of the same name as the property, followed by a dot and the setter keyword. The same applies to defining getter functions."
+			+"<br> <br> class Pizza:"
+			+"<br> &nbsp; def __init__(self, toppings):"
+			+"<br> &nbsp; &nbsp; self.toppings = toppings"
+			+"<br> &nbsp; &nbsp; self._pineapple_allowed = False"
+			+"<br> "
+			+"<br> &nbsp; @property"
+			+"<br> &nbsp; def pineapple_allowed(self):"
+			+"<br> &nbsp; &nbsp; return self._pineapple_allowed"
+			+"<br> "
+			+"<br> &nbsp; @pineapple_allowed.setter"
+			+"<br> &nbsp; def pineapple_allowed(self, value):"
+			+"<br> &nbsp; &nbsp; if value:"
+			+"<br> &nbsp; &nbsp; &nbsp; password = input(\"Enter the password: \")"
+			+"<br> &nbsp; &nbsp; &nbsp; if password == \"Sw0rdf1sh!\":"
+			+"<br> &nbsp; &nbsp; &nbsp; &nbsp; self._pineapple_allowed = value"
+			+"<br> &nbsp; &nbsp; &nbsp; else:"
+			+"<br> &nbsp; &nbsp; &nbsp; &nbsp; raise ValueError(\"Alert! Intruder!\")"
+			+"<br> "
+			+"<br> pizza = Pizza([\"cheese\", \"tomato\"])"
+			+"<br> print(pizza.pineapple_allowed)"
+			+"<br> pizza.pineapple_allowed = True"
+			+"<br> print(pizza.pineapple_allowed)"
+			+"<br> <br> False <br> Enter the password: Sw0rdf1sh! <br> True"],
+			//Object-Oriented Programming end
+
+
+			/*
+			+"<br> 
+			<br> 
+			<br> &nbsp; //tab
+			
+			["", 
+			""],
+
+			*/
+		];
+		var shq = [];
+		var hq = [];
+		var sq = [];
+		function _(x) {
+			return document.getElementById(x);
+		}
+		function renderQuestion() {
+			test = _("test");
+
+			if (sq.length == questions.length) {
+				test.innerHTML = "<p>" + sq + "</p>";
+				test.innerHTML += "<br><p>" + hq + "</p>";
+				test.innerHTML += "<br><button onclick='nextQuestion()'>Next Question</button>";
+				pos = 0;
+				correct = 0;
+				return false;
+			}
+
+			// if(pos >= questions.length){
+			// 	test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" </h2> ";
+			// 	_("test_status").innerHTML = "Test Completed";
+			// 	pos = 0;
+			// 	correct = 0;
+			// 	return false;
+			// }
+			var tot = questions.length - sq.length;
+			var rq = [];
+			var rpn = Math.floor(Math.random() * 3) + 1;
+			var rn = [1, 3, 4, 2];
+			rn = shuffle(rn);
+			pos = Math.floor(Math.random() * questions.length);
+			//pos = 0;
+			while (sq.includes(pos)) {
+				pos = Math.floor(Math.random() * questions.length);
+				if (!sq.includes(pos)) break;
+			}
+			//pos = questions.length - 5;
+			//pos = 41;
+			if (pos == questions.length)--pos;
+
+			_("test_status").innerHTML = "Question " + (pos + 1) + " of " + tot;
+			question = questions[pos][0];
+			Ans = questions[pos][1];
+			test.innerHTML = "<h3>" + question + "</h3>";
+			test.innerHTML += "<button onclick='checkAnswer()'>Flip</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
+			test.innerHTML += "<button onclick='nextQuestion()'>Next</button>";
+			test.innerHTML += "<p id=\"myDIV\" hidden>" + Ans + "</p>";
+			
+		}
+		function checkAnswer() {
+			var x = document.getElementById("myDIV");
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
+			}
+
+
+		}
+		function shuffle(array) {
+			var currentIndex = array.length, temporaryValue, randomIndex;
+
+			// While there remain elements to shuffle...
+			while (0 !== currentIndex) {
+
+				// Pick a remaining element...
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+
+				// And swap it with the current element.
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			}
+
+			return array;
+		}
+		function nextQuestion() {
+			sq.push(pos);
+			renderQuestion();
+			window.scrollTo(0, 0);
+		}
+
+		function HQuestion() {
+			hq.push(pos);
+			sq.push(pos);
+			renderQuestion();
+		}
+
+		function done() {
+			test.innerHTML = "<p>" + sq + "</p>";
+			test.innerHTML += "<br><p>" + hq + "</p>";
+			test.innerHTML += "<br><button onclick='nextQuestion()'>Next Question</button>";
+		}
+		window.addEventListener("load", renderQuestion, false);
+	</script>
+</head>
+
+<body>
+	<h2 id="test_status"></h2>
+	<div id="test"></div>
+</body>
+
+</html>

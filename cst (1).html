@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=1000">
+	<style>
+		div#test {
+			border: #000 1px solid;
+			padding: 10px 40px 40px 40px;
+		}
+
+		input {
+			float: right;
+		}
+	</style>
+	<script>
+		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+		var questions = [
+
+			["Assume there is a function tail which returns a reference to the last Node of a linked list, given the head Node. For this problem, also assume there is a non-empty linked list reference declared as list. Now consider the following line of code:<br>"
+				+ "Node temp <- tail ( list )<br>"
+				+ "Immediately after this line of code is executed, which of the following conditions will be true, according to the postcondition of tail",
+				"temp is equal to null",
+				"temp.item is equal to 0",
+				"temp.next is equal to null",
+				"temp.next.item is equal to null",
+				"temp.next is equal to null"],
+
+			["Assume there is a function tail which returns a reference to the last Node of a list. Assuming that there is a reference head which points to the head Node of a linked list, which of the following pseudo-code descriptions would append a Node with the value newItem to the end of the list?",
+				"Set the tail Node\'s item value to the newItem",
+				"Set the tail Node\'s next link to the newItem",
+				"Create a new Node with the value newItem; set the tail Node\'s item value to the new Node",
+				"Create a new Node with the value newItem; set the tail Node\'s next link to the new Node",
+				"Create a new Node with the value newItem; set the tail Node\'s next link to the new Node"],
+
+			["head <br> &darr <br> 5 -> 3 -> 5 -> null <br> Assuming that a Node reference head is null, which of the following code blocks will NOT result in the Linked List pictured above?",
+				"head <- new Node( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.next.item <- 3 <br>"
+				+ "head.next.next <- new Node ( ) <br>"
+				+ "head.next.next.item <- 6 <br>",
+				"head <- new Node( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.item <- 3 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.item <- 6 <br>",
+				"head <- new Node( ) <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.next.next <- new Node ( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "head.next.item <- 3 <br>"
+				+ "head.next.next.item <- 6 <br>",
+				"head <- new Node( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "temp <- new Node ( ) <br>"
+				+ "temp.item <- 3 <br>"
+				+ "head.next <- temp <br>"
+				+ "temp <- new Node ( ) <br>"
+				+ "temp.item <- 6 <br>"
+				+ "head.next.next <- temp <br>",
+				"head <- new Node( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.item <- 3 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.item <- 6 <br>"],
+
+			["head <br> &darr <br> 5 -> 3 -> 5 -> null <br> Now consider the following block of code: <br>"
+				+ "int num ← 0 <br>"
+				+ "Node temp ← head <br>"
+				+ "while ( temp ≠ null ) <br>"
+				+ "    if ( temp.item == 3 ) <br>"
+				+ "        print num <br>"
+				+ "    end if <br>"
+				+ "    num ← num + 1 <br>"
+				+ "    temp ← temp.next <br>"
+				+ "end while <br>"
+				+ "What will be printed by the above block of code? <br>",
+				"0",
+				"1",
+				"2",
+				"3",
+				"1"],
+
+			["head <br> &darr <br> 5 -> 3 -> 5 -> null <br> Which of the following is not a true statement about this linked list? <br>",
+				"The head node contains the value 5",
+				"head.next.next.item is equal to 5",
+				"There are three nodes in this list",
+				"null represents a node that exists but does not contain a value",
+				"null represents a node that exists but does not contain a value"],
+
+			["Which of the following does not describe a feature of linked lists?",
+				"Dynamically allocated in memory",
+				"Abstract data type",
+				"Fixed length",
+				"O(N) complexity to access any node in the list",
+				"Fixed length"],
+
+			["What is not a pro in Waterfall",
+				"Offers a clear, staightforward process",
+				"Stages can be easily tracked and managed",
+				"It\'s easy to see progess and to document",
+				"build in iteration",
+				"build in iteration"],
+
+			["What is not a con in Waterfall",
+				"Assumes reqirements are clear and unchanging",
+				"Does not build in iteration",
+				"Does not build testing and review into each step, therefore changes can be costly",
+				"Stages can be hard to tracked and managed",
+				"Stages can be hard to tracked and managed"],
+
+			["What is not a pro in incremental",
+				"Introduces more flexibility to change",
+				"Builds in customer testing and evaluation",
+				"Easier to manage risk",
+				"Requires good planning and design to work effectively",
+				"Requires good planning and design to work effectively"],
+
+			["What is not a pro in SCRUM",
+				"Very flexible",
+				"Builds in rapid iteration and feedback",
+				"Can reduce total number of bugs in final product",
+				"Good for documentation",
+				"Good for documentation"],
+
+			["What is not a pro in Spiral",
+				"Very flexible and excellent at managing risky projects",
+				"Uses the best of other models",
+				"Uses prototyping extensively",
+				"Document is easy and cheap",
+				"Document is easy and cheap"],
+
+			["What is not a con in Spiral",
+				"Can be difficult to stop the process of iteration",
+				"Complex to manage",
+				"Documentation is difficult and costly",
+				"Not flexible",
+				"Not flexible"],
+
+			["Commonly used for years in standard industry production. This model is sequential in nature, with progress flowing steadily down through the phases of idea, analysis, design, development and test. The disadvantage of this methodology is that it is rigid and does not easily allow for modifications.",
+				"Waterfall",
+				"Incremental",
+				"Agile Methodologies (SCRUM, XP, Kanban)",
+				"Spiral",
+				"Waterfall"],
+
+			["The system software development process in small steps, completing all of the SSLC phases for each subset of the application, and then repeating the cycle for each portion until the project is complete. This is an improvement over the waterfall model because it provides more opportunity to make adjustments as needed with less cost involved in making changes along the way.",
+				"Waterfall",
+				"Incremental",
+				"Agile Methodologies (SCRUM, XP, Kanban)",
+				"Spiral",
+				"Incremental"],
+
+			["Are both incremental and iterative. Emphasizes continuous delivery of working software that is coded, tested and fixed over short intervals that are typically one to three weeks in duration. A subset of system requirements are selected from the backlog and implemented and delivered in each iteration.",
+				"Waterfall",
+				"Incremental",
+				"Agile Methodologies (SCRUM, XP, Kanban)",
+				"Spiral",
+				"Agile Methodologies (SCRUM, XP, Kanban)"],
+
+			["A risk-driven process model generator for software projects. Based on the unique risk patterns of a given project, the model guides a team to adopt elements of one or more process models. Before any changes are made to the original plan, a risk assessment is performed, helping to decide the nature and degree of the recommended change.",
+				"Waterfall",
+				"Incremental",
+				"Agile Methodologies (SCRUM, XP, Kanban)",
+				"Spiral",
+				"Spiral"],
+
+			["BLACK BOX TESTING",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+				"a pure functional approach to problem solving. Programming is a form of declarative programming. Languages that fit this description include Scheme, Haskell, LISP, Racket, and F#.",
+				"a paradigm in programming that is often referred to as procedural, where a developer writes code that describes in exacting detail the steps that the computer must take to accomplish the goal. Most of the mainstream programming languages, such as C++, Java, and Python, are considered imperative languages.",
+				" how a parent object can reference any of its child objects, or any descendant several levels of inheritance down the way.",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional."],
+
+			["What is the generic steps to carry out any type of black box testing:",
+				"1.Initially requirements and specifications of the system are examined. <br>"
+				+ "2.Tester chooses valid inputs (positive test scenario) to check whether SUT processes them correctly . Also some invalid inputs (negative test scenario) are chosen to verify that the SUT is able to detect them. <br>"
+				+ "3.Tester determines expected outputs for all those inputs. <br>"
+				+ "4.Software tester constructs test cases with the selected inputs. <br>"
+				+ "5.The test cases are executed. <br>"
+				+ "6.Software tester compares the actual outputs with the expected outputs. <br>"
+				+ "7.Defects if any are fixed and re-tested. ",
+				"IDK",
+				"Study",
+				"none",
+				"Answer"],
+
+			["BLACK BOX Functional TESTING",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+				"done after code fixes, upgrades or any other system maintenance to check the new code has not affected the existing code.",
+				"This type of black box testing is not related to testing of a specific functionality, but non-functional requirements such as performance, scalability, usability",
+				"This black box testing type is related to functional requirements of a system; it is done by software testers",
+				"This black box testing type is related to functional requirements of a system; it is done by software testers"],
+
+			["BLACK BOX Non-Functional TESTING",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+				"done after code fixes, upgrades or any other system maintenance to check the new code has not affected the existing code.",
+				"This type of black box testing is not related to testing of a specific functionality, but non-functional requirements such as performance, scalability, usability",
+				"This black box testing type is related to functional requirements of a system; it is done by software testers",
+				"This type of black box testing is not related to testing of a specific functionality, but non-functional requirements such as performance, scalability, usability"],
+
+			["BLACK BOX Regression TESTING",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+				"done after code fixes, upgrades or any other system maintenance to check the new code has not affected the existing code.",
+				"This type of black box testing is not related to testing of a specific functionality, but non-functional requirements such as performance, scalability, usability",
+				"This black box testing type is related to functional requirements of a system; it is done by software testers",
+				"done after code fixes, upgrades or any other system maintenance to check the new code has not affected the existing code."],
+
+			["What is the case summary for Linear Search",
+			"Best Case: O(1), Average Case: O(log n), Worst Case: O(log n)",
+			"Best Case: O(1), Average Case: O(n), Worst Case: O(n)",
+			"Best Case: O(n^2), Average Case: O(n^2), Worst Case: O(n^2)",
+			"Best Case: O(n), Average Case: O(n^2), Worst Case: O(n^2)",
+			"Best Case: O(1), Average Case: O(n), Worst Case: O(n)"],
+
+			["What is the case summary for Binary Search",
+			"Best Case: O(1), Average Case: O(log n), Worst Case: O(log n)",
+			"Best Case: O(1), Average Case: O(n), Worst Case: O(n)",
+			"Best Case: O(n^2), Average Case: O(n^2), Worst Case: O(n^2)",
+			"Best Case: O(n), Average Case: O(n^2), Worst Case: O(n^2)",
+			"Best Case: O(1), Average Case: O(log n), Worst Case: O(log n)"],
+
+			["What is the case summary for Selection Sort",
+			"Best Case: O(1), Average Case: O(log n), Worst Case: O(log n)",
+			"Best Case: O(1), Average Case: O(n), Worst Case: O(n)",
+			"Best Case: O(n^2), Average Case: O(n^2), Worst Case: O(n^2)",
+			"Best Case: O(n), Average Case: O(n^2), Worst Case: O(n^2)",
+			"Best Case: O(n^2), Average Case: O(n^2), Worst Case: O(n^2)"],
+
+			["What is the case summary for Bubble Sort and Insertion Sort",
+			"Best Case: O(1), Average Case: O(log n), Worst Case: O(log n)",
+			"Best Case: O(1), Average Case: O(n), Worst Case: O(n)",
+			"Best Case: O(n^2), Average Case: O(n^2), Worst Case: O(n^2)",
+			"Best Case: O(n), Average Case: O(n^2), Worst Case: O(n^2)",
+			"Best Case: O(n), Average Case: O(n^2), Worst Case: O(n^2)"],
+
+			["What is the case summary for Merge Sort",
+			"Best Case: O(n log n), Average Case: O(n log n), Worst Case: O(n log n)",
+			"Best Case: O(n log n), Average Case: O(n log n), Worst Case: O(n^2)",
+			"Best Case: O(log n), Average Case: O(log n), Worst Case: O(log n)",
+			"Best Case: O(n), Average Case: O(log n), Worst Case: O(log n)",
+			"Best Case: O(n log n), Average Case: O(n log n), Worst Case: O(n log n)"],
+
+			["What is the case summary for Quick Sort",
+			"Best Case: O(n log n), Average Case: O(n log n), Worst Case: O(n log n)",
+			"Best Case: O(n log n), Average Case: O(n log n), Worst Case: O(n^2)",
+			"Best Case: O(log n), Average Case: O(log n), Worst Case: O(log n)",
+			"Best Case: O(n), Average Case: O(log n), Worst Case: O(log n)",
+            "Best Case: O(n log n), Average Case: O(n log n), Worst Case: O(n^2)"],
+            
+            //from test
+
+			["Which of the words meean the practive of concealing a file, meaddage, image, or video within another file message, image, or video?",
+			"steganography",
+			"encryption",
+			"edigoy",
+			"none",
+			"steganography"],
+
+			["waht is creative commons license",
+			"a document stipulating constraints and practices that a user must agree to for access to a corporate network or the Internet.",
+			"The doctrine that permits limited use of copyrighted material without acquiring permission from the rights holders",
+			"none",
+			"enable the free distribution of an otherwise copyrighted work: used when an author wants to give other people the right to share, use, and build upon a work that he or she (that author) has created.",
+			"enable the free distribution of an otherwise copyrighted work: used when an author wants to give other people the right to share, use, and build upon a work that he or she (that author) has created."],
+
+			["one in which all concurrent processes are waiting on one another. In this state, the program will never recover without outside intervention.",
+			"deadlock",
+			"race condition",
+			"conditional jump",
+			"other",
+			"deadlock"],			
+
+			["occurs when two or more operations must execute in the correct order, but the program has not been written so that this order is guaranteed to be maintained.",
+			"deadlock",
+			"race condition",
+			"conditional jump",
+			"other",
+			"race condition"],	
+
+			["If some specified condition is satisfied in _______, the control flow is transferred to a target instruction. There are numerous _______ instructions depending upon the condition and data.",
+			"deadlock",
+			"race condition",
+			"conditional jump",
+			"other",
+			"conditional jump"],	
+	
+			["Html alt what does it do?",
+			"Specifies an alternative text for an image, when the image cannot be displayed",
+			"provide additional information about an element, always specified in the start tag, and cone ine name/value",
+			"other",
+			"none",
+			"Specifies an alternative text for an image, when the image cannot be displayed"],
+
+			["Html attr what does it do?",
+			"Specifies an alternative text for an image, when the image cannot be displayed",
+			"provide additional information about an element, always specified in the start tag, and cone ine name/value",
+			"other",
+			"none",
+			"provide additional information about an element, always specified in the start tag, and cone ine name/value"],
+
+			["What is subroutine?",
+			"inheritance",
+			"procedure, a function, method",
+			"extends",
+			"base case",
+			"procedure, a function, method"],
+
+			["What is volatile data?",
+			"any data that is stored in memory, or exists in transit, that will be lost when the computer loses power or is turned off. It resides in registries, cache, and random access memory (RAM). alos called live forensics",
+			"data that is stored on a local hard drive (or another medium) and is preserved when the computer is turned off.",
+			"none",
+			"same as any data",
+			"any data that is stored in memory, or exists in transit, that will be lost when the computer loses power or is turned off. It resides in registries, cache, and random access memory (RAM). alos called live forensics"],
+			
+			["What is authorization?",
+			"allowing or denying permissions based on who or what you are",
+			"A computer program which translates assembly language to an object file or machine language format",
+			"A low-level programming language (difficult for humans, easy for machines) that uses mnemonic opcodes, such as mov, sto, and load, to interact directly with a computer's CPU and registers, used by expert programmers to produce highly efficient and fast programs",
+			"called a procedure, a function, a routine, a method, or a subprogram",
+			"allowing or denying permissions based on who or what you are"],
+
+			["What is garbage collector?",
+			"is to free heap memory by destroying unreachable objects",
+			"storing unuse objects",
+			"is to free heap memory by destroying reachable objects",
+			"none",
+			"is to free heap memory by destroying unreachable objects"],
+
+			["what is unreachable objects?",
+			"An object is said to be unreachable iff it doesn’t contain any reference to it. Also note that objects which are part of island of isolation are also unreachable",
+			"is to free heap memory by destroying unreachable object",
+			"storing unuse objects",
+			"none",
+			"An object is said to be unreachable iff it doesn’t contain any reference to it. Also note that objects which are part of island of isolation are also unreachable"],
+
+			["four different ways to make an object eligible for garbage collection",
+			"Nullifying the reference variable, Re-assigning the reference variable, Object created inside method, Island of Isolati",
+			"reference variable, assigning the reference variable, Object created inside method, Island of Isolati",
+			"Nullifying the reference variable, assigning the reference variable, Object created outside method, Island of Isolati",
+			"none",
+			"Nullifying the reference variable, Re-assigning the reference variable, Object created inside method, Island of Isolati"],
+
+			["What is the difference between ram, cpu, and cache",
+			"ram has quick read/write times, and its function is to load open programs and os data currently in use from the slower secondary storage, so it can be accessed directly by the cpu",
+			"cache(a type of memory that stores copies of frequently used data) is much faster than ram, though has much lower capacity",
+			"cpu cache is physically closer to the processor, and is checked before ram in the fetch stage",
+			"none",
+			"Answer"],
+
+			["Why use Low level instead of high level?",
+			"High level is direct memory management",
+			"low level is faster than high level",
+			"Low level are interpreted",
+			"high  level specifically structured to run directly on the hardware, using very less syntax",
+			"low level is faster than high level"],
+
+			["What is the advantage of compiled language intsead of interpreted language?",
+			"compiled is fast and source code is private, but not cross platform and requires extra compiling step(longer to develop)",
+			"compiled is cross platform and does not need extra step to compiling (less to develop)",
+			"interpreted is fast and source code is private",
+			"none",
+			"compiled is fast and source code is private, but not cross platform and requires extra compiling step(longer to develop)"],
+
+			["What is the advantage of interpreted language intsead of compiled language?",
+			"interpreted is fast and source code is private, but not cross platform and requires extra compiling step(longer to develop)",
+			"interpreted is cross platform and does not need extra step to compiling (less to develop), but public source and slower due to reading every line",
+			"interpreted is fast and source code is private",
+			"none",
+			"interpreted is cross platform and does not need extra step to compiling (less to develop), but public source and slower due to reading every line"],
+
+			["The methodology is guided by a set of 4 simple principals which are outlined in the Agile Manifesto:",
+			"1. Individuals and interactions over processes and tools <br>2. Working software over comprehensive documentation <br>3. Customer collaboration over contract negotiation <br>4. Responding to change over following a plan",
+			"1. Working software over comprehensive documentation <br>2. Individuals and interactions over processes and tools <br>3. Customer collaboration over contract negotiation <br>4. Responding to change over following a plan",
+			"1. Individuals and interactions over processes and tools <br>2. Customer collaboration over contract negotiation <br>3. Working software over comprehensive documentation <br>4. Responding to change over following a plan",
+			"1. Individuals and interactions over processes and tools <br>2. Working software over comprehensive documentation <br>3. Responding to change over following a plan <br>4. Customer collaboration over contract negotiation",
+			"1. Individuals and interactions over processes and tools <br>2. Working software over comprehensive documentation <br>3. Customer collaboration over contract negotiation <br>4. Responding to change over following a plan"],
+
+			["Select the option that suits the Manifesto for Agile Software Development",
+			"Individuals and interactions",
+			"Working software",
+			"Customer collaboration",
+			"All of the mentioned",
+			"All of the mentioned"],
+
+			["Agile Software Development is based on",
+			"Incremental Development",
+			"Iterative Development",
+			"Linear Development",
+			"Both Incremental and Iterative Development",
+			"Both Incremental and Iterative Development"],
+
+			["Which on of the following is not an agile method?",
+			"XP",
+			"4GT",
+			"AUP",
+			"All of the mentioned",
+			"4GT"],
+
+			["How is plan driven development different from agile development ?",
+			"Outputs are decided through a process of negotiation during the software development process",
+			"Specification, design, implementation and testing are interleaved",
+			"Iteration occurs within activities",
+			"All of the mentioned",
+			"Iteration occurs within activities"],
+
+			["How many phases are there in Scrum ?",
+			"Two",
+			"Three",
+			"Four",
+			"Scrum is an agile method which means it does not have phases",
+			"Three"],
+
+			["Which of the following does not apply to agility to a software process?",
+			"Uses incremental product delivery strategy",
+			"Only essential work products are produced",
+			"Eliminate the use of project planning and testing",
+			"All of the mentione",
+			"Eliminate the use of project planning and testing"],
+
+			["Key Differences Between Top-down and Bottom-up Approach",
+			"Top-down approach decomposes the large task into smaller subtasks whereas bottom-up approach first chooses to solve the different fundamental parts of the task directly then combine those parts into a whole program.",
+			"Each submodule is separately processed in a bottom-up approach. As against, Top-down approach implements the concept of the information hiding by examining the data to be encapsulated.",
+			"none",
+			"bottom-up approach can produce redundancy while Top-downbottom-up approach does not include redundant information",
+			"Top-down approach decomposes the large task into smaller subtasks whereas bottom-up approach first chooses to solve the different fundamental parts of the task directly then combine those parts into a whole program."],
+
+			["Key Differences Between Top-down and Bottom-up Approach",
+			"bottom-up approach decomposes the large task into smaller subtasks whereas Top-down approach first chooses to solve the different fundamental parts of the task directly then combine those parts into a whole program.",
+			"Each submodule is separately processed in a top-down approach. As against, bottom-up approach implements the concept of the information hiding by examining the data to be encapsulated.",
+			"none",
+			"bottom-up approach can produce redundancy while Top-downbottom-up approach does not include redundant information",
+			"Each submodule is separately processed in a top-down approach. As against, bottom-up approach implements the concept of the information hiding by examining the data to be encapsulated."],
+
+			["Key Differences Between Top-down and Bottom-up Approach",
+			"bottom-up approach decomposes the large task into smaller subtasks whereas Top-down approach first chooses to solve the different fundamental parts of the task directly then combine those parts into a whole program.",
+			"Each submodule is separately processed in a bottom-up approach. As against, Top-down approach implements the concept of the information hiding by examining the data to be encapsulated.",
+			"none",
+			"The different modules in top-down approach don’t require much communication. On the contrary, the bottom-up approach needs interaction between the separate fundamental modules to combine them later.",
+			"The different modules in top-down approach don’t require much communication. On the contrary, the bottom-up approach needs interaction between the separate fundamental modules to combine them later."],
+
+			["Key Differences Between Top-down and Bottom-up Approach",
+			"bottom-up approach decomposes the large task into smaller subtasks whereas Top-down approach first chooses to solve the different fundamental parts of the task directly then combine those parts into a whole program.",
+			"Each submodule is separately processed in a bottom-up approach. As against, Top-down approach implements the concept of the information hiding by examining the data to be encapsulated.",
+			"none",
+			"Top-down approach can produce redundancy while bottom-up approach does not include redundant information.",
+			"Top-down approach can produce redundancy while bottom-up approach does not include redundant information."],
+
+			["Key Differences Between Top-down and Bottom-up Approach",
+			"bottom-up approach decomposes the large task into smaller subtasks whereas Top-down approach first chooses to solve the different fundamental parts of the task directly then combine those parts into a whole program.",
+			"Each submodule is separately processed in a bottom-up approach. As against, Top-down approach implements the concept of the information hiding by examining the data to be encapsulated.",
+			"none",
+			"The procedural programming languages such as Fortran, COBOL and C follows a top-down approach. In contrast, object-oriented programming languages like C++, Java, C#, Perl, Python abides the bottom-up approach.",
+			"The procedural programming languages such as Fortran, COBOL and C follows a top-down approach. In contrast, object-oriented programming languages like C++, Java, C#, Perl, Python abides the bottom-up approach."],
+
+			["Key Differences Between Top-down and Bottom-up Approach",
+			"bottom-up approach decomposes the large task into smaller subtasks whereas Top-down approach first chooses to solve the different fundamental parts of the task directly then combine those parts into a whole program.",
+			"Each submodule is separately processed in a bottom-up approach. As against, Top-down approach implements the concept of the information hiding by examining the data to be encapsulated.",
+			"none",
+			"Bottom-up approach is priorly used in testing. Conversely, the top-down approach is utilized in module documentation, test case creation, debugging, etcetera.",
+			"Bottom-up approach is priorly used in testing. Conversely, the top-down approach is utilized in module documentation, test case creation, debugging, etcetera."],
+
+			["Equivalence partitioning is:",
+			"A black box testing technique appropriate to all levels of testing",
+			"A black box testing technique than can only be used during system testing",
+			"A black box testing texhnique used only by developers",
+			"none",
+			"A black box testing technique appropriate to all levels of testing"],
+
+			["Which of the following techniques is NOT a black box technique?",
+			"syntax testing",
+			"state transition testing",
+			"LCSAJ",
+			"boundary value analysis",
+			"LCSAJ"],
+
+
+			/*
+			["",
+			"",
+			"",
+			"",
+			"",
+			"aswer"],
+			
+			
+			["BLACK BOX TESTING",
+			"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+			"",
+			"",
+			"",
+			"Answer"],
+			*/
+
+		];
+		var shq = [];
+		var hq = [];
+		var sq = [];
+		function _(x) {
+			return document.getElementById(x);
+		}
+		function renderQuestion() {
+			test = _("test");
+
+			if (sq.length == questions.length) {
+				test.innerHTML = "<p>" + sq + "</p>";
+				test.innerHTML += "<br><p>" + hq + "</p>";
+				test.innerHTML += "<br><button onclick='nextQuestion()'>Next Question</button>";
+				pos = 0;
+				correct = 0;
+				return false;
+			}
+
+			// if(pos >= questions.length){
+			// 	test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" </h2> ";
+			// 	_("test_status").innerHTML = "Test Completed";
+			// 	pos = 0;
+			// 	correct = 0;
+			// 	return false;
+			// }
+			var tot = questions.length - sq.length;
+			var rq = [];
+			var rpn = Math.floor(Math.random() * 3) + 1;
+			var rn = [1, 3, 4, 2];
+			rn = shuffle(rn);
+			pos = Math.floor(Math.random() * questions.length);
+			//pos = 98;
+			while (sq.includes(pos)) {
+				pos = Math.floor(Math.random() * questions.length);
+				if (!sq.includes(pos)) break;
+			}
+			//pos = questions.length - 5;
+			//pos = 41;
+			if (pos == questions.length)--pos;
+			rq.push(questions[pos][rn.pop(rn[Math.floor(Math.random() * rn.length)])]);
+			rq.push(questions[pos][rn.pop(rn[Math.floor(Math.random() * rn.length)])]);
+			rq.push(questions[pos][rn.pop(rn[Math.floor(Math.random() * rn.length)])]);
+			rq.push(questions[pos][rn.pop(rn[Math.floor(Math.random() * rn.length)])]);
+			rq = shuffle(rq);
+
+			_("test_status").innerHTML = "Question " + (pos + 1) + " of " + tot;
+			question = questions[pos][0];
+			chA = rq.pop(rq[Math.floor(Math.random() * rq.length)]);
+			chB = rq.pop(rq[Math.floor(Math.random() * rq.length)]);
+			chC = rq.pop(rq[Math.floor(Math.random() * rq.length)]);
+			chD = rq.pop(rq[Math.floor(Math.random() * rq.length)]);
+			test.innerHTML = "<h3>" + question + "</h3>";
+			test.innerHTML += "<input type='radio' name='choices' value='" + chA + "'> <p><font >" + chA + "</font></p><br>";
+			test.innerHTML += "<input type='radio' name='choices' value='" + chB + "'> <p><font >" + chB + "</font></p><br>";
+			test.innerHTML += "<input type='radio' name='choices' value='" + chC + "'> <p><font >" + chC + "</font></p><br>";
+			test.innerHTML += "<input type='radio' name='choices' value='" + chD + "'> <p><font >" + chD + "</font></p><br><br>";
+			test.innerHTML += "<button onclick='checkAnswer()'>Submit</button>";
+		}
+		function checkAnswer() {
+			choices = document.getElementsByName("choices");
+			for (var i = 0; i < choices.length; i++) {
+				if (choices[i].checked) {
+					choice = choices[i].value;
+				}
+			}
+			if (choice == questions[pos][5]) {
+				test.innerHTML += "<button onclick='nextQuestion()'>Next Question</button>";
+				test.innerHTML += "<h3>Right! its: <br>" + questions[pos][5] + "</h3>";
+
+			}
+			else {
+				test.innerHTML += "<button onclick='nextQuestion()'>Next Question</button>";
+				test.innerHTML += "<h3> Wrong its: <br>" + questions[pos][5] + "</h3>";
+				hq.push(pos);
+			}
+
+		}
+		function shuffle(array) {
+			var currentIndex = array.length, temporaryValue, randomIndex;
+
+			// While there remain elements to shuffle...
+			while (0 !== currentIndex) {
+
+				// Pick a remaining element...
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+
+				// And swap it with the current element.
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			}
+
+			return array;
+		}
+		function nextQuestion() {
+			sq.push(pos);
+			renderQuestion();
+			window.scrollTo(0, 0);
+		}
+
+		function HQuestion() {
+			hq.push(pos);
+			sq.push(pos);
+			renderQuestion();
+		}
+
+		function done() {
+			test.innerHTML = "<p>" + sq + "</p>";
+			test.innerHTML += "<br><p>" + hq + "</p>";
+			test.innerHTML += "<br><button onclick='nextQuestion()'>Next Question</button>";
+		}
+		window.addEventListener("load", renderQuestion, false);
+	</script>
+</head>
+
+<body>
+	<h2 id="test_status"></h2>
+	<div id="test"></div>
+</body>
+
+</html>

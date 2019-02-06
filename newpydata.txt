@@ -1,0 +1,310 @@
+[" How are arguments passed - by reference and by value? ",
+" Everything in Python is an object and all variables hold references to the objects. The references values are according to the functions; as a result you cannot change the value of the references. However, you can change the objects if it is mutable."],
+
+[" Do you know what list and dict comprehensions are? Can you give an example? ",
+" List/Dict comprehensions are syntax constructions to ease the creation of a list/dict based on existing iterable.<br>"
++"<br>"
++" a = []<br>"
++" for x in range(10):<br>"
++"  a.append(x*2)<br>"
++" # a == [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]<br>"
++"<br>"
++" # list comprehension<br>"
++" a = [x*2 for x in range(10)]<br>"
++" # dict comprehension<br>"
++" a = {x: x*2 for x in range(10)}<br>"
++" # a == {0: 0, 1: 2, 2: 4, 3: 6, 4: 8, 5: 10, 6: 12, 7: 14, 8: 16, 9: 18}"],<br>"
+
+[" what is PEP 8? ",
+" PEP 8 is a coding convention(a set of recommendations) how to write your Python code in order to make it more readable and useful for those after you. For more information check PEP 8."],
+
+[" Can you sum all of the elements in the list, how about to multiply them and get the result? ",
+" # the right way<br>"
++" s = sum(range(10)) or<br>"
++" s = sum (list)<br>"
++"<br>"
++" # fast way<br>"
++" import functools<br>"
++" from operator import mul<br>"
++" functools.reduce(mul, range(1, 10))"],
+
+[" Do you know what is the difference between lists and tuples? Can you give me an example for their usage? ",
+" First list are mutable while tuples are not, and second tuples can be hashed e.g. to be used as keys for dictionaries. As an example of their usage, tuples are used when the order of the elements in the sequence matters e.g. a geographic coordinates, &#34;list&#34; of points in a path or route, or set of actions that should be executedin specific order. Don&#39;t forget that you can use them a dictionary keys. For everything else use lists."],
+
+[" Do you know the difference between range and xrange? ",
+" Range returns a list while xrange returns a generator xrange object which takes the same memory no matterof the range size. In the first case you have all items already generated(this can take a lot of time and memory) while in the second you get the elements one by one e.g. only one element is generated and available per iteration."],
+
+[" a few differences between 2.x and 3.x ",
+" In Python 3.x all strings are now Unicode, print is now function not a statement. There is no range, it has been replaced by xrange which is removed. All classes are new style and the division of integers now returns float."],
+
+[" what are decorators and what is their usage ",
+" Decorators allow you to inject or modify code in functions or classes&#34;. In other words decorators allow you to wrap a function or class method call and execute some code before or after the execution of the original code. And also you can nest them e.g. to use more than one decorator for a specific function. Usage examples include - logging the calls to specific method, checking for permission(s), checking and/or modifying the arguments passed to the method etc."],
+
+[" Explain the with statement and its usage ",
+" In a few words the with statement allows you to executed code before and/or after a specific set of operations. For example if you open a file for reading and parsing no matter what happens during the parsing you want to be sure that at the end the file is closed. This is normally achieved using the try... finally construction but the with statement simplifies it usin the so called &#34;context management protocol&#34;. To use it with your own objects you just have to define __enter__ and __exit__ methods. Some standard objects like the file object automatically support this protocol. For more information you may check Understanding Python&#39;s &#34;with&#34; statement."],
+
+[" what is pickling and unpickling ",
+" Pickle module accepts any Python object and converts it into a string representation and dumps it into a file by using dump function, this process is called pickling. While the process of retrieving original Python objects from the stored string representation is called unpickling."],
+
+[" How python is interpreted ",
+" Python language is an interpreted language. Python program runs directly from the source code. It converts the source code that is written by the programmer into an intermediate language, which is again translated into machine language that has to be executed."],
+
+[" How is memory managed in Python ",
+" Python memory is managed by Python private heap space. All Python objects and data structures are locatedin a private heap. The programmer does not have an access to this private heap and interpreter takes care of this Python private heap. Python also have an inbuilt garbage collector, which recycle all the unused memory and frees thememory and makes it available to the heap space."],
+
+[" what is module and package in Python ",
+" In Python, module is the way to structure program. Each Python program file is a module, which imports other modules like objects and attributes.<br>"
++"<br>"
++" The folder of Python program is a package of modules. A package can have modules or subfolders."],
+
+[" what is a negative index in python ",
+" Python sequences can be index in positive and negative numbers. For positive index, 0 is the first index,1 is the second index and so forth. For negative index, (-1) is the last index and (-2) is the second last index and so forth."],
+
+[" how can you convert a number to a string? ",
+" In order to convert a number into a string, use the inbuilt function str(). If you want a octal or hexadecimal representation, use the inbuilt function oct() or hex()."],
+
+[" How can you copy an object in Python ",
+" To copy an object in Python, you can try copy.copy () or copy.deepcopy() for the general case. You cannotcopy all objects but most of them."],
+
+[" what is a namespace in python ",
+" In Python, every name introduced has a place where it lives and can be hooked for. This is known as namespace. It is like a box where a variable name is mapped to the object placed. Whenever the variable is searched out, this box will be searched, to get corresponding object."],
+
+[" in Python what are iterators ",
+" In Python, iterators are used to iterate a group of elements, containers like list."],
+
+[" in python what is slicign ",
+" A mechanism to select a range of items from sequence types like list, tuple, strings etc. is known as slicing."],
+
+[" What is a module and package in Python? ",
+" In Python, module is the way to structure program. Each Python program file is a module, which imports other modules like objects and attributes.<br>"
++"<br>"
++" The folder of Python program is a package of modules. A package can have modules or subfolders."],
+
+[" build the primes() function so that I fills the n one at a time, and comes back to primes() functionuntil n > 100. ",
+" def isPrime(n):<br>"
++"  if n == 1:<br>"
++"  return False<br>"
++"  for t in range(2,n):<br>"
++"  if n % t == 0:<br>"
++"  return False<br>"
++"  return True<br>"
++"<br>"
++" def primes(n=1):<br>"
++"  while n < 100:<br>"
++"  # yields n instead of returns n<br>"
++"  if isPrime(n): yield n<br>"
++"  # next call it will increment n by 1<br>"
++"  n += 1"],
+
+[" What is __init__.py? ",
+" It is used to import a module in a directory, which is called package import."],
+
+[" Build a string with the numbers from 0 to 100, &#34;0123456789101112... ",
+" &#39;&#39;.join([str(x) for x in range(n)])"],
+
+[" printing cotents of a file ",
+" try:
++"  with open(&#39;filename&#39;,&#39;r&#39;) as f:
++"  print f.read()
++" except IOError:
++"  print &#34;No such file exists&#34;"],
+
+[" How can we get home directory using &#39;~&#39; in Python? ",
+" import os
++" print os.path.expanduser(&#39;~&#39;)"],
+
+[" what are generators ",
+" Generators allow us to declare a function that behaves like an iterator, i.e. it can be used in a for loop. It&#39;s a function type generator, but there is another type of generator that may be more familiar to us - expression type generator used in list comprehension:"],
+
+[" What is a docstring ",
+" A docstring is the documentation string for a function. If it exists, it must be the first thing defined in a function. We use the docstring like so:
++" function_name.__doc__
+
++" how it looks in a function
++" def my_function():
++"  &#34;&#34;&#34;our docstring&#34;&#34;&#34;"],
+
+[" what is monkey patching ",
+" n Python, the term monkey patch only refers to dynamic modifications of a class or module at runtime, motivated by the intent to patch existing third-party code as a workaround to a bug or feature which does not act as wedesire."],
+
+[" what are lambdas and give an example ",
+" Python supports the creation of anonymous functions (i.e. functions that are not bound to a name) at runtime, using a construct called lambda.
+
++" functools.reduce(lamda x,y:x*y, a)
+
++" general form :lambda arg1, arg2, ...argN : expression using arguments lambda arg1, arg2, ...argN : expression using arguments"],
+
+[" properties vs Getters/Setters ",
+" In general, properties are more flexible than attributes. That&#39;s because we can define functions thatdescribe what is supposed to happen when we need setting, getting or deleting them. If we don&#39;t need this additional flexibility, we may just use attributes since they are easier to declare and faster.
+
++" However, when we convert an attribute into a property, we just define some getter and setter that we attach to it, that will hook the data access. Then, we don&#39;t need to rewrite the rest of our code, the way for accessing the data is the same, whatever our attribute is a property or not."],
+
+[" Making a list with unique element from a list with duplicate elements ",
+" >>> dup_list = [1,2,3,4,4,4,5,1,2,7,8,8,10]
++" >>> unique_list = list(set(dup_list))
++" >>> print unique_list
+ <br>", [1, 2, 3, 4, 5, 7, 8, 10]
++" >>>"],
+
+[" Name the functional approach that python is taking ",
+" map(aFunction, aSequence)
++" filter(aFunction, aSequence)
++" reduce(aFunction, aSequence)
++" lambda
++" list comprehension"],
+
+[" what is map? ",
+" synatx: map(aFunction, aSequence)
+
++" >>> def cubic(x):
++"  return x*x*x
+
++" >>> items = [x for x in range(11) if x % 2 == 0]
++" >>> list(map(cubic, items))
+ <br>", [0, 8, 64, 216, 512, 1000]
++" >>>
++" >>> list(map(lambda x,y: x*y, [1,2,3], [4,5,6]))
+ <br>", [4, 10, 18]
+
++" The first argument is a function to be executed for all the elements of the iterable given as the secondargument. If the function given takes in more than 1 arguments, then many iterables are given."],
+
+[" what is filter and reduce ",
+" >>> integers = [ x for x in range(11)]
++" >>> filter(lambda x: x % 2 == 0, integers)
+ <br>", [0, 2, 4, 6, 8, 10]
++" >>> map(lambda x: x**2, integers)
+ <br>", [0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
++" >>> reduce(lambda x, y: x + y, integers)
++" 55"],
+
+[" describe filter vs reduce vs map ",
+" In the first example, filter() calls our lambda function for each element of the list, and returns a new list that contains only those elements for which the function returned &#34;True&#34;. In this case, we get a list of all even numbers.
++" In the second example, map() is used to convert our list. The given function is called for every element in the original list, and a new list is created which contains the return values from our lambda function. In this case, itcomputes x^2 for every element.
++" Finally, reduce() is somewhat special. The function for this one must accept two arguments (x and y), not just one. The function is called with the first two elements from the list, then with the result of that call and the third element, and so on, until all of the list elements have been handled. This means that our function is called n-1 times if the list contains n elements. The return value of the last call is the result of the reduce() construct. In the above example, it simply adds the arguments, so we get the sum of all elements."],
+
+[" what types are immutable and what types are immutable ",
+" immutable:tuple, frozen set, int, float, str
++" mutable: list, set, dict, byte array"],
+
+[" difference between remove, del and pop on lists ",
+" To remove a list element, we can use either the del statement if we know exactly which element(s) we are deleting or the remove() method if we do not know.
+
++" list.remove(element), del list(index), list.pop(index)
+
++" Examples: del a[i], a.remove(7), a.pop(i)"],
+
+[" Given a list of string, [&#39;Black&#39;, &#39;holes&#39;, &#39;are&#39;, &#39;where&#39;, &#39;God&#39;, &#39;divided&#39;, &#39;by&#39;, &#39;zero&#39;], print each word in a new line: ",
+" >>> s = [&#39;Black&#39;, &#39;holes&#39;, &#39;are&#39;, &#39;where&#39;, &#39;God&#39;, &#39;divided&#39;, &#39;by&#39;, &#39;zero&#39;]
++" >>> print &#39;\n&#39;.join(s)"],
+
+[" is python a case sensitive langauge ",
+" Yes! Python is a case sensitive programming language."],
+
+[" What are the supported data types in Python? ",
+" Python has five standard data types −
+
++" Numbers
+
++" String
+
++" List
+
++" Tuple
+
++" Dictionary"],
+
+[" What is the output str if str = &#39;Hello World!&#39;? ",
+" It will print complete string. Output would be Hello World!"],
+
+[" What is the output of print str[2:5] if str = &#39;Hello World!&#39;? ",
+" It will print characters starting from 3rd to 5th. Output would be llo."],
+
+[" What is the output of print str[2:] if str = &#39;Hello World!&#39;? ",
+" It will print characters starting from 3rd character. Output would be llo World!."],
+
+[" What is the output of print str * 2 if str = &#39;Hello World!&#39;? ",
+" It will print string two times. Output would be Hello World!Hello World!."],
+
+[" What is the output of print str + &#34;TEST&#34; if str = &#39;Hello World!&#39;? ",
+" It will print concatenated string. Output would be Hello World!TEST."],
+
+[" What is the output of print list[2:] if list = [ &#39;abcd&#39;, 786 , 2.23, &#39;john&#39;, 70.2 ]?",
+" It will print elements starting from 3rd element. Output would be [2.23, &#39;john&#39;, 70.200000000000003]."],
+
+[" What is the output of print tinylist * 2 if tinylist = [123, &#39;john&#39;]? ",
+" It will print list two times. Output would be [123, &#39;john&#39;, 123, &#39;john&#39;]."],
+
+[" What is the output of print list + tinylist * 2 if list = [ &#39;abcd&#39;, 786 , 2.23, &#39;john&#39;, 70.2 ] and tinylist = [123, &#39;john&#39;]? ",
+" It will print concatenated lists. Output would be [&#39;abcd&#39;, 786, 2.23, &#39;john&#39;, 70.200000000000003, 123, &#39;john&#39;]."],
+
+[" How will you check in a string that all characters are whitespaces? ",
+" isspace() − Returns true if string contains only whitespace characters and false otherwise."],
+
+[" How will you capitalizes first letter of string? ",
+" capitalize() − Capitalizes first letter of string."],
+
+[" How will you check in a string that all characters are alphanumeric? ",
+" isalnum() − Returns true if string has at least 1 character and all characters are alphanumeric and falseotherwise."],
+
+[" How will you check in a string that all characters are digits? ",
+" isdigit() − Returns true if string contains only digits and false otherwise."],
+
+[" How will you check in a string that all characters are in lowercase? ",
+" islower() − Returns true if string has at least 1 cased character and all cased characters are in lowercase and false otherwise."],
+
+[" How will you check in a string that all characters are numerics? ",
+" isnumeric() − Returns true if a unicode string contains only numeric characters and false otherwise."],
+
+[" How will you check in a string that it is properly titlecased? ",
+" istitle() − Returns true if string is properly &#34;titlecased&#34; and false otherwise."],
+
+[" How will you check in a string that all characters are in uppercase? ",
+" isupper() − Returns true if string has at least one cased character and all cased characters are in uppercase and false otherwise."],
+
+[" How will you merge elements in a sequence? ",
+" &#39;-&#39;.join(list) − Merges (concatenates) the string representations of elements in sequence seq into a string, with separator string."],
+
+[" How will you get the length of the string? ",
+" len(string) − Returns the length of the string."],
+
+[" How will you replaces all occurrences of old substring in string with new string? ",
+" replace(old, new [, max]) − Replaces all occurrences of old in string with new or at most max occurrencesif max given."],
+
+[" How will you change case for all letters in string? ",
+" swapcase() − Inverts case for all letters in string."],
+
+[" How will you get titlecased version of string? ",
+" title() − Returns &#34;titlecased&#34; version of string, that is, all words begin with uppercase and therest are lowercase."],
+
+[" How will you convert a string to all uppercase? ",
+" upper() − Converts all lowercase letters in string to uppercase."],
+
+[" How will you get titlecased version of string? ",
+" title() − Returns &#34;titlecased&#34; version of string, that is, all words begin with uppercase and therest are lowercase."],
+
+[" How will you get the length of a list? ",
+" len(list) − Gives the total length of the list."],
+
+[" How will you get the max valued item of a list? ",
+" max(list) − Returns item from the list with max value."],
+
+[" how will you get the min valued item of a list ",
+" min(list) − Returns item from the list with min value."],
+
+[" How will you get the index of an object in a list? ",
+" list.index(obj) − Returns the lowest index in list that obj appears."],
+
+[" How will you insert an object at given index in a list? ",
+" list.insert(index, obj) − Inserts object obj into list at offset index."],
+
+[" How will you remove last object from a list? ",
+" list.pop(obj=list[-1]) − Removes and returns last object or obj from list."],
+
+[" How will you remove an object from a list? ",
+" list.remove(obj) − Removes object obj from list."],
+
+[" How will you reverse a list? ",
+" list.reverse() − Reverses objects of list in place."],
+
+[" How will you sort a list? ",
+" list.sort([func]) − Sorts objects of list, use compare func if given."],

@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=1000">
+	<style>
+		div#test {
+			border: #000 1px solid;
+			padding: 10px 40px 40px 40px;
+		}
+
+		input {
+			float: right;
+		}
+	</style>
+	<script>
+		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+		var questions = [
+
+			["Is this order of operator precedence right:<br>"
+				+ "1. Unary (positive +, negative -, NOT !)<br>"
+				+ "2. Multiplicative (*, /, %)<br>"
+				+ "3. Additive (+, -)<br>"
+				+ "4. Relational (<, >, <=, ≤, >=, ≥)<br>"
+				+ "5. Equality (==, !=, <>, ≠)<br>"
+				+ "6. Logical AND (&&)<br>"
+				+ "7. Logical XOR (^)<br>"
+				+ "8. Logical OR (||)<br>"
+				+ "9. Assignment (<-, <-)<br>",
+				"True",
+				"False",
+				"1 and 9 need to switch",
+				"4 and 5 need to switch",
+				"True"
+			],
+			["Is this order of operator precedence right:<br>"
+				+ "1. Assignment (<-, <-)<br>"
+				+ "2. Multiplicative (*, /, %)<br>"
+				+ "3. Additive (+, -)<br>"
+				+ "4. Relational (<, >, <=, ≤, >=, ≥)<br>"
+				+ "5. Equality (==, !=, <>, ≠)<br>"
+				+ "6. Logical AND (&&)<br>"
+				+ "7. Logical XOR (^)<br>"
+				+ "8. Logical OR (||)<br>"
+				+ "9. Unary (positive +, negative -, NOT !)<br>",
+				"True",
+				"False",
+				"1 and 9 need to switch",
+				"4 and 5 need to switch",
+				"1 and 9 need to switch"
+			],
+			["Is this order of operator precedence right: <br>"
+				+ "1. Unary (positive +, negative -, NOT !) <br>"
+				+ "2. Multiplicative (*, /, %) <br>"
+				+ "3. Additive (+, -) <br>"
+				+ "4. Equality (==, !=, <>, ≠) <br>"
+				+ "5. Relational (<, >, <=, ≤, >=, ≥) <br>"
+				+ "6. Logical AND (&&) <br>"
+				+ "7. Logical XOR (^) <br>"
+				+ "8. Logical OR (||) <br>"
+				+ "9. Assignment (<-, <-) <br>",
+				"True",
+				"False",
+				"1 and 9 need to switch",
+				"4 and 5 need to switch",
+				"4 and 5 need to switch"
+			],
+			["Is this order of operator precedence right:<br>"
+				+ "1. Unary (positive +, negative -, NOT !)<br>"
+				+ "2. Multiplicative (*, /, %)<br>"
+				+ "3. Additive (+, -)<br>"
+				+ "4. Relational (<, >, <=, ≤, >=, ≥)<br>"
+				+ "5. Equality (==, !=, <>, ≠)<br>"
+				+ "6. Logical AND (&&)<br>"
+				+ "7. Logical OR (||)<br>"
+				+ "8. Logical XOR (^)<br>"
+				+ "9. Assignment (<-, <-)<br>",
+				"True",
+				"False",
+				"1 and 9 need to switch",
+				"4 and 5 need to switch",
+				"False"
+			],
+
+
+			["What is array is this <br>"
+				+ "procedure arraySomething(int [] list, int places) <br>"
+				+ "for (int i <- 0; i < places; i <- i + 1) <br>"
+				+ "int first <- list[0] <br>"
+				+ "for (int j <- 0; j < len(list) - 1; j <- j + 1) <br>"
+				+ "list[j] <- list[j + 1] <br>"
+				+ "end for <br>"
+				+ "list[len(list) - 1] <- first <br>"
+				+ "end for <br>"
+				+ "end arraySomething <br>",
+				"1D Array LeftShift",
+				"1D Array Reverse",
+				"1D Array Fibonacci",
+				"1D Array Histogram",
+				"1D Array LeftShift"],
+
+			["What is array is this <br>"
+				+ "procedure arraySomething(int [] list) <br>"
+				+ "for (int i <- 0; i < len(list)/2; i <- i + 1) <br>"
+				+ "// call to swap <br>"
+				+ "swap(list, i, len(list) - i - 1) <br>"
+				+ "end for <br>"
+				+ "end arraySomething <br>",
+				"1D Array LeftShift",
+				"1D Array Reverse",
+				"1D Array Fibonacci",
+				"1D Array Histogram",
+				"1D Array Reverse"],
+
+			["What is array is this <br>"
+				+ "int [] <- {0, 1, 0, 0, 0, 0, 0, 0, 0, 0} <br>"
+				+ "for (int i <- 0; i < 10; i <- i + 1) <br>"
+				+ "// loop body <br>"
+				+ "if ( i < 8)  <br>"
+				+ "list[ i + 2]  <- list[i] + list[i + 1] <br>"
+				+ "end if <br>"
+				+ "//another way is: <br>"
+				+ "if ( i > 1)  <br>"
+				+ "list[i]  <- list[i - 1] + list[i - 2] <br>"
+				+ "end if <br>",
+				"1D Array LeftShift",
+				"1D Array Reverse",
+				"1D Array Fibonacci",
+				"1D Array Histogram",
+				"1D Array Fibonacci"],
+
+			["What is array is this <br>"
+				+ "procedure arraySomething (pass-by-reference int[] result, pass-by-value int[] data) <br>"
+				+ "for (int i <- 0; i < len(data); i <- i +1)<br>"
+				+ "result[data[i]] <- result[data[i]] + 1 <br>"
+				+ "end for <br>"
+				+ "end arraySomething <br>",
+				"1D Array Histogram",
+				"1D Array Reverse",
+				"1D Array Fibonacci",
+				"1D Array Swap",
+				"1D Array Histogram"],
+
+			["What is array is this <br>"
+				+ "procedure histogram (pass-by-reference int[] result, pass-by-value int[] data) <br>"
+				+ "for (int i <- 0; i < len(data); i <- i +1)<br>"
+				+ "result[data[i]] <- result[data[i]] + 1 <br>"
+				+ "end for <br>"
+				+ "end histogram <br>"
+				+ "What pre-condition must be true for histogram to execute without error? <br>",
+				"result last index must be greater than or equal to data greatest value",
+				"result first index must be greater than or equal to data greatest value",
+				"result first index must be greater than or equal to data lowest value",
+				"result last index must be greater than or equal to data lowest value",
+				"result last index must be greater than or equal to data greatest value"],
+
+			["What is array is this <br>"
+				+ "int arraySomething (int[] list1,  int[] list2) <br>"
+				+ "int [] result <- new int [ len(list1) + len(list2) ] <br>"
+				+ "for ( int i <- 0; i < len(result); i <- i + 1)<br>"
+				+ "if ( i < len(list1) ) <br>"
+				+ "result[i] <- list1[i] <br>"
+				+ "else <br>"
+				+ "result[i] <- list2[i - len(list1) ] <br>"
+				+ "end if <br>"
+				+ "end for <br>"
+				+ "end arraySomething <br>",
+				"1D Array Histogram",
+				"1D Array Reverse",
+				"1D Array Fibonacci",
+				"1D Array Combine",
+				"1D Array Combine"],
+			//new from my second test
+			["If the ASCII is 97 and the symbol is a what is the ASCII when the symbol is e?",
+				"101",
+				"93",
+				"100",
+				"94",
+				"101"],
+
+			["What are the difference of java and c++?",
+				"In Java, parameters are always passed by value (or, with objects, their references are passed by value). In C++, parameters can be passed by value, pointer, or by reference.",
+				"C++ has built-in garbage collection.",
+				"Java allows operator overloading.",
+				"Java allows multiple inheritance of classes",
+				"In Java, parameters are always passed by value (or, with objects, their references are passed by value). In C++, parameters can be passed by value, pointer, or by reference."],
+
+			["What are the difference of java and c++?",
+				"C++ runs in a virtual machine.",
+				"Java has built-in garbage collection.",
+				"Java allows operator overloading.",
+				"Java allows multiple inheritance of classes",
+				"Java has built-in garbage collection."],
+
+			["What are the difference of java and c++?",
+				"C++ runs in a virtual machine.",
+				"C++ has built-in garbage collection.",
+				"Java allows operator overloading.",
+				"C++ allows multiple inheritance of classes.",
+				"C++ allows multiple inheritance of classes."],
+
+			["What are the difference of java and c++?",
+				"C++ runs in a virtual machine.",
+				"C++ has built-in garbage collection.",
+				"Java allows operator overloading.",
+				"C++ natively supports unsigned arithmetic.",
+				"C++ natively supports unsigned arithmetic."],
+
+			["What are the difference of java and c++?",
+				"C++ runs in a virtual machine.",
+				"C++ has built-in garbage collection.",
+				"Java allows operator overloading.",
+				"C++ allows operator overloading.",
+				"C++ allows operator overloading."],
+
+			["picture.jpg is located in the same folder as the current page",
+				"img src=\"picture.jpg\">",
+				"img src=\"images/picture.jpg\">",
+				"img src=\"/images/picture.jpg\">",
+				"img src=\"../picture.jpg\">",
+				"img src=\"picture.jpg\">"],
+
+			["picture.jpg is located in the images folder in the current folder",
+				"img src=\"picture.jpg\">",
+				"img src=\"images/picture.jpg\">",
+				"img src=\"/images/picture.jpg\">",
+				"img src=\"../picture.jpg\">",
+				"img src=\"images/picture.jpg\">"],
+
+			["picture.jpg is located in the images folder at the root of the current web",
+				"img src=\"picture.jpg\">",
+				"img src=\"images/picture.jpg\">",
+				"img src=\"/images/picture.jpg\">",
+				"img src=\"../picture.jpg\">",
+				"img src=\"/images/picture.jpg\">"],
+
+			["picture.jpg is located in the folder one level up from the current folder",
+				"img src=\"picture.jpg\">",
+				"img src=\"images/picture.jpg\">",
+				"img src=\"/images/picture.jpg\">",
+				"img src=\"../picture.jpg\">",
+				"img src=\"../picture.jpg\">"],
+
+			["RBG stands for Red, green, blue and it is integer between?",
+				"0, 255 light added together in order to reproduce a broad array of colors",
+				"0, 200 light added together in order to reproduce a broad array of colors",
+				"0, 100 light added together in order to reproduce a broad array of colors",
+				"0, 155 light added together in order to reproduce a broad array of colors",
+				"0, 255 light added together in order to reproduce a broad array of colors"],
+
+			["For example, rgb(0, 0, 255) is rendered as ",
+				"green, because the green parameter is set to its highest value (255) and the others are set to 0.",
+				"red, because the red parameter is set to its highest value (255) and the others are set to 0.",
+				"blue, because the blue parameter is set to its highest value (255) and the others are set to 0.",
+				"none, because must be equal to all parameters",
+				"blue, because the blue parameter is set to its highest value (255) and the others are set to 0."],
+
+			["31 base 10 = ____ base 2 what is the first step",
+				"31 / 2 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"31 / 10 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"10 / 31 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"2 / 31 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"31 / 2 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)"],
+
+			["31 base 10 = ____ base 2 and after first step and its 11111 what is the second",
+				"put in the place value system of 16 8 4 2 1 so the answer is 16 + 8 + 4 + 2 + 1 =31",
+				"add all integer together",
+				"times all integer so its 1",
+				"no second step",
+				"put in the place value system of 16 8 4 2 1 so the answer is 16 + 8 + 4 + 2 + 1 =31"],
+
+			["101 base 2 = ____ base 10 what is the first step",
+				"put in the place value system of 4 2 1 so the answer is 4 + 0 + 1 = 5",
+				"add all integer together",
+				"times all integer so its 1",
+				"no second step",
+				"put in the place value system of 4 2 1 so the answer is 4 + 0 + 1 = 5"],
+
+			["101 base 2 = ____ base 10 after finding the answer 5 how to check",
+				"5 / 2 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"5 / 10 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"10 / 5 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"2 / 5 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"5 / 2 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)"],
+
+			["47 base 10 = ____ base 8 what is the first step",
+				"47 / 8 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"47 / 10 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"10 / 47 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"8 / 31 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"47 / 8 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)"],
+
+			["47 base 10 = ____ base 8 and after first step and its 57 what is the second",
+				"put in the place value system of 8 1 so the answer is 40 + 7 = 47",
+				"add all integer together",
+				"times all integer so its 1",
+				"no second step",
+				"put in the place value system of 8 1 so the answer is 40 + 7 = 47"],
+
+			["Octal 21 = ____ base 10 what is the first step",
+				"put in the place value system of 8 1 so the answer is 16 + 1 = 17",
+				"add all integer together",
+				"times all integer so its 1",
+				"no second step",
+				"put in the place value system of 8 1 so the answer is 16 + 1 = 17"],
+
+			["Octal 21 = ____ base 10 and after first step and its 17 what is the second",
+				"17 / 8 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"17 / 10 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"10 / 17 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"8 / 17 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"17 / 8 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)"],
+
+			["47 base 10 = ____ base 16 what is the first step",
+				"47 / 16 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"47 / 10 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"10 / 47 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"16 / 47 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"47 / 16 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)"],
+
+			["47 base 10 = ____ base 16 and after first step and its 2F F = 15 what is the second",
+				"put in the place value system of 16 1 so the answer is 32 + 15 = 47",
+				"add all integer together",
+				"times all integer so its 1",
+				"no second step",
+				"put in the place value system of 16 1 so the answer is 32 + 15 = 47"],
+
+			["2A base 16 = ____ base 10 what is the first step A = 10",
+				"put in the place value system of 16 1 so the answer is 32 + 10 = 42",
+				"add all integer together",
+				"times all integer so its 1",
+				"no second step",
+				"put in the place value system of 16 1 so the answer is 32 + 10 = 42"],
+
+			["2A base 16 = ____ base 10 and after first step and its 42 what is the second",
+				"42 / 16 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"42 / 10 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"10 / 42 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"16 / 42 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"42 / 16 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)"],
+
+			["How to start with the base 8 (Octal) to base 2 (binary)",
+				"top 4 2 1 blank and right side blank 0 1 2 3 4 5 6 7",
+				"top  0 1 2 3 4 5 6 7 blank and right side blank 4 2 1 ",
+				"top 4 2 1 and right side blank 0 1 2 3 4 5 6 7",
+				"top  0 1 2 3 4 5 6 7  and right side  4 2 1 ",
+				"top 4 2 1 blank and right side blank 0 1 2 3 4 5 6 7"],
+
+			["21 base 8 = ____ base 2",
+				"1st the base 8 to base 2 chart and plug it in to the 2 and 1 so its 010 for 2 and 001 for 1 answer is 10001",
+				"21 / 2 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"21 / 8 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"other",
+				"1st the base 8 to base 2 chart and plug it in to the 2 and 1 so its 010 for 2 and 001 for 1 answer is 10001"],
+
+			["100101 base 2 = ____ base 8",
+				"1st the base 8 to base 2 chart so start from the right to left in 3s: 101 is 5 and 100 is 4 so its 45",
+				"put in the place value system of 1 0 0 1 0 1 so then",
+				"times all integer so its 1",
+				"other",
+				"1st the base 8 to base 2 chart so start from the right to left in 3s: 101 is 5 and 100 is 4 so its 45"],
+
+			["How to start with the base 16 (hexadecimal) to base 2 (binary)",
+				"top 8 4 2 1 blank and right side blank 0 1 2 3 4 5 6 7 8 9 A B C D E F",
+				"top  0 1 2 3 4 5 6 7 8 9 A B C D E F blank and right side blank 8 4 2 1 ",
+				"top 8 4 2 1 and right side blank 0 1 2 3 4 5 6 7 8 9 A B C D E F",
+				"top  0 1 2 3 4 5 6 7  and right side  4 2 1 ",
+				"top 8 4 2 1 blank and right side blank 0 1 2 3 4 5 6 7 8 9 A B C D E F"],
+
+			["94 base 16 = ____ base 2",
+				"1st the base 16 to base 2 chart and plug it in to the 9 and 4 so its 1001 for 9 and 0100 for 1 answer is 10010100",
+				"94 / 2 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"94 / 16 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"other",
+				"1st the base 16 to base 2 chart and plug it in to the 9 and 4 so its 1001 for 9 and 0100 for 1 answer is 10010100"],
+
+			["1110001 base 2 = ____ base 16",
+				"1st the base 16 to base 2 chart so start from the right to left in 4s: 0111 is 7 and 0001 is 1 so its 71",
+				"put in the place value system of 1 0 0 1 0 1 so then",
+				"times all integer so its 1",
+				"other",
+				"1st the base 16 to base 2 chart so start from the right to left in 4s: 0111 is 7 and 0001 is 1 so its 71"],
+
+			["E5 base 16 = ____ base 8",
+				"1st the base 16 to base 2 and base 8 to 2 chart so E = 1110 and 5 = 0101 add together 11100100 next (0)11 100 101 is 3 4 5",
+				"E5 / 16 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"E5 / 8 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"other",
+				"1st the base 16 to base 2 and base 8 to 2 chart so E = 1110 and 5 = 0101 add together 11100100 next (0)11 100 101 is 3 4 5"],
+
+			["21 base 8 = ____ base 16",
+				"1st the base 8 to base 2 and base 16 to 2 chart so 2 = 010 and 1 = 001 add together 10001 next (000)1 0001 is 1 1",
+				"21 / 16 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"21 / 8 and so on until you cant divide no more get the last remainder and back to the first remainder(bottom to top)",
+				"other",
+				"1st the base 8 to base 2 and base 16 to 2 chart so 2 = 010 and 1 = 001 add together 10001 next (000)1 0001 is 1 1"],
+
+
+			["Flowchart what is (tilt) process block do?",
+				"condition is made like while for or if",
+				"input and output",
+				"start or end",
+				"assign variable(s)",
+				"input and output"],
+
+			["Flowchart what is decision diamond?",
+				"condition is made like while for or if",
+				"input and output",
+				"start or end",
+				"assign variable(s)",
+				"condition is made like while for or if"],
+
+			["Flowchart what is square?",
+				"condition is made like while for or if",
+				"input and output",
+				"start or end",
+				"assign variable(s)",
+				"assign variable(s)"],
+
+			["How does i++ work",
+				"it incremental or + 1 after the current line",
+				"it incremental or + 1 during the current line",
+				"it incremental or + 1 before the current line",
+				"nothing",
+				"it incremental or + 1 after the current line"],
+
+			["How does ++i work",
+				"it incremental or + 1 after the current line",
+				"it incremental or + 1 during the current line",
+				"it incremental or + 1 before the current line",
+				"nothing",
+				"it incremental or + 1 during the current line"],
+
+			["does incremental in for loop matters if its ++i or i++",
+				"it doesnt since it loop",
+				"it does since ++i does it in the current line ",
+				"it does since i++ does it after the current line ",
+				"IDK",
+				"it doesnt since it loop"],
+
+
+			["2D array what is printing when print grid.length",
+				"number of rows",
+				"number of columns",
+				"number of both rows and columns",
+				"none",
+				"number of columns"],
+
+			["2D array what is printing when print grid[n].length",
+				"number of rows in n column",
+				"number of columns in n row",
+				"number of both rows and columns",
+				"none",
+				"number of rows in n column"],
+
+			["int[][]grid <- new int[3][4] <br> Default value is 0",
+				"grid  | [0] | [1] | [2] | [3] <br> [0] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br> [1] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br> [2] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br>",
+				"grid | [1] | [2]  | [3] | [4] <br> [1] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br> [2] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br> [3] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br>",
+				"grid  | [0] | [1] | [2]  <br> [0] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br> [1] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br> [2] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br>",
+				"none",
+				"grid &nbsp | [0] | &nbsp | [1] | &nbsp | [2] | &nbsp [3] <br> [0] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br> [1] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br> [2] &nbsp | 0 | &nbsp | 0 | &nbsp | 0 | &nbsp 0 <br>"],
+
+			["if(False XOR False) what is the result",
+				"False",
+				"True",
+				"undefine",
+				"error",
+				"False"],
+
+			["if(True XOR False) what is the result",
+				"False",
+				"True",
+				"undefine",
+				"error",
+				"True"],
+
+			["if(True XOR True) what is the result",
+				"False",
+				"True",
+				"undefine",
+				"error",
+				"False"],
+				// right here to write
+			["Assume there is a function tail which returns a reference to the last Node of a linked list, given the head Node. For this problem, also assume there is a non-empty linked list reference declared as list. Now consider the following line of code:<br>"
+				+ "Node temp <- tail ( list )<br>"
+				+ "Immediately after this line of code is executed, which of the following conditions will be true, according to the postcondition of tail",
+				"temp is equal to null",
+				"temp.item is equal to 0",
+				"temp.next is equal to null",
+				"temp.next.item is equal to null",
+				"temp.next is equal to null"],
+
+			["Assume there is a function tail which returns a reference to the last Node of a list. Assuming that there is a reference head which points to the head Node of a linked list, which of the following pseudo-code descriptions would append a Node with the value newItem to the end of the list?",
+				"Set the tail Node\'s item value to the newItem",
+				"Set the tail Node\'s next link to the newItem",
+				"Create a new Node with the value newItem; set the tail Node\'s item value to the new Node",
+				"Create a new Node with the value newItem; set the tail Node\'s next link to the new Node",
+				"Create a new Node with the value newItem; set the tail Node\'s next link to the new Node"],
+
+			["head <br> &darr <br> 5 -> 3 -> 5 -> null <br> Assuming that a Node reference head is null, which of the following code blocks will NOT result in the Linked List pictured above?",
+				"head <- new Node( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.next.item <- 3 <br>"
+				+ "head.next.next <- new Node ( ) <br>"
+				+ "head.next.next.item <- 6 <br>",
+				"head <- new Node( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.item <- 3 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.item <- 6 <br>",
+				"head <- new Node( ) <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.next.next <- new Node ( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "head.next.item <- 3 <br>"
+				+ "head.next.next.item <- 6 <br>",
+				"head <- new Node( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "temp <- new Node ( ) <br>"
+				+ "temp.item <- 3 <br>"
+				+ "head.next <- temp <br>"
+				+ "temp <- new Node ( ) <br>"
+				+ "temp.item <- 6 <br>"
+				+ "head.next.next <- temp <br>",
+				"head <- new Node( ) <br>"
+				+ "head.item <- 5 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.item <- 3 <br>"
+				+ "head.next <- new Node ( ) <br>"
+				+ "head.item <- 6 <br>"],
+
+			["head <br> &darr <br> 5 -> 3 -> 5 -> null <br> Now consider the following block of code: <br>"
+				+ "int num ← 0 <br>"
+				+ "Node temp ← head <br>"
+				+ "while ( temp ≠ null ) <br>"
+				+ "    if ( temp.item == 3 ) <br>"
+				+ "        print num <br>"
+				+ "    end if <br>"
+				+ "    num ← num + 1 <br>"
+				+ "    temp ← temp.next <br>"
+				+ "end while <br>"
+				+ "What will be printed by the above block of code? <br>",
+				"0",
+				"1",
+				"2",
+				"3",
+				"1"],
+
+			["head <br> &darr <br> 5 -> 3 -> 5 -> null <br> Which of the following is not a true statement about this linked list? <br>",
+				"The head node contains the value 5",
+				"head.next.next.item is equal to 5",
+				"There are three nodes in this list",
+				"null represents a node that exists but does not contain a value",
+				"null represents a node that exists but does not contain a value"],
+
+			["Which of the following does not describe a feature of linked lists?",
+				"Dynamically allocated in memory",
+				"Abstract data type",
+				"Fixed length",
+				"O(N) complexity to access any node in the list",
+				"Fixed length"],
+
+			["What is not a pro in Waterfall",
+				"Offers a clear, staightforward process",
+				"Stages can be easily tracked and managed",
+				"It\'s easy to see progess and to document",
+				"build in iteration",
+				"build in iteration"],
+
+			["What is not a con in Waterfall",
+				"Assumes reqirements are clear and unchanging",
+				"Does not build in iteration",
+				"Does not build testing and review into each step, therefore changes can be costly",
+				"Stages can be hard to tracked and managed",
+				"Stages can be hard to tracked and managed"],
+
+			["What is not a pro in incremental",
+				"Introduces more flexibility to change",
+				"Builds in customer testing and evaluation",
+				"Easier to manage risk",
+				"Requires good planning and design to work effectively",
+				"Requires good planning and design to work effectively"],
+
+			["What is not a pro in SCRUM",
+				"Very flexible",
+				"Builds in rapid iteration and feedback",
+				"Can reduce total number of bugs in final product",
+				"Good for documentation",
+				"Good for documentation"],
+
+			["What is not a pro in Spiral",
+				"Very flexible and excellent at managing risky projects",
+				"Uses the best of other models",
+				"Uses prototyping extensively",
+				"Document is easy and cheap",
+				"Document is easy and cheap"],
+
+			["What is not a con in Spiral",
+				"Can be difficult to stop the process of iteration",
+				"Complex to manage",
+				"Documentation is difficult and costly",
+				"Not flexible",
+				"Not flexible"],
+
+			["Commonly used for years in standard industry production. This model is sequential in nature, with progress flowing steadily down through the phases of idea, analysis, design, development and test. The disadvantage of this methodology is that it is rigid and does not easily allow for modifications.",
+				"Waterfall",
+				"Incremental",
+				"Agile Methodologies (SCRUM, XP, Kanban)",
+				"Spiral",
+				"Waterfall"],
+
+			["The system software development process in small steps, completing all of the SSLC phases for each subset of the application, and then repeating the cycle for each portion until the project is complete. This is an improvement over the waterfall model because it provides more opportunity to make adjustments as needed with less cost involved in making changes along the way.",
+				"Waterfall",
+				"Incremental",
+				"Agile Methodologies (SCRUM, XP, Kanban)",
+				"Spiral",
+				"Incremental"],
+
+			["Are both incremental and iterative. Emphasizes continuous delivery of working software that is coded, tested and fixed over short intervals that are typically one to three weeks in duration. A subset of system requirements are selected from the backlog and implemented and delivered in each iteration.",
+				"Waterfall",
+				"Incremental",
+				"Agile Methodologies (SCRUM, XP, Kanban)",
+				"Spiral",
+				"Agile Methodologies (SCRUM, XP, Kanban)"],
+
+			["A risk-driven process model generator for software projects. Based on the unique risk patterns of a given project, the model guides a team to adopt elements of one or more process models. Before any changes are made to the original plan, a risk assessment is performed, helping to decide the nature and degree of the recommended change.",
+				"Waterfall",
+				"Incremental",
+				"Agile Methodologies (SCRUM, XP, Kanban)",
+				"Spiral",
+				"Spiral"],
+
+			["BLACK BOX TESTING",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+				"a pure functional approach to problem solving. Programming is a form of declarative programming. Languages that fit this description include Scheme, Haskell, LISP, Racket, and F#.",
+				"a paradigm in programming that is often referred to as procedural, where a developer writes code that describes in exacting detail the steps that the computer must take to accomplish the goal. Most of the mainstream programming languages, such as C++, Java, and Python, are considered imperative languages.",
+				" how a parent object can reference any of its child objects, or any descendant several levels of inheritance down the way.",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional."],
+
+			["What is the generic steps to carry out any type of black box testing:",
+				"1.Initially requirements and specifications of the system are examined. <br>"
+				+ "2.Tester chooses valid inputs (positive test scenario) to check whether SUT processes them correctly . Also some invalid inputs (negative test scenario) are chosen to verify that the SUT is able to detect them. <br>"
+				+ "3.Tester determines expected outputs for all those inputs. <br>"
+				+ "4.Software tester constructs test cases with the selected inputs. <br>"
+				+ "5.The test cases are executed. <br>"
+				+ "6.Software tester compares the actual outputs with the expected outputs. <br>"
+				+ "7.Defects if any are fixed and re-tested. ",
+				"IDK",
+				"Study",
+				"none",
+				"Answer"],
+
+			["BLACK BOX Functional TESTING",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+				"done after code fixes, upgrades or any other system maintenance to check the new code has not affected the existing code.",
+				"This type of black box testing is not related to testing of a specific functionality, but non-functional requirements such as performance, scalability, usability",
+				"This black box testing type is related to functional requirements of a system; it is done by software testers",
+				"This black box testing type is related to functional requirements of a system; it is done by software testers"],
+
+			["BLACK BOX Non-Functional TESTING",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+				"done after code fixes, upgrades or any other system maintenance to check the new code has not affected the existing code.",
+				"This type of black box testing is not related to testing of a specific functionality, but non-functional requirements such as performance, scalability, usability",
+				"This black box testing type is related to functional requirements of a system; it is done by software testers",
+				"This type of black box testing is not related to testing of a specific functionality, but non-functional requirements such as performance, scalability, usability"],
+
+			["BLACK BOX Regression TESTING",
+				"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+				"done after code fixes, upgrades or any other system maintenance to check the new code has not affected the existing code.",
+				"This type of black box testing is not related to testing of a specific functionality, but non-functional requirements such as performance, scalability, usability",
+				"This black box testing type is related to functional requirements of a system; it is done by software testers",
+				"done after code fixes, upgrades or any other system maintenance to check the new code has not affected the existing code."],
+
+
+
+				["Binary tree what to do? simple array [5,9,3,4,6,2,7]",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 2 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 4 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 6 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 1 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 2 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 4 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8  6",
+				"&nbsp &nbsp 5 <br> &nbsp / &nbsp &#92 <br> 3 &nbsp &nbsp &nbsp 9 <br> &nbsp &#92 &nbsp &nbsp / <br> &nbsp 4 &nbsp 6",
+				"&nbsp &nbsp &nbsp &nbsp 5 <br> &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp 9 &nbsp &nbsp &nbsp 3 <br> &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br>4 &nbsp 6 &nbsp 2 &nbsp 7",
+				"&nbsp &nbsp &nbsp &nbsp 5 <br> &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp 9 &nbsp &nbsp &nbsp 3 <br> &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br>4 &nbsp 6 &nbsp 2 &nbsp 7"],
+			["Complete Tree",
+				"there are no missing nodes when looking at each level of the tree. The lowest level of tree may not be completely full, but does not have any missing nodes. All other levels are full.",
+				"A tree in which every level of the tree is completely full, with no missing nodes",
+				"a tree data structure that has no children, and is at the end of a branch in a tree",
+				"tree structure is a node, including the root, which has one or more child nodes connected to it.",
+				"there are no missing nodes when looking at each level of the tree. The lowest level of tree may not be completely full, but does not have any missing nodes. All other levels are full."],
+			["Full Tree",
+				"there are no missing nodes when looking at each level of the tree. The lowest level of tree may not be completely full, but does not have any missing nodes. All other levels are full.",
+				"A tree in which every level of the tree is completely full, with no missing nodes",
+				"a tree data structure that has no children, and is at the end of a branch in a tree",
+				"The root node is the base level node in tree; the node that has no parent",
+				"A tree in which every level of the tree is completely full, with no missing nodes"],
+			["Binary search tree what to do? simple array [5,9,3,4,6]",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 2 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 4 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 6 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 1 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 2 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 4 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8  6",
+				"&nbsp &nbsp 5 <br> &nbsp / &nbsp &#92 <br> 3 &nbsp &nbsp &nbsp 9 <br> &nbsp &#92 &nbsp &nbsp / <br> &nbsp 4 &nbsp 6",
+				"&nbsp &nbsp &nbsp &nbsp 5 <br> &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp 9 &nbsp &nbsp &nbsp 3 <br> &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br>4 &nbsp 6 &nbsp 2 &nbsp 7",
+				"&nbsp &nbsp 5 <br> &nbsp / &nbsp &#92 <br> 3 &nbsp &nbsp &nbsp 9 <br> &nbsp &#92 &nbsp &nbsp / <br> &nbsp 4 &nbsp 6"],
+			["Minimum Heap Tree what to do? simple array [5,9,3,4,6,2,7,1,8,5] every parent is lesser in value than both its children",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 2 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 4 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 6 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 1 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 2 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 4 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8  6",
+				"&nbsp &nbsp 5 <br> &nbsp / &nbsp &#92 <br> 3 &nbsp &nbsp &nbsp 9 <br> &nbsp &#92 &nbsp &nbsp / <br> &nbsp 4 &nbsp 6",
+				"&nbsp &nbsp &nbsp &nbsp 5 <br> &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp 9 &nbsp &nbsp &nbsp 3 <br> &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br>4 &nbsp 6 &nbsp 2 &nbsp 7",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 1 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 2 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 4 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8  6"],
+			["Minimum Heap Tree element retrieval process 1st part? <br> &nbsp &nbsp &nbsp &nbsp &nbsp 1 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 2 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 4 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8  6",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 2 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 4 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 6 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 1 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 2 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 4 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8  6",
+				"&nbsp &nbsp 5 <br> &nbsp / &nbsp &#92 <br> 3 &nbsp &nbsp &nbsp 9 <br> &nbsp &#92 &nbsp &nbsp / <br> &nbsp 4 &nbsp 6",
+				"&nbsp &nbsp &nbsp &nbsp 5 <br> &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp 9 &nbsp &nbsp &nbsp 3 <br> &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br>4 &nbsp 6 &nbsp 2 &nbsp 7",
+				"&nbsp &nbsp &nbsp &nbsp &nbsp 2 <br> &nbsp &nbsp &nbsp &nbsp / &nbsp &#92 <br> &nbsp &nbsp &nbsp 4 &nbsp &nbsp &nbsp 3 <br> &nbsp &nbsp /  &nbsp &#92 &nbsp &nbsp / &#92 <br> &nbsp 6 &nbsp &nbsp 5 &nbsp 5 &nbsp 7 <br> &nbsp /  &#92 &nbsp / <br>9  &nbsp 8"],
+
+			/*
+			["",
+			"",
+			"",
+			"",
+			"",
+			"Answer"],
+			
+			["What pseudocode is this: <br>"
+				+ "int pseudocode(int[] list, int target)<br>"
+				+ "for (int j <- 0; j < list.length; j <- j + 1)<br>"
+				+ "if (list[j] == target)<br>"
+				+ "return j<br>"
+				+ "end if<br>"
+				+ "end for<br>"
+				+ "return −1<br>"
+				+ "end pseudocode<br>",
+				"Linear Search",
+				"Binary Search",
+				"Selection Sort",
+				"Bubble Sort",
+				"Linear Search"],
+
+			["What pseudocode is this: <br>"
+				+ "int pseudocode(int[] list, int target)<br>"
+				+ "//left at start, right at end<br>"
+				+ "int left <- 0, right <- list.length - 1<br>"
+				+ "//while left and right have not crossed<br>"
+				+ "while (left <= right)    <br>"
+				+ "//find the middle of the list<br>"
+				+ "int middle <- (left + right)/2    <br>"
+				+ "if (target == list[middle])<br>"
+				+ "return middle<br>"
+				+ "else<br>"
+				+ "//if target less than middle<br>"
+				+ "if (target < list[middle])   <br> "
+				+ "//look left (change right marker to<br>"
+				+ "right <- middle - 1    <br>"
+				+ "   //position one place before the middle)<br>"
+				+ "else<br>"
+				+ "//look right (change left marker to<br>"
+				+ "left <- middle + 1    <br>"
+				+ "end if else chain<br>"
+				+ "end while<br>"
+				+ "return -1 //target not found<br>"
+				+ "end pseudocode <br>",
+				"Linear Search",
+				"Binary Search",
+				"Selection Sort",
+				"Bubble Sort",
+				"Binary Search"],
+
+			["What pseudocode is this: <br>"
+				+ "void pseudocode(pass-by-reference int[] list)<br>"
+				+ "for (int k <- 0; k < list.length - 1; k <- k+1)   <br>"
+				+ " //k loop starts at zero and stops & one position short of end of list<br>"
+				+ "//assume that position k has best value<br>"
+				+ "int best <- k <br> "
+				+ "//q loop searches the rest of<br>"
+				+ "for (int q <- k+1; q < list.length; q <- q + 1)   <br>"
+				+ "   //the list for a better value<br>"
+				+ "//if q indicates a better value,<br>"
+				+ "if (list[q] < list[best])    <br>"
+				+ "best <- q //best gets q<br>"
+				+ "end q loop<br>"
+				+ "//swap values at positions k and best<br>"
+				+ "swap(list, k, best)    <br>"
+				+ "end k loop<br>"
+				+ "end pseudocode<br>"
+				+ "   //three step swap process<br>"
+				+ "void swap (pass-by-reference int[] list, int i, int j)<br>"
+				+ "int temp <- list[i]<br>"
+				+ "list[i] <- list [j]<br>"
+				+ "list [j] <- temp<br>"
+				+ "end swap<br>",
+				"Linear Search",
+				"Binary Search",
+				"Selection Sort",
+				"Bubble Sort",
+				"Selection Sort"],
+
+			["What pseudocode is CODEHERE to make it work: <br>"
+				+ "void selectionsort(pass-by-reference int[] list)<br>"
+				+ "for (int k <- 0; k < list.length - 1; k <- k+1)   <br>"
+				+ " //k loop starts at zero and stops & one position short of end of list<br>"
+				+ "//assume that position k has best value<br>"
+				+ "int best <- k <br> "
+				+ "//q loop searches the rest of<br>"
+				+ "for (int q <- k+1; q < list.length; q <- q + 1)   <br>"
+				+ "   //the list for a better value<br>"
+				+ "//if q indicates a better value,<br>"
+				+ "if (CODEHERE)    <br>"
+				+ "best <- q //best gets q<br>"
+				+ "end q loop<br>"
+				+ "//swap values at positions k and best<br>"
+				+ "swap(list, k, best)    <br>"
+				+ "end k loop<br>"
+				+ "end pseudocode<br>"
+				+ "   //three step swap process<br>",
+				"list[q] < list[best]",
+				"list[best] > list[q]",
+				"list[q] > list[best]",
+				"list[best] < list[q]",
+				"list[q] < list[best]"],
+
+			["What pseudocode is this: <br>"
+				+ "void pseudocode(pass-by-reference int[] list)<br>"
+				+ "//assume sorting process is NOT done<br>"
+				+ "boolean done <- false <br>"
+				+ "while(not done)<br>"
+				+ "//assume sorting process IS done, and list is sorted…BUT… <br>"
+				+ "done <- true <br>"
+				+ "//…look through the list anyway to see<br>"
+				+ "for (int k <- 0; k<list.length-1; k <- k+1) <br>"
+				+ "//if any neighboring elements are out<br>"
+				+ "//of order and need to be swapped<br>"
+				+ "//if value of next-door neighbor is<br>"
+				+ "if (list[k+1] < list[k]) <br>"
+				+ "//less than current value(neighbors are “out of sorts”)<br>"
+				+ "//swap the two values<br>"
+				+ "swap(list, k, k+1) <br>"
+				+ "//set done to false<br>"
+				+ "done <- false <br>"
+				+ "end for k loop<br>"
+				+ "end while loop<br>"
+				+ "end pseudocode<br>"
+				+ "//three step swap process<br>"
+				+ "void swap (pass-by-reference int[] list, int i, int j)<br>"
+				+ "int temp <- list[i]<br>"
+				+ "list[i] <- list [j]<br>"
+				+ "list [j] <- temp<br>"
+				+ "end swap<br>",
+				"Linear Search",
+				"Binary Search",
+				"Selection Sort",
+				"Bubble Sort",
+				"Bubble Sort"],
+
+			["What pseudocode is CODEHERE: <br>"
+				+ "void pseudocode(pass-by-reference int[] list)<br>"
+				+ "//assume sorting process is NOT done<br>"
+				+ "boolean done <- false <br>"
+				+ "while(not done)<br>"
+				+ "//assume sorting process IS done, and list is sorted…BUT… <br>"
+				+ "done <- true <br>"
+				+ "//…look through the list anyway to see<br>"
+				+ "for (int k <- 0; k<list.length-1; k <- k+1) <br>"
+				+ "//if any neighboring elements are out<br>"
+				+ "//of order and need to be swapped<br>"
+				+ "//if value of next-door neighbor is<br>"
+				+ "if (CODEHERE) <br>"
+				+ "//less than current value(neighbors are “out of sorts”)<br>"
+				+ "//swap the two values<br>"
+				+ "swap(list, k, k+1) <br>"
+				+ "//set done to false<br>"
+				+ "done <- false <br>"
+				+ "end for k loop<br>"
+				+ "end while loop<br>"
+				+ "end pseudocode<br>"
+				+ "//three step swap process<br>",
+				"list[k+1] < list[k]",
+				"list[k] < list[k+1]",
+				"list[k+1] > list[k]",
+				"list[k] > list[k+1]",
+				"list[k+1] < list[k]"],
+
+			["What pseudocode is this: <br>"
+				+ "void pseudocode(pass-by-reference int[] list) <br>"
+				+ "//outside loop starts at ONE and stops <br>"
+				+ "for (int k <- 1; k < list.length; k++) <br>"
+				+ "//at end of list <br>"
+				+ "//save copy of current value to be inserted <br>"
+				+ "int temp <- list[k] <br>"
+				+ "//assume best place is at current position…BUT…  <br>"
+				+ "int best <- k <br>"
+				+ "//…keep looking for a better place <br>"
+				+ "while (best > 0 AND temp < list[best - 1]) <br>"
+				+ "//shift values over one spot while the previous <br>"
+				+ "list[best] <- list[best - 1] <br>"
+				+ "//place is better and haven’t reached the start <br>"
+				+ "best <- best-1 <br>"
+				+ "//of the list <br>"
+				+ "end while <br>"
+				+ "//insert the current value in the best place <br>"
+				+ "list[best] <- temp <br>"
+				+ "end for <br>"
+				+ "end pseudocode <br>",
+				"Linear Search",
+				"Insertion Sort",
+				"Selection Sort",
+				"Bubble Sort",
+				"Insertion Sort"],
+
+			["What pseudocode is CODEHERE: <br>"
+				+ "void pseudocode(pass-by-reference int[] list) <br>"
+				+ "//outside loop starts at ONE and stops <br>"
+				+ "for (int k <- 1; k < list.length; k++) <br>"
+				+ "//at end of list <br>"
+				+ "//save copy of current value to be inserted <br>"
+				+ "int temp <- list[k] <br>"
+				+ "//assume best place is at current position…BUT…  <br>"
+				+ "int best <- k <br>"
+				+ "//…keep looking for a better place <br>"
+				+ "while (CODEHERE) <br>"
+				+ "//shift values over one spot while the previous <br>"
+				+ "list[best] <- list[best - 1] <br>"
+				+ "//place is better and haven’t reached the start <br>"
+				+ "best <- best-1 <br>"
+				+ "//of the list <br>"
+				+ "end while <br>"
+				+ "//insert the current value in the best place <br>"
+				+ "list[best] <- temp <br>"
+				+ "end for <br>"
+				+ "end pseudocode <br>",
+				"best > 0 AND temp < list[best - 1]",
+				"best > 0 AND temp > list[best - 1]",
+				"best < 0 AND temp < list[best - 1]",
+				"best < 0 AND temp > list[best - 1]",
+				"best > 0 AND temp < list[best - 1]"],
+
+			["What pseudocode is this: <br>"
+				+ "//method for initial sort call <br>"
+				+ "void Sort(pass-by-reference int[] list) <br>"
+				+ "int n <- list.length <br>"
+				+ "//creates a temporary array the same size as list <br>"
+				+ "int[] temp <- new int[n] <br>"
+				+ "sortHelper(list, 0, n - 1, temp) <br>"
+				+ "end Sort <br>"
+				+ "//method that does the “divide and conquer” recursive process, receiving two arrays and two integers <br>"
+				+ "//indicating front and back of portion of the current portion of the list being sorted <br>"
+				+ "void sortHelper(pass-by-reference int[] list, int front, <br>"
+				+ "int back, pass-by-reference int[] temp) <br>"
+				+ "//if front and back positions have not crossed and are not the same <br>"
+				+ "if (front < back) <br>"
+				+ "//find the middle position between front and back <br>"
+				+ "int mid <- (front + back)/2 <br>"
+				+ "//sort the left side, from front to mid <br>"
+				+ "sortHelper(list, front, mid, temp) <br>"
+				+ "//sort the right side, mid+1 to back <br>"
+				+ "sortHelper(list, mid + 1, back, temp) <br>"
+				+ "//merge the left and right lists <br>"
+				+ "otherMethod(list, front, mid, back, temp) <br>"
+				+ "end if <br>"
+				+ "end sortHelper <br>",
+				"Merge Sort",
+				"Insertion Sort",
+				"Selection Sort",
+				"Bubble Sort",
+				"Merge Sort"],
+
+			["What pseudocode is this: <br>"
+				+ "//method that merges two previously sorted lists, receiving two arrays and three integers <br>"
+				+ "//indicating the front, mid, and back of the current portion of the list being sorted. <br>"
+				+ "void otherMethod(pass-by-reference int_array list, int front, int mid, <br>"
+				+ "int back, pass-by-reference int_array temp) <br>"
+				+ "//i marks the front of the left side of the list being sorted <br>"
+				+ "int i <- front <br>"
+				+ "//j marks the front of the right side of the list being sorted <br>"
+				+ "int j <- mid + 1 <br>"
+				+ "//k marks the front of the temporary list, into which the values <br>"
+				+ "int k <- front <br>"
+				+ "//will be merged <br>"
+				+ "//while neither front marker, i or j, have reached <br>"
+				+ "while (i <= mid && j <= back) <br>"
+				+ "//the end of their half of the list <br>"
+				+ "//if i’s value is less than j’s value <br>"
+				+ "if (list[i] < list[j]) <br>"
+				+ "//put i’s value into the temporary list, and <br>"
+				+ "temp[k] <- list[i] <br>"
+				+ "//step i one position to the right <br>"
+				+ "i <- i+1 <br>"
+				+ "end if <br>"
+				+ "else <br>"
+				+ "//otherwise, put j’s value into the temporary list, and <br>"
+				+ "temp[k] <- list[j]; <br>"
+				+ "//step j one position to the right <br>"
+				+ "j <- j+1 <br>"
+				+ "end else <br>"
+				+ "//step k one position to the right <br>"
+				+ "k <- k+1 <br>"
+				+ "end while <br>"
+				+ "//at this point, one of the two halves of the list has been completely loaded into the <br>"
+				+ "//temporary array, and the remaining half needs to be \“cleaned out\”  <br>"
+				+ "//if i has not reached the middle, then the left half needs to be “cleaned out” and loaded <br>"
+				+ "//into the temporary list <br>"
+				+ "while (i <= mid) <br>"
+				+ "//put i’s value into the temporary list <br>"
+				+ "temp[k] <- list[i] <br>"
+				+ "//step both k and i <br>"
+				+ "k <- k+1 <br>"
+				+ "//one place to the right <br>"
+				+ "I <- i+1 <br>"
+				+ "end while <br>"
+				+ "//if j has not reached the back, then the right half needs to be “cleaned out” and loaded <br>"
+				+ "//into the temporary list <br>"
+				+ "while (j <= back) <br>"
+				+ "//put j’s value into the temporary list <br>"
+				+ "temp[k] <- list[j] <br>"
+				+ "//step both k and j <br>"
+				+ "j <- j+1 <br>"
+				+ "//one place to the right <br>"
+				+ "k <- k+1 <br>"
+				+ "end while <br>"
+				+ "//load all temporary values in this current list back into the original list <br>"
+				+ "for (int x <- front; x <= back; x <- x+1) <br>"
+				+ "list[x] <- temp[x] <br>"
+				+ "end otherMethod <br>",
+				"Merge Sort",
+				"Insertion Sort",
+				"Selection Sort",
+				"Bubble Sort",
+				"Merge Sort"],
+
+			["What pseudocode part of Merge Sort is this: <br>"
+				+ "void Sort(pass-by-reference int[] list) <br>"
+				+ "int n <- list.length <br>"
+				+ "int[] temp <- new int[n] <br>"
+				+ "sortHelper(list, 0, n - 1, temp) <br>"
+				+ "end Sort <br>",
+				"initial sort call creating a temporary array same size as list",
+				"Merge Sort the method that divide and conquer ",
+				"Merge Sort receiving two arrays and three integers ",
+				"Merge Sort the end of it",
+				"initial sort call creating a temporary array same size as list"],
+
+			["What pseudocode part of Merge Sort is this: <br>"
+				+ "void sortHelper(pass-by-reference int[] list, int front, <br>"
+				+ "int back, pass-by-reference int[] temp) <br>"
+				+ "if (front < back) <br>"
+				+ "int mid <- (front + back)/2 <br>"
+				+ "sortHelper(list, front, mid, temp) <br>"
+				+ "sortHelper(list, mid + 1, back, temp) <br>"
+				+ "otherMethod(list, front, mid, back, temp) <br>"
+				+ "end if <br>"
+				+ "end sortHelper <br>",
+				"divid and conquer process, if the front and back havent crossed and not equal, find the middle position, sort left side, sort right, merge two sides",
+				"initial sort call creating a temporary array same size as list",
+				"front of left and right side, front od temporary, receives 2 merfed sides, while both sides cantain values, if left front < rigth front, put left in temp and k steps 1",
+				"Bubble Sort",
+				"divid and conquer process, if the front and back havent crossed and not equal, find the middle position, sort left side, sort right, merge two sides"],
+
+			["What pseudocode part of Merge Sort is this: <br>"
+				+ "void otherMethod(pass-by-reference int_array list, int front, int mid, <br>"
+				+ "int back, pass-by-reference int_array temp) <br>"
+				+ "int i <- front <br>"
+				+ "int j <- mid + 1 <br>"
+				+ "int k <- front <br>"
+				+ "while (i <= mid && j <= back) <br>"
+				+ "if (list[i] < list[j]) <br>"
+				+ "temp[k] <- list[i] <br>"
+				+ "i <- i+1 <br>"
+				+ "end if <br>...<br>"
+				+ "k <- k+1 <br>"
+				+ "end while <br>",
+				"front of left and right side, front od temporary, receives 2 merfed sides, while both sides cantain values, if left front < rigth front, put left in temp and k steps 1",
+				"divid and conquer process, if the front and back havent crossed and not equal, find the middle position, sort left side, sort right, merge two sides",
+				"initial sort call creating a temporary array same size as list",
+				"One of the 2 sides are empty, (i <= mid) cleans left, (j <= back) cleans right, for loop all temporary values back to the original list",
+				"front of left and right side, front od temporary, receives 2 merfed sides, while both sides cantain values, if left front < rigth front, put left in temp and k steps 1"],
+
+			["What pseudocode part of Merge Sort is this: <br>"
+				+ "void otherMethod(pass-by-reference int_array list, int front, int mid, <br>"
+				+ "int back, pass-by-reference int_array temp) <br>"
+				+ "int i <- front <br>"
+				+ "int j <- mid + 1 <br>"
+				+ "int k <- front <br>"
+				+ "while (i <= mid && j <= back) <br>...<br>"
+				+ "else <br>"
+				+ "temp[k] <- list[j]; <br>"
+				+ "j <- j+1 <br>"
+				+ "end else <br>"
+				+ "k <- k+1 <br>"
+				+ "end while <br>",
+				"front of left and right side, front od temporary, receives 2 merfed sides, while both sides cantain values, if left front < rigth front, else put rigth in temp and k steps 1",
+				"initial sort call creating a temporary array same size as list",
+				"front of left and right side, front od temporary, receives 2 merfed sides, while both sides cantain values, if left front < rigth front, put left in temp and k steps 1",
+				"One of the 2 sides are empty, (i <= mid) cleans left, (j <= back) cleans right, for loop all temporary values back to the original list",
+				"front of left and right side, front od temporary, receives 2 merfed sides, while both sides cantain values, if left front < rigth front, else put rigth in temp and k steps 1"],
+
+			["What pseudocode part of Merge Sort is this: <br>"
+				+ "while (i <= mid) <br>"
+				+ "temp[k] <- list[i] <br>"
+				+ "k <- k+1 <br>"
+				+ "I <- i+1 <br>"
+				+ "end while <br>"
+				+ "while (j <= back) <br>"
+				+ "temp[k] <- list[j] <br>"
+				+ "j <- j+1 <br>"
+				+ "k <- k+1 <br>"
+				+ "end while <br>"
+				+ "for (int x <- front; x <= back; x <- x+1) <br>"
+				+ "list[x] <- temp[x] <br>"
+				+ "end otherMethod <br>",
+				"One of the 2 sides are empty, (i <= mid) cleans left, (j <= back) cleans right, for loop all temporary values back to the original list",
+				"initial sort call creating a temporary array same size as list",
+				"Merge Sort the method that divide and conquer ",
+				"Merge Sort receiving two arrays and three integers ",
+				"One of the 2 sides are empty, (i <= mid) cleans left, (j <= back) cleans right, for loop all temporary values back to the original list"],
+
+			["What pseudocode is this: <br>"
+				+ "void sort (pass-by-reference int[] list, int lo, int hi) <br>"
+				+ "//if the current values of lo and hi have met or crossed, <br>"
+				+ "if (lo >= hi) <br>"
+				+ "//do not continue this process <br>"
+				+ "return <br>"
+				+ "end if <br>"
+				+ "//left marker gets low end of current portion of list being sorted <br>"
+				+ "int left <- lo <br>"
+				+ "//right marker gets high end of current portion of list being sorted <br>"
+				+ "int right <- hi <br>"
+				+ "//pivot gets middle position value of current list <br>"
+				+ "int pivot <- list[(lo+hi)/2] <br>"
+				+ "//while left and right markers have not met or crossed <br>"
+				+ "while ( left < right) <br>"
+				+ "//look for a value to the left of the pivot that is on the <br>"
+				+ "while (list[left] < pivot) <br>"
+				+ "//wrong side, and stop there, with left marking that position <br>"
+				+ "left <- left+1 <br>"
+				+ "end while <br>"
+				+ "//look for a value to the right of the pivot that is on the <br>"
+				+ "while (list[right] > pivot) <br>"
+				+ "//wrong side, and stop there, with right marking that position <br>"
+				+ "right <- right-1 <br>"
+				+ "end while <br>"
+				+ "//if the left and right positions have not crossed, swap the two <br>"
+				+ "if (left <= right) <br>"
+				+ "//values at those positions, and…   <br>"
+				+ "swap (list, left, right) <br>"
+				+ "//…step left marker one position to the right, and…   <br>"
+				+ "left <- left+1 <br>"
+				+ "//…step right marker one position to the left <br>"
+				+ "right <- right-1 "
+				+ "end if <br>"
+				+ "end while <br>"
+				+ "//quicksort the left side of the list <br>"
+				+ "quickSort (list, lo, right) <br>"
+				+ "//quicksort the right side of the list <br>"
+				+ "quickSort (list, left, hi) <br>"
+				+ "end sort <br>"
+				+ "void swap (pass-by-reference int[] list, int i, int j) <br>"
+				+ "int temp <- list[i] <br>"
+				+ "list[i] <- list [j] <br>"
+				+ "list [j] <- temp <br>"
+				+ "end swap <br>",
+				"Merge Sort",
+				"Quick Sort",
+				"Selection Sort",
+				"Bubble Sort",
+				"Quick Sort"],
+
+			["What pseudocode part of Quick Sort is this: <br>"
+				+ "void sort (pass-by-reference int[] list, int lo, int hi) <br>"
+				+ "if (lo >= hi) <br>"
+				+ "return <br>"
+				+ "end if <br>"
+				+ "int left <- lo <br>"
+				+ "int right <- hi <br>"
+				+ "int pivot <- list[(lo+hi)/2] <br>",
+				"initial, if lo and hi meet or cross return(dont continue), left marker gets low end, right marker gets hi end, pivot gets middle",
+				"in the same petition(markers not met or cress), look for a value to the left of pivot if wrong side and stop with left mark, look for a value to the right of pivot if wrong side and stop with rigth mark",
+				"if left and right positions not cross, swap the two values at positions, step left marker to right, step right marker to left",
+				"last quicksort to the left partition and quicksort to the right partition",
+				"initial, if lo and hi meet or cross return(dont continue), left marker gets low end, right marker gets hi end, pivot gets middle"],
+
+			["What pseudocode part of Quick Sort is this: <br>"
+				+ "while ( left < right) <br>"
+				+ "while (list[left] < pivot) <br>"
+				+ "left <- left+1 <br>"
+				+ "end while <br>"
+				+ "while (list[right] > pivot) <br>"
+				+ "right <- right-1 <br>"
+				+ "end while <br>",
+				"in the same petition(markers not met or cress), look for a value to the left of pivot if wrong side and stop with left mark, look for a value to the right of pivot if wrong side and stop with rigth mark",
+				"initial, if lo and hi meet or cross return(dont continue), left marker gets low end, right marker gets hi end, pivot gets middle",
+				"if left and right positions not cross, swap the two values at positions, step left marker to right, step right marker to left",
+				"last quicksort to the left partition and quicksort to the right partition",
+				"in the same petition(markers not met or cress), look for a value to the left of pivot if wrong side and stop with left mark, look for a value to the right of pivot if wrong side and stop with rigth mark"],
+
+			["What pseudocode part of Quick Sort is this: <br>"
+				+ "if (left <= right) <br>"
+				+ "swap (list, left, right) <br>"
+				+ "left <- left+1 <br>"
+				+ "right <- right-1 "
+				+ "end if <br>"
+				+ "end while <br>",
+				"if left and right positions not cross, swap the two values at positions, step left marker to right, step right marker to left",
+				"in the same petition(markers not met or cress), look for a value to the left of pivot if wrong side and stop with left mark, look for a value to the right of pivot if wrong side and stop with rigth mark",
+				"initial, if lo and hi meet or cross return(dont continue), left marker gets low end, right marker gets hi end, pivot gets middle",
+				"last quicksort to the left partition and quicksort to the right partition",
+				"if left and right positions not cross, swap the two values at positions, step left marker to right, step right marker to left"],
+
+			["What pseudocode part of Quick Sort is this: <br>"
+				+ "quickSort (list, lo, right) <br>"
+				+ "quickSort (list, left, hi) <br>"
+				+ "end sort <br>"
+				+ "void swap (pass-by-reference int[] list, int i, int j) <br>"
+				+ "int temp <- list[i] <br>"
+				+ "list[i] <- list [j] <br>"
+				+ "list [j] <- temp <br>"
+				+ "end swap <br>",
+				"last quicksort to the left partition and quicksort to the right partition",
+				"if left and right positions not cross, swap the two values at positions, step left marker to right, step right marker to left",
+				"in the same petition(markers not met or cress), look for a value to the left of pivot if wrong side and stop with left mark, look for a value to the right of pivot if wrong side and stop with rigth mark",
+				"initial, if lo and hi meet or cross return(dont continue), left marker gets low end, right marker gets hi end, pivot gets middle",
+				"last quicksort to the left partition and quicksort to the right partition"],
+
+
+			["What is array is this <br>"
+				+ "void arraySomething (pass-by-reference int[] list, int i, int j) <br>"
+				+ "int temp <- list[i] <br>"
+				+ "list[i] <- list [j] <br>"
+				+ "list [j] <- temp <br>"
+				+ "end arraySomething <br>",
+				"1D Array LeftShift",
+				"1D Array Reverse",
+				"1D Array Fibonacci",
+				"1D Array Swap",
+				"1D Array Swap"],
+			
+			["BLACK BOX TESTING",
+			"also known as Behavioral Testing, is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. These tests can be functional or non-functional, though usually functional.",
+			"",
+			"",
+			"",
+			"Answer"],
+			*/
+
+		];
+		var shq = [];
+		var hq = [];
+		var sq = [];
+		function _(x) {
+			return document.getElementById(x);
+		}
+		function renderQuestion() {
+			test = _("test");
+
+			if (sq.length == questions.length) {
+				test.innerHTML = "<p>" + sq + "</p>";
+				test.innerHTML += "<br><p>" + hq + "</p>";
+				test.innerHTML += "<br><button onclick='nextQuestion()'>Next Question</button>";
+				pos = 0;
+				correct = 0;
+				return false;
+			}
+
+			// if(pos >= questions.length){
+			// 	test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" </h2> ";
+			// 	_("test_status").innerHTML = "Test Completed";
+			// 	pos = 0;
+			// 	correct = 0;
+			// 	return false;
+			// }
+			var tot = questions.length - sq.length;
+			var rq = [];
+			var rpn = Math.floor(Math.random() * 3) + 1;
+			var rn = [1, 3, 4, 2];
+			rn = shuffle(rn);
+			pos = Math.floor(Math.random() * questions.length);
+			//pos = 98;
+			while (sq.includes(pos)) {
+				pos = Math.floor(Math.random() * questions.length);
+				if (!sq.includes(pos)) break;
+			}
+			//pos = questions.length - 5;
+			//pos = 41;
+			if (pos == questions.length)--pos;
+			rq.push(questions[pos][rn.pop(rn[Math.floor(Math.random() * rn.length)])]);
+			rq.push(questions[pos][rn.pop(rn[Math.floor(Math.random() * rn.length)])]);
+			rq.push(questions[pos][rn.pop(rn[Math.floor(Math.random() * rn.length)])]);
+			rq.push(questions[pos][rn.pop(rn[Math.floor(Math.random() * rn.length)])]);
+			rq = shuffle(rq);
+
+			_("test_status").innerHTML = "Question " + (pos + 1) + " of " + tot;
+			question = questions[pos][0];
+			chA = rq.pop(rq[Math.floor(Math.random() * rq.length)]);
+			chB = rq.pop(rq[Math.floor(Math.random() * rq.length)]);
+			chC = rq.pop(rq[Math.floor(Math.random() * rq.length)]);
+			chD = rq.pop(rq[Math.floor(Math.random() * rq.length)]);
+			test.innerHTML = "<h3>" + question + "</h3>";
+			test.innerHTML += "<input type='radio' name='choices' value='" + chA + "'> <p><font >" + chA + "</font></p><br>";
+			test.innerHTML += "<input type='radio' name='choices' value='" + chB + "'> <p><font >" + chB + "</font></p><br>";
+			test.innerHTML += "<input type='radio' name='choices' value='" + chC + "'> <p><font >" + chC + "</font></p><br>";
+			test.innerHTML += "<input type='radio' name='choices' value='" + chD + "'> <p><font >" + chD + "</font></p><br><br>";
+			test.innerHTML += "<button onclick='checkAnswer()'>Submit</button>";
+		}
+		function checkAnswer() {
+			choices = document.getElementsByName("choices");
+			for (var i = 0; i < choices.length; i++) {
+				if (choices[i].checked) {
+					choice = choices[i].value;
+				}
+			}
+			if (choice == questions[pos][5]) {
+				test.innerHTML += "<button onclick='nextQuestion()'>Next Question</button>";
+				test.innerHTML += "<h3>Right! its: <br>" + questions[pos][5] + "</h3>";
+
+			}
+			else {
+				test.innerHTML += "<button onclick='nextQuestion()'>Next Question</button>";
+				test.innerHTML += "<h3> Wrong its: <br>" + questions[pos][5] + "</h3>";
+				hq.push(pos);
+			}
+
+		}
+		function shuffle(array) {
+			var currentIndex = array.length, temporaryValue, randomIndex;
+
+			// While there remain elements to shuffle...
+			while (0 !== currentIndex) {
+
+				// Pick a remaining element...
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+
+				// And swap it with the current element.
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			}
+
+			return array;
+		}
+		function nextQuestion() {
+			sq.push(pos);
+			renderQuestion();
+			window.scrollTo(0, 0);
+		}
+
+		function HQuestion() {
+			hq.push(pos);
+			sq.push(pos);
+			renderQuestion();
+		}
+
+		function done() {
+			test.innerHTML = "<p>" + sq + "</p>";
+			test.innerHTML += "<br><p>" + hq + "</p>";
+			test.innerHTML += "<br><button onclick='nextQuestion()'>Next Question</button>";
+		}
+		window.addEventListener("load", renderQuestion, false);
+	</script>
+</head>
+
+<body>
+	<h2 id="test_status"></h2>
+	<div id="test"></div>
+</body>
+
+</html>
