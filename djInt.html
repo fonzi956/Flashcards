@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=1000">
+	<style>
+		@font-face {
+		font-family: myFirstFont;
+		src: url(SansForgetica-Regular.otf);
+		}
+		body {
+			font-family: myFirstFont;
+		}
+		div#test {
+			border: #000 1px solid;
+			padding: 10px 40px 40px 40px;
+		}
+
+		input {
+			float: right;
+		}
+
+		
+	</style>
+	<script>
+		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+		//
+		var questions = [
+		["What is model",
+		"A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table."
+		+"<br>"
+		+"<br>The basics:"
+		+"<br>"
+		+"<br>Each model is a Python class that subclasses django.db.models.Model."
+		+"<br>Each attribute of the model represents a database field."
+		+"<br>With all of this, Django gives you an automatically-generated database-access API",
+		"What is model"],
+
+		["how to use the model",
+		"Once you have defined your models, you need to tell Django you’re going to use those models. Do this by editing your settings file and changing the INSTALLED_APPS setting to add the name of the module that contains your models.py.",
+		"how to use the model"],
+
+		//other parts from the internet
+
+		["Explain the architecture of Django?",
+		"Django architecture consists of:"
+		+"<br>Models: It describes your database schema and your data structure"
+		+"<br>Views: It controls what a user sees, the view retrieves data from appropriate models and execute any calculation made to the data and pass it to the template"
+		+"<br>Templates: It determines how the user sees it. It describes how the data received from the views should be changed or formatted for display on the page"
+		+"<br>Controller: It is the heart of the system. It handles request and responses, setting up database connections and loading add-ons and specifies Django framework and URL parsing.",
+		"Explain the architecture of Django"],
+
+		["Why should Django be used for web development?",
+		"Django should be used for web development because of following reasons:"
+		+"<br>•It allows dividing code module into logical groups to make it flexible to change."
+		+"<br>•To easy the website administration, it provides auto-generated web admin module."
+		+"<br>•It provides pre-packaged API for common user tasks."
+		+"<br>•It enables to define what should be URL for given function."
+		+"<br>•It enables to separate business logic from the HTML."
+		+"<br>•Everything is written in Python programming language."
+		+"<br>•It gives you template system to define HTML template for your web page to avoid code duplication",
+		"Why should Django be used for web development"],
+
+		["Can you explain the working philosophy of Django?",
+		"Django can be broken into many components:"
+		+"<br>Models.py file: This file defines your data model by extending your single line of code into full database tables and add a pre-built administration section to manage content."
+		+"<br>Urls.py file: It uses a regular expression to capture URL patterns for processing."
+		+"<br>Views.py file: It is the main part of Django. The actual processing happens in view."
+		+"<br>When a visitor lands on Django page:"
+		+"<br>1.Django checks the various URLs pattern you have created and uses the information to retrieve the view."
+		+"<br>2.The view processes the request, querying your database if necessary"
+		+"<br>3.The view passes the requested information on to your template."
+		+"<br>4.The template renders the data in a layout you have created and displays the page.",
+		"Can you explain the working philosophy of Django"],
+
+		["What are the inheritance properties in Django?",
+		"There is three possible inheritance in Django:"
+		+"<br>1.Abstract base classes: This style is used when you only want parent\’s class to hold information that you don\’t want to type out for each child model."
+		+"<br>2.Multi-table Inheritance: This style is used if you are sub-classing an existing model and need each model to have its own database table."
+		+"<br>3.Proxy models: This style is used, if you only want to modify the Python level behavior of the model, without changing the model’s fields.",
+		"What are the inheritance properties in Django"],
+
+		["How can you setup Database in Django?",
+		"To set up a database in Django, you can use the command edit my site/ setting.py, it is a normal python module with module level representing Django settings."
+		+"<br>Django uses SQLite database by default. It is easy for Django users because it doesn’t require any other type of installation. In the case of other databases, you have the following keys in the DATABASE \‘default\’ item to match your database connection settings."
+		+"<br>Engines: you can change database by using \‘django.db.backends.sqlite3\’ , \‘django.db.backeneds.mysql\’, \‘django.db.backends.postgresql_psycopg2\’, \‘django.db.backends.oracle\’"
+		+"<br>Name: The name of your database. In the case if you are using SQLite as your database, in that case, a database will be a file on your computer, Name should be a full absolute path, including the file name of that file."
+		+"<br>You can add setting likes setting like Password, Host, User, etc. in your database, if you are not choosing SQLite as your database.",
+		"How can you setup Database in Django"],
+
+		["How can you set up static files in Django?",
+		"There are three main things required to set up static files in Django:"
+		+"<br>•Set STATIC_ROOT in settings.py"
+		+"<br>•run manage.py collect static"
+		+"<br>•set up a Static Files entry on the PythonAnywhere web tab",
+		"How can you set up static files in Django"],
+
+		["What is the use of session framework in Django?",
+		"The session framework facilitates you to store and retrieve arbitrary data on a per-site visitor basis. It stores data on the server side and abstracts the receiving and sending of cookies. A session can be implemented through a piece of middleware.",
+		"What is the use of session framework in Django"],
+
+		["What are the roles of receiver and sender in signals?",
+		"The roles of receiver and sender in signals are:"
+		+"<br>Receiver: It specifies the callback function which will be connected to the signal."
+		+"<br>Sender: It specifies a particular sender to receive a signal from.",
+		"What are the roles of receiver and sender in signals"],
+
+		["What do you understand by Django?",
+		"Django is a free and open source web application framework, written in Python. Django is named after Django Reinhardt, Jazz guitarist from the 1930s to early 1950s who is one of the best guitarists of all time. Django was mainly developed to handle the intensive design of the newsroom. You can even build high-quality web applications using this. It adheres to the DRY principle and focuses completely on automating as much as possible.",
+		"What do you understand by Django"],
+
+		["What does Of Django Field Class types do?",
+		"It specifies the database column <br> It also specifies the default HTML widget which is availed while render the form field. <br> The requirements of the minimal validation which is used in Django admin is also specified by the field class",
+		"What does Of Django Field Class types do"],
+
+		["Does Django Follow Architectural pattern?",
+		"Yes, Django follows Model-View-Controller (MVC) architectural pattern.",
+		"Does Django Follow Architectural pattern"],
+
+		["Mention What Does The Django Templates Consists Of?",
+		"The template is a simple text file.  It can create any text-based format like XML, CSV, HTML, etc.  A template contains variables that get replaced with values when the template is evaluated and tags (% tag %) that controls the logic of the template.",
+		"Mention What Does The Django Templates Consists Of"],
+
+		["Is Django stable or not?",
+		"Of course, Django is stable. Most of the companies are using it."],
+
+		["Is Django a high level or low-level framework?",
+		"Django is a high-level Python’s web framework which was designed for rapid development and clean realistic design."],
+
+		["What is the name of the Foundation which manages Django web framework?",
+		"Django web framework is managed and maintained by an independent and non-profit organization named Django Software Foundation (DSF)."],
+
+		["Name the features available in Django web framework?",
+		"Admin Interface (CRUD)"
+		+" <br> Templating"
+		+" <br> Form handling"
+		+" <br> Internationalization"
+		+" <br> Session, user management, role-based permissions"
+		+" <br> Object-relational mapping (ORM)"
+		+" <br> Testing Framework"
+		+" <br> Fantastic Documentation",
+		"Name the features available in Django web framework"],
+
+		["***What is the process of creating a project in Django?",
+		"To start a project in Django, use the command $django-admin.py and then use the following command:Project"
+		+" <br> __init__.py, manage.py, settings.py, urls.py"],
+
+		["Is Django a content management system (CMS)?",
+		"No, Django is not a Content Management System (CMS). Instead, it is a Web framework and a programming tool that helps you in building elegant websites."],
+
+		["What django collectstatic command does?*",
+		"Collect static will collect all the data inside the static folder in project directory and creates a copy in the STATIC_ROOT",
+		"What django collectstatic command does"],
+
+		["What is some typical usage of middlewares in Django?",
+		"Middleware is a function that acts on or transforms a request/response before/after it passes through the view layer "
+		+" <br> It can be used for Session management,"
+		+" <br> User authentication can be done with the help of this."
+		+" <br> It helps in Cross-site request forgery protection"
+		+" <br> Content Gzipping, etc.",
+		"What is some typical usage of middlewares in Django"],
+
+		["What is the usage of Django-admin.py and manage.py?",
+		"Django-admin.py: It is a Django’s command line utility for administrative tasks. "
+		+"<br> Manage.py: It is an automatically created file in each Django project. It is a thin wrapper around the Django-admin.py. It has the following usage:"
+		+" <br> It puts your project’s package on sys.path."
+		+" <br> It sets the DJANGO_SETTING_MODULE environment variable to points to your project’s setting.py file.",
+		"What is the usage of Django-admin and manage"],
+
+		["What are signals in Django?",
+		"Signal are inbuilt utility in Django. They allow to execute some piece of code based on some action or event is occurred in framework something like a new user register, on delete of a record."
+		+" <br> pre_save and post_save."
+		+" <br> pre_delete and post_delete"
+		+" <br> pre_request and post_request",
+		"What are signals in Django"],
+/*
+		["Django is based on which design pattern.",
+		"Django closely follows the MVC (Model View Controller) design pattern, however, it does use its own logic in the implementation. Because the C is handled by the framework itself and most of the excitement in Django happens in models, templates, and views, Django is often referred to as an MTV framework. In the MTV development pattern:"
+		+" <br> M stands for Model, the data access layer. This layer contains anything and everything about the data: how to access it, how to validate it, which behaviors it has, and the relationships between the data."
+		+" <br> T stands for Template, the presentation layer. This layer contains presentation-related decisions: how something should be displayed on a Web page or other type of document."
+		+" <br> V stands for View, the business logic layer. This layer contains the logic that accesses the model and defers to the appropriate template(s). You can think of it as the bridge between models and templates.",
+		""],
+*/
+		["List server requirement to install Django Framework.",
+		"As Django is Python Framework, in order to install Django Python is required. Django comes with an inbuilt lightweight web server that you can use for the testing purpose.If you are using Django on production Apache with mod_wsgi is required.",
+		"List server requirement to install Django Framework"],
+
+		["List the database backends supported by Django Framework?",
+		"PostgreSQL, MySQL, SQLite, Oracle and 3d parties: SAP SQL Anywhere, IBM DM2, Microsoft SQL Server, Firebird, ODBC"],
+
+		["What is recommended way to install Django?",
+		"Installing using pip is the recommended way to install Django Framework.: <br> Install pip. <br> Configure virtualenv and virtualenvwrapper <br> Once virtual environment is created and activated, enter the command pip install Django to install Django",
+		"What is recommended way to install Django"],
+
+		["How to install the development version of Django",
+		"$ git clone https://github.com/django/django.git <br> Make sure that the Python interpreter can load Django’s code. The most convenient way to do this is to use virtualenv, virtualenvwrapper, and pip. After setting up and activating the virtualenv, run the following command:<br> $ pip install -e django/ ",
+		"How to install the development version of Django"],
+
+		["Where are Django migrations stored?",
+		"You can think Django Migrations as version control system for your database/Model. It keeps track of changes done in your application Models/Table like adding a field, deleting a model, etc. Migrations in Django are stored as an on-disk format, referred to here as “migration files”. These files are actually just normal Python files with an agreed-upon object layout, written in a declarative style. A basic migration file looks like this",
+		"Where are Django migrations stored"],
+
+		["How a request is processed in Django?*",
+		"Django determines the root URLconf module to use."
+		+" <br> Django loads that Python module and looks for the variable urlpatterns."
+		+" <br> Django runs through each URL pattern, in order, and stops at the first one that matches the requested URL"
+		+" <br> Once one of the URL patterns matches, Django imports and calls the given view, which is a simple Python function (or a class-based view)",
+		"How a request is processed in Django"],
+
+		["When to use the iterator in Django ORM?",
+		"Iterators are used for traversing an object in Python which implements iterator protocol. It consists of two methods __iter__() and next()."
+		+" <br> In Django, a good use of iterator is when you are processing results that take up a large amount of available memory (lots of small objects or fewer large objects).",
+		"When to use the iterator in Django ORM"],
+
+		["When QuerySets are evaluated in Django?",
+		"In Django, a QuerySet can be evaluated in Iteration, Slicing, Pickling/Caching, repr(),len(), list() and bool().",
+		"When QuerySets are evaluated in Django"],
+
+		["How to set/unset session in Django?",
+		"Setting Session in Django"
+		+" <br> request.session[\'key\'] = \'value\'"
+		+" <br> Unset Session in Django"
+		+" <br> del request.session[\'key\']",
+		"How to set and unset session in Django"],
+
+		["What is a context in Django?",
+		"is a dictionary with variable names in the form of key and value like {varible1: 101, varible2: 102},when we pass this context to the template render method, {{ varible1 }} would be replaced with 101 and {{ varible2 }} with 102 in your template.",
+		"What is a context in Django"],
+
+		["Explain mixins in Django.",
+		"is a special kind of multiple inheritances in Python. There are two main situations where mixins are used: <br> You want to provide a lot of optional features for a class. <br> You want to use one particular feature in a lot of different classes.",
+		"Explain mixins in Django"],
+
+		["How to get current page URI in Django template.",
+		"You can use {{ request.path }} and {{ request.get_full_path }} to get current page URI in Django template",
+		"How to get current page URI in Django template"],
+
+		["How to create an Constant in Django.",
+		"To create a constant in Django. Open your settings.py file and add a variable like MY_CONST = \“MY_VALUE\”. To use this constant in your views simply import setting like \“Import settings in views.py\” and use it as settings.MY_CONST",
+		"How to create an Constant in Django"],
+
+		["List some caching strategies that you know in Django",
+		"File system caching, In-memory caching, Using Memcached, Database caching",
+		"List some caching strategies that you know in Django"],
+
+
+
+
+			/*
+			++"<br> 
+			<br> 
+			<br> &nbsp; //tab
+			
+			["", 
+			"", ""],
+
+			*/
+		];
+		var shq = [];
+		var hq = [];
+		var sq = [];
+		pos = 0;
+		function _(x) {
+			return document.getElementById(x);
+		}
+		function renderQuestion() {
+			test = _("test");
+
+			if (sq.length == questions.length) {
+				test.innerHTML = "<p>" + sq + "</p>";
+				test.innerHTML += +"<br><p>" + hq + "</p>";
+				test.innerHTML += +"<br><button onclick='nextQuestion()'>Next Question</button>";
+				pos = 0;
+				correct = 0;
+				return false;
+			}
+
+			// if(pos >= questions.length){
+			// 	test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" </h2> ";
+			// 	_("test_status").innerHTML = "Test Completed";
+			// 	pos = 0;
+			// 	correct = 0;
+			// 	return false;
+			// }
+			var tot = questions.length - sq.length;
+			var rq = [];
+			var rpn = Math.floor(Math.random() * 3) + 1;
+			var rn = [1, 3, 4, 2];
+			rn = shuffle(rn);
+			pos = Math.floor(Math.random() * questions.length);
+			// pos = 0;
+			// while (sq.includes(pos)) {
+			// 	pos = Math.floor(Math.random() * questions.length);
+			// 	if (!sq.includes(pos)) break;
+			// }
+			//pos = questions.length - 5;
+			// pos = 0;
+			if (pos == questions.length)--pos;
+
+			_("test_status").innerHTML = "Question " + (pos + 1) + " of " + tot;
+			question = questions[pos][0];
+			Ans = questions[pos][1];
+			mus = questions[pos][2];
+			test.innerHTML = "<h3>" + question + "</h3>";
+			test.innerHTML += "<button onclick='checkAnswer()'>Flip</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
+			test.innerHTML += "<button onclick='nextQuestion()'>Next</button>";
+			if(typeof(mus) != "undefined"){
+				test.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick='play(mus)'>Audio</button>";
+			}
+			test.innerHTML += "<p id=\"myDIV\" hidden>" + Ans + "</p>";
+			
+		}
+		function checkAnswer() {
+			var x = document.getElementById("myDIV");
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
+			}
+
+
+		}
+		function shuffle(array) {
+			var currentIndex = array.length, temporaryValue, randomIndex;
+
+			// While there remain elements to shuffle...
+			while (0 !== currentIndex) {
+
+				// Pick a remaining element...
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+
+				// And swap it with the current element.
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			}
+
+			return array;
+		}
+		function nextQuestion() {
+			sq.push(pos);
+			//pos++;
+			renderQuestion();
+			window.scrollTo(0, 0);
+		}
+
+		function play(name){
+			console.log(name);
+			song = "Record/Dja/"+name+".ogg";
+			var audio = new Audio(song);
+			audio.play();
+		}
+
+		function HQuestion() {
+			hq.push(pos);
+			sq.push(pos);
+			renderQuestion();
+		}
+
+		function done() {
+			test.innerHTML = "<p>" + sq + "</p>";
+			test.innerHTML += +"<br><p>" + hq + "</p>";
+			test.innerHTML += +"<br><button onclick='nextQuestion()'>Next Question</button>";
+		}
+		window.addEventListener("load", renderQuestion, false);
+	</script>
+</head>
+
+<body>
+	<h2 id="test_status"></h2>
+	<div id="test"></div>
+</body>
+
+</html>

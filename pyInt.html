@@ -25,6 +25,7 @@
 	<script>
 		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
 		//
+		/*
 		var questions = [
 
 			["Python",
@@ -1153,7 +1154,7 @@
 			//Object-Oriented Programming end
 
 
-			/*
+			
 			+"<br> 
 			<br> 
 			<br> &nbsp; //tab
@@ -1161,8 +1162,9 @@
 			["", 
 			"", ""],
 
-			*/
-		];
+			
+		];*/
+		var questions = require('./djIntData.js');
 		var shq = [];
 		var hq = [];
 		var sq = [];
@@ -1250,7 +1252,7 @@
 		}
 
 		function play(name){
-			//console.log(name);
+			console.log(name);
 			song = name+".ogg";
 			var audio = new Audio(song);
 			audio.play();

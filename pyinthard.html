@@ -27,6 +27,70 @@
 		//
 		var questions = [
 
+			["***Reusing Code", 
+			"Code reuse is a very important part of programming in any language. Increasing code size makes it harder to maintain. "
+			+"<br> For a large programming project to be successful, it is essential to abide by the Don't Repeat Yourself, or DRY, principle. We've already looked at one way of doing this: by using loops and FUNCTIONS"
+			+"<br> Bad, repetitive code is said to abide by the WET principle, which stands for Write Everything Twice, or We Enjoy Typing",
+			"Reusing-Code"],
+
+			["***Functions", 
+			"is a block of code which only runs when it is called. Can pass data, known as parameters, into function and can return data as result. Any statement that consists of a word followed by information in parentheses is a function call. and the comma-separated values inside the parentheses are function arguments.",
+			"Functions"],
+
+			["***Assertions", 
+			"An assertion is a sanity-check that you can turn on or turn off when you have finished testing the program. An expression is tested, and if the result comes up false, an exception is raised. "
+			+"Assertions are carried out through use of the assert statement. Programmers often place assertions at the start of a function to check for valid input, and after a function call to check for valid output."
+			+"<br> <br> print(1)"
+			+"<br> assert 2 + 2 == 4"
+			+"<br> print(2)"
+			+"<br> assert 1 + 1 == 3"
+			+"<br> print(3)"
+			+"<br> <br> 1<br> 2<br> AssertionError",
+			"Assertions"],
+
+
+			["***Can assert take a second argument", 
+			"The assert can take a second argument that is passed to the AssertionError raised if the assertion fails. AssertionError exceptions can be caught and handled like any other exception using the try-except statement, but if not handled, this type of exception will terminate the program."
+			+"<br> <br> temp = -10"
+			+"<br> assert (temp >= 0), \"Colder than absolute zero!\""
+			+"<br> <br> AssertionError: Colder than absolute zero!",
+			"Can-assert-take-a-second-argument"],
+
+
+			["***Dictionaries", 
+			"Dictionaries are data structures used to map arbitrary keys to values. Lists can be thought of as dictionaries with integer keys within a certain range. Dictionaries can be indexed in the same way as lists, using square brackets containing keys."
+			+"<br> <br> ages = {\"Dave\": 24, \"Mary\": 42, \"John\": 58}"
+			+"<br> print(ages[\"Dave\"]) # Each element in a dictionary is represented by a key:value pair."
+			+"<br> print(ages[\"Mary\"]) <br> <br> 24 <br> 42",
+			"Dictionaries"],
+
+			["***When to use a dictionary:",
+			"- When you need a logical association between a key:value pair."
+			+"<br> - When you need fast lookup for your data, based on a custom key."
+			+"<br> - When your data is being constantly modified. Remember, dictionaries are mutable.",
+			"When-to-use-a-dictionary"],
+
+			["***dictionary keys", 
+			"Just like lists, dictionary keys can be assigned to different values. However, unlike lists, a new dictionary key can also be assigned a value, not just ones that already exist."
+			+"<br> <br> squares = {1: 1, 2: 4, 3: \"error\", 4: 16,}"
+			+"<br> squares[8] = 64"
+			+"<br> squares[3] = 9"
+			+"<br> print(squares) <br> <br> {8: 64, 1: 1, 2: 4, 3: 9, 4: 16}",
+			"dictionary-keys"],
+
+			["***Tuples", 
+			"Tuples are very similar to lists, except that they are immutable (they cannot be changed). Also, they are created using parentheses, rather than square brackets. Trying to reassign a value in a tuple causes a TypeError. tuples can be nested within each other. Tuples can be created without the parentheses, by just separating the values with commas. An empty tuple is created using an empty parenthesis pair. Tuples are faster than lists, but they cannot be changed. ",
+			"Tuples"],
+
+			["***List Comprehensions", 
+			"List comprehensions are a useful way of quickly creating lists whose contents obey a simple rule. List comprehensions are inspired by set-builder notation in mathematics."
+			+"<br> <br> # a list comprehension"
+			+"<br> cubes = [i**3 for i in range(5)]"
+			+"<br> "
+			+"<br> print(cubes)"
+			+"<br> <br> [0, 1, 8, 27, 64]",
+			"List-Comprehensions"],
+
 			["***Functional programming", 
 			"Functional programming is a style of programming that (as the name suggests) is based around functions. A key part of functional programming is higher-order functions. Higher-order functions take other functions as arguments, or return them as results."
 			+"<br> <br> def apply_twice(func, arg):"
@@ -61,54 +125,6 @@
 			+"They can also be more difficult to write in some situations.",
 			"advantages-and-disadvantages-of-using-pure-functions"],
 
-			["***Lambdas", 
-			"Creating a function normally (using def) assigns it to a variable automatically. This is different from the creation of other objects - such as strings and integers - which can be created on the fly, without assigning them to a variable. The same is possible with functions, provided that they are created using lambda syntax. Functions created this way are known as anonymous. This approach is most commonly used when passing a simple function as an argument to another function."
-			+"<br> <br> def my_func(f, arg):"
-			+"<br> &nbsp; return f(arg)"
-			+"<br> "
-			+"<br> my_func(lambda x: 2*x*x, 5)",
-			"Lambdas"],
-
-			["why use Lambdas", 
-			"Lambda functions aren't as powerful as named functions. "
-			+"They can only do things that require a single expression - usually equivalent to a single line of code."
-			+"<br> <br> #named function"
-			+"<br> def polynomial(x):"
-			+"<br> &nbsp; return x**2 + 5*x + 4"
-			+"print(polynomial(-4))"
-			+"<br> "
-			+"<br> #lambda"
-			+"<br> print((lambda x: x**2 + 5*x + 4) (-4))"
-			+"<br> <br> 0 <br> 0 <br> <br> In the code above, we created an anonymous function on the fly and called it with an argument."],
-
-			["can Lambdas be assigned to variable", 
-			"yes and use like normal functions"
-			+"<br> <br> double = lambda x: x * 2"
-			+"<br> print(double(7)) <br> <br> 14 <br> <br> However, there is rarely a good reason to do this - it is usually better to define a function with def instead."],
-
-			["***map", 
-			"The built-in functions map and filter are very useful higher-order functions that operate on lists (or similar objects called iterables). The function map takes a function and an iterable as arguments, and returns a new iterable with the function applied to each argument. "
-			+"<br> <br> def add_five(x):"
-			+"<br> &nbsp; return x + 5"
-			+"<br> "
-			+"<br> nums = [11, 22, 33, 44, 55]"
-			+"<br> result = list(map(add_five, nums))"
-			+"<br> print(result)"
-			+"<br> <br> [16, 27, 38, 49, 60] <br> <br> We could have achieved the same result more easily by using lambda syntax"
-			+"<br> <br> nums = [11, 22, 33, 44, 55]"
-			+"<br> "
-			+"<br> result = list(map(lambda x: x+5, nums))"
-			+"<br> print(result)<br> <br> To convert the result into a list, we used list explicitly.",
-			"map"],
-
-			["***filter", 
-			"The function filter filters an iterable by removing items that don't match a predicate (a function that returns a Boolean). "
-			+"<br> <br> nums = [11, 22, 33, 44, 55]"
-			+"<br> res = list(filter(lambda x: x%2==0, nums))"
-			+"<br> print(res)"
-			+"<br> <br> [22,44]<br> <br> Like map, the result has to be explicitly converted to a list if you want to print it.",
-			"filter"],
-
 			["***Generators", 
 			"Generators are a type of iterable, like lists or tuples. Unlike lists, they don't allow indexing with arbitrary indices, but they can still be iterated through with for loops. They can be created using functions and the yield statement."
 			+"<br> <br> def countdown():"
@@ -121,38 +137,6 @@
 			+"<br> &nbsp; print(i)"
 			+"<br> <br> 5<br> 4<br> 3<br> 2<br> 1<br> <br> The yield statement is used to define a generator, replacing the return of a function to provide a result to its caller without destroying local variables.",
 			"Generators"],
-
-			["# Fibonacci Generator",
-			"<br> def fib(num):"
-			+"<br> &nbsp; a,b = 0,1"
-			+"<br> &nbsp; for i in xrange(0, num):"
-			+"<br> &nbsp; &nbsp; yield \"{}: {}\".format(i+1, a)"
-			+"<br> &nbsp; &nbsp; a, b = b, a + b"
-			+"<br> for item in fib(10):"
-			+"<br> &nbsp; print item"
-			+"<br> <br>1: 0 <br>2: 1 <br>3: 1 <br>4: 2 <br>5: 3 <br>6: 5 <br>7: 8 <br>8: 13 <br>10: 34 "],
-
-			["Do generators have memory restrictions", 
-			"no, Due to the fact that they yield one item at a time, generators don't have the memory restrictions of lists. In fact, they can be infinite!"
-			+"<br> <br> def infinite_sevens():"
-			+"<br> &nbsp; while True:"
-			+"<br> &nbsp; &nbsp; yield 7"
-			+"<br> "     
-			+"<br> for i in infinite_sevens():"
-			+"<br> &nbsp; print(i)"
-			+"<br> <br> 7<br> 7<br> 7<br> 7<br> ...<br> <br> In short, generators allow you to declare a function that behaves like an iterator, i.e. it can be used in a for loop."],
-
-
-			["Finite generators", 
-			"Finite generators can be converted into lists by passing them as arguments to the list function. Using generators results in improved performance, which is the result of the lazy (on demand) generation of values, which translates to lower memory usage. Furthermore, we do not need to wait until all the elements have been generated before we start to use them."
-			+"<br> <br> def numbers(x):"
-			+"<br> &nbsp; for i in range(x):"
-			+"<br> &nbsp; &nbsp; if i % 2 == 0:"
-			+"<br> &nbsp; &nbsp; &nbsp; yield i"
-			+"<br> "
-			+"<br> print(list(numbers(11)))"
-			+"<br> <br> [0, 2, 4, 6, 8, 10]",
-			"Finitegenerators"],
 
 			["***Decorators", 
 			"Decorators provide a way to modify functions using other functions. This is ideal when you need to extend the functionality of functions that you don't want to modify."
@@ -172,104 +156,8 @@
 			+"<br> <br> print_text = decor(print_text) <br> print_text() # Now print_text corresponds to our decorated version.",
 			"Decorators"],
 
-			["What are decorators?", 
-			"Functions that modify other functions"],
 
-			["Which statement can be used to achieve the same behavior as my_func = my_dec(my_func)?", 
-			"@my_dec"],
-
-			["***Recursion", 
-			"Recursion is a very important concept in functional programming. The fundamental part of recursion is self-reference - functions calling themselves. It is used to solve problems that can be broken up into easier sub-problems of the same type. Once it reaches the end known as the base case, as it can be calculated without performing any more factorials. The base case acts as the exit condition of the recursion."
-			+"<br> <br> def factorial(x):"
-			+"<br> &nbsp;if x == 1:"
-			+"<br> &nbsp; &nbsp;return 1"
-			+"<br> &nbsp;else: "
-			+"<br> &nbsp; &nbsp;return x * factorial(x-1)"
-			+"<br> "
-			+"<br> print(factorial(5))<br> <br> 120",
-			"Recursion"],
-
-			["can recursion be indirect", 
-			"One function can call a second, which calls the first, which calls the second, and so on. This can occur with any number of functions. added note Recursive functions can be infinite, just like infinite while loops"
-			+"<br><br>def is_even(x):"
-			+"<br> if x == 0:"
-			+"<br> return True"
-			+"<br> else:"
-			+"<br> return is_odd(x-1)"
-			+"<br>"
-			+"<br> def is_odd(x):"
-			+"<br> return not is_even(x)"
-			+"<br>"
-			+"<br>"
-			+"<br> print(is_odd(17))"
-			+"<br> print(is_even(23))"
-			+"<br><br> True <br>False"],
-
-			["Sets", 
-			"Sets are data structures, similar to lists or dictionaries. They are created using curly braces, or the set function. They share some functionality with lists, such as the use of in to check whether they contain a particular item."
-			+"<br> <br> num_set = {1, 2, 3, 4, 5}"
-			+"<br> word_set = set([\"spam\", \"eggs\", \"sausage\"])"
-			+"<br> "
-			+"<br> print(3 in num_set)"
-			+"<br> print(\"spam\" not in word_set)"
-			+"<br> <br> True <br> False <br> <br> To create an empty set, you must use set(), as {} creates an empty dictionary."],
-
-			["When to use sets",
-			"- Use a set if you need uniqueness for the elements. "],
-
-
-			["***Sets differ from lists in several ways", 
-			"but share several list operations such as len. They are unordered, which means that they can't be indexed. They cannot contain duplicate elements. Due to the way they're stored, it's faster to check whether an item is part of a set, rather than part of a list. Instead of using append to add to a set, use add. The method remove removes a specific element from a set; pop removes an arbitrary element."
-			+"<br> <br> nums = {1, 2, 1, 3, 1, 4, 5, 6}"
-			+"<br> print(nums)"
-			+"<br> nums.add(-7)"
-			+"<br> nums.remove(3)"
-			+"<br> print(nums)"
-			+"<br> <br> {1, 2, 3, 4, 5, 6} <br>  {1, 2, 4, 5, 6, -7}"
-			+"<br> <br> Basic uses of sets include membership testing and the elimination of duplicate entries.",
-			"Sets-differ-from-lists-in-several-ways"],
-
-			["***Can sets be combined", 
-			"Sets can be combined using mathematical operations. "
-			+"<br> The union operator | combines two sets to form a new one containing items in either." 
-			+"<br> The intersection operator & gets items only in both. "
-			+"<br> The difference operator - gets items in the first set but not in the second. "
-			+"<br> The symmetric difference operator ^ gets items in either set, but not both."
-			+"<br> <br> first = {1, 2, 3, 4, 5, 6}"
-			+"<br> second = {4, 5, 6, 7, 8, 9}"
-			+"<br> "
-			+"<br> print(first | second)"
-			+"<br> print(first & second)"
-			+"<br> print(first - second)"
-			+"<br> print(second - first)"
-			+"<br> print(first ^ second)"
-			+"<br> <br> {1, 2, 3, 4, 5, 6, 7, 8, 9}"
-			+"<br> {4, 5, 6}"
-			+"<br> {1, 2, 3}"
-			+"<br> {8, 9, 7}"
-			+"<br> {1, 2, 3, 7, 8, 9}",
-			"Can-sets-be-combined"],
-
-			["Data structures",
-			"lists, dictionaries, tuples, sets"],
-
-			["***itertools", 
-			"The module itertools is a standard library that contains several functions that are useful in functional programming. One type of function it produces is infinite iterators. The function count counts up infinitely from a value. The function cycle infinitely iterates through an iterable (for instance a list or string). The function repeat repeats an object, either infinitely or a specific number of times."
-			+"from itertools import count"
-			+"<br>"
-			+"<br>for i in count(3):"
-			+"<br>  &nbsp; print(i)"
-			+"<br>  &nbsp; if i >=11:"
-			+"<br>   &nbsp;  &nbsp; break"
-			+"<br> 3<br> 4<br> 5<br> 6<br> 7<br> 8<br> 9<br> 10<br> 11 ",
-			"itertools"],
-
-			//["many functions in itertools", 
-			//"takewhile - takes items from an iterable while a predicate function remains true; chain - combines several iterables into one long one;  accumulate - returns a running total of values in an iterable. <br> Product and permutation. These are used when you want to accomplish a task with all possible combinations of some items"],
-
-			//Functional Programming end
-
-			["***Classes", 
+ 			["***Classes", 
 			"Another very popular paradigm is object-oriented programming (OOP). Objects are created using classes, which are actually the focal point of OOP. The class describes what the object will be, but is separate from the object itself. In other words, a class can be described as an object's blueprint, description, or definition. You can use the same class as a blueprint for creating multiple different objects. Classes are created using the keyword class and an indented block, which contains class methods (which are functions). "
 			+"<br> <br> class Cat:"
 			+"<br> &nbsp; def __init__(self, color, legs):"
@@ -325,65 +213,7 @@
 			+"<br> <br> 4 <br> 4 <br> #Class attributes are shared by all instances of the class. Trying to access an attribute of an instance that isn't defined causes an AttributeError. This also applies when you call an undefined method.",
 			"class-attributes"],
 
-			["Inheritance", 
-			"Inheritance provides a way to share functionality between classes. To inherit a class from another class, put the superclass name in parentheses after the class name."
-			+"<br> <br> class Animal: "
-			+"<br> &nbsp; def __init__(self, name, color):"
-			+"<br> &nbsp; &nbsp; self.name = name"
-			+"<br> &nbsp; &nbsp; self.color = color"
-			+"<br> "
-			+"<br> class Cat(Animal):"
-			+"<br> &nbsp; def purr(self):"
-			+"<br> &nbsp; &nbsp; print(\"Purr...\")"
-			+"<br> "
-			+"<br> class Dog(Animal):"
-			+"<br> &nbsp; def bark(self):"
-			+"<br> &nbsp; &nbsp; print(\"Woof!\")"
-			+"<br> "
-			+"<br> fido = Dog(\"Fido\", \"brown\")"
-			+"<br> print(fido.color)"
-			+"<br> fido.bark()"
-			+"<br> <br> brown <br> Woof!"],
-
-			["superclass and subclass", 
-			"A class that inherits from another class is called a subclass. A class that is inherited from is called a superclass. If a class inherits from another with the same attributes or methods, it overrides them."
-			+"<br> <br> class Wolf: "
-			+"<br> &nbsp; def __init__(self, name, color):"
-			+"<br> &nbsp; &nbsp; self.name = name"
-			+"<br> &nbsp; &nbsp; self.color = color"
-			+"<br> "
-			+"<br> &nbsp; def bark(self):"
-			+"<br> &nbsp; &nbsp; print(\"Grr...\")"
-			+"<br> "
-			+"<br> class Dog(Wolf):"
-			+"<br> &nbsp; def bark(self):"
-			+"<br> &nbsp; &nbsp; print(\"Woof\")"
-			+"<br> "
-			+"<br> husky = Dog(\"Max\", \"grey\")"
-			+"<br> husky.bark()"
-			+"<br> <br> Woof <br> <br> In the example, Wolf is the superclass, Dog is the subclass"],
-
-			["can Inheritance be indirect.", 
-			"yes One class can inherit from another, and that class can inherit from a third class. "
-			+"<br> <br> class A:"
-			+"<br> &nbsp; def method(self):"
-			+"<br> &nbsp; &nbsp; print(\"A method\")"
-			+"<br> "
-			+"<br> class B(A):"
-			+"<br> &nbsp; def another_method(self):"
-			+"<br> &nbsp; &nbsp; print(\"B method\")"
-			+"<br> "
-			+"<br> class C(B):"
-			+"<br> &nbsp; def third_method(self):"
-			+"<br> &nbsp; &nbsp; print(\"C method\")"
-			+"<br> "
-			+"<br> c = C()"
-			+"<br> c.method()"
-			+"<br> c.another_method()"
-			+"<br> c.third_method()"
-			+"<br> <br> A method <br> B method <br> C method <br> <br> However, circular inheritance is not possible."],
-
-			["***function super", 
+ 			["***function super", 
 			"The function super is a useful inheritance-related function that refers to the parent class. It can be used to find the method with a certain name in an object's superclass."
 			+"<br> <br> class A:"
 			+"<br> &nbsp; def spam(self):"
@@ -445,51 +275,6 @@
 			+"<br> The Python philosophy is slightly different. It is often stated as \"we are all consenting adults here\", meaning that you shouldn't put arbitrary restrictions on accessing parts of a class. Hence there are no ways of enforcing a method or attribute be strictly private. "
 			+"<br> However, there are ways to discourage people from accessing parts of a class, such as by denoting that it is an implementation detail, and should be used at their own risk.",
 			"Data-Hiding"],
-
-			["Weakly private methods and attributes",
-			"Weakly private methods and attributes have a single underscore at the beginning. This signals that they are private, and shouldn't be used by external code. However, it is mostly only a convention, and does not stop external code from accessing them. Its only actual effect is that from module_name import * won't import variables that start with a single underscore."
-			+"<br> <br> class Queue:"
-			+"<br> &nbsp; def __init__(self, contents):"
-			+"<br> &nbsp; &nbsp; self._hiddenlist = list(contents)"
-			+"<br> "
-			+"<br> &nbsp; def push(self, value):"
-			+"<br> &nbsp; &nbsp; self._hiddenlist.insert(0, value)"
-			+"<br> "
-			+"<br> &nbsp; def pop(self):"
-			+"<br> &nbsp; &nbsp; return self._hiddenlist.pop(-1)"
-			+"<br> "
-			+"<br> &nbsp; def __repr__(self):"
-			+"<br> &nbsp; &nbsp; return \"Queue({})\".format(self._hiddenlist)"
-			+"<br> "
-			+"<br> queue = Queue([1, 2, 3])"
-			+"<br> print(queue)"
-			+"<br> queue.push(0)"
-			+"<br> print(queue)"
-			+"<br> queue.pop()"
-			+"<br> print(queue)"
-			+"<br> <br> print(queue._hiddenlist)"
-			+"<br> <br> Queue([1, 2, 3])"
-			+"<br> Queue([0, 1, 2, 3])"
-			+"<br> Queue([0, 1, 2])"
-			+"<br> [0, 1, 2]"
-			+"<br> <br> In the code above, the attribute _hiddenlist is marked as private, but it can still be accessed in the outside code. The __repr__ magic method is used for string representation of the instance."],
-
-			["***Strongly private methods and attributes",
-			"Strongly private methods and attributes have a double underscore at the beginning of their names. This causes their names to be mangled, which means that they can't be accessed from outside the class. "
-			+"<br> The purpose of this isn't to ensure that they are kept private, but to avoid bugs if there are subclasses that have methods or attributes with the same names."
-			+"<br> Name mangled methods can still be accessed externally, but by a different name. The method __privatemethod of class Spam could be accessed externally with _Spam__privatemethod."
-			+"<br> <br> class Spam:"
-			+"<br> &nbsp; __egg = 7"
-			+"<br> &nbsp; def print_egg(self):"
-			+"<br> &nbsp; &nbsp; print(self.__egg)"
-			+"<br> "
-			+"<br> s = Spam()"
-			+"<br> s.print_egg()"
-			+"<br> print(s._Spam__egg)"
-			+"<br> print(s.__egg)"
-			+"<br> <br> 7<br> 7<br> attributeError: 'Spam' object has no attribute '_egg'"
-			+"<br> <br> Basically, Python protects those members by internally changing the name to include the class name.",
-			"Strongly-private-methods-and-attributes"],
 
 			["***Class Methods",
 			"Methods of objects are called by an instance of a class, which is then passed to the self parameter of the method. Class methods are different - they are called by a class, which is passed to the cls parameter of the method. A common use of these are factory methods, which instantiate an instance of a class, using different parameters than those usually passed to the class constructor. Class methods are marked with a classmethod decorator."
@@ -574,8 +359,19 @@
 			+"<br> pizza.pineapple_allowed = True"
 			+"<br> print(pizza.pineapple_allowed)"
 			+"<br> <br> False <br> Enter the password: Sw0rdf1sh! <br> True",
-			"Properties-setter-getter"],
-			//Object-Oriented Programming end
+			"Properties-setter-getter"],  
+			
+			["Finite generators", 
+			"Finite generators can be converted into lists by passing them as arguments to the list function. Using generators results in improved performance, which is the result of the lazy (on demand) generation of values, which translates to lower memory usage. Furthermore, we do not need to wait until all the elements have been generated before we start to use them."
+			+"<br> <br> def numbers(x):"
+			+"<br> &nbsp; for i in range(x):"
+			+"<br> &nbsp; &nbsp; if i % 2 == 0:"
+			+"<br> &nbsp; &nbsp; &nbsp; yield i"
+			+"<br> "
+			+"<br> print(list(numbers(11)))"
+			+"<br> <br> [0, 2, 4, 6, 8, 10]",
+			"Finitegenerators"],
+			//Functions & Modules end
 
 
 			/*
@@ -639,8 +435,8 @@
 			if(typeof(mus) != "undefined"){
 				test.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick='play(mus)'>Audio</button>";
 			}
+			
 			test.innerHTML += "<p id=\"myDIV\" hidden>" + Ans + "</p>";
-			//test.innerHTML += "<p id=\"myDIV\" >" + Ans + "</p>";
 			
 		}
 		function checkAnswer() {
@@ -682,6 +478,7 @@
 			var audio = new Audio(song);
 			audio.play();
 		}
+
 		function HQuestion() {
 			hq.push(pos);
 			sq.push(pos);

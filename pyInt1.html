@@ -23,15 +23,12 @@
 		
 	</style>
 	<script>
-		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+		var pos = 0, test, test_status, question, choice, mus, choices, chA, chB, chC, chD, correct = 0;
 		//
 		var questions = [
 
-			["Python",
-			"is a high-level programming language, with applications in numerous areas, including web programming, scripting, scientific computing, and artificial intelligence. And is processed at runtime by the interpreter."],
-
-			["What are the three major version of Python?", 
-			"1.x, 2.x and 3.x; Both Python Version 2.x and 3.x are used currently; Code written for Python 3.x is guaranteed to work in all future versions."],
+			["What is Python and what are the three major version of Python?", 
+			"is a high-level programming language, with applications in numerous areas, including web programming, scripting, scientific computing, and artificial intelligence. And is processed at runtime by the interpreter. 1.x, 2.x and 3.x; Both Python Version 2.x and 3.x are used currently; Code written for Python 3.x is guaranteed to work in all future versions."],
 			
 			["How to print text and get input from the user?", 
 			"The print statement can also be used to output multiple lines of text. <br><br> >>> print('Hello world!') <br> Hello world!"
@@ -40,22 +37,17 @@
 			["Concatenation", 
 			"integers and floats, strings in Python can be added together; You can’t concatenate strings with numbers (integers)"],
 
-			["Type Conversion", 
-			"Turning string numbers into numbers(int, float, str) <br> >>> int(\"2\") + int(\"3\") <br> 5"],
-
-			["example of type conversion", 
-			"is turning user input (which is a string) to numbers (integers or floats), to allow for the performance of calculations. <br> "
+			["what is Type Conversion and example of type conversion", 
+			"Turning string numbers into numbers(int, float, str) <br> >>> int(\"2\") + int(\"3\") <br> 5  <br> <br> turning user input (which is a string) to numbers (integers or floats), to allow for the performance of calculations. <br> "
 			+">>> float(input(\"Enter a number: \")) + float(input(\"Enter another number: \"))"
 			+"<br> Enter a number: 40"
 			+"<br> Enter another number: 2"
 			+"<br> 42.0"],
 
-			["What is a variable and can variables be reassigned and be specific to a type", 
+			["What is a variable, can variables be reassigned and be specific to a type, Variable Names, and how to remove a variable", 
 			"A variable allows you to store a value by assigning it to a name, which can be used to refer to the value later in the program. To assign a variable, use one equals sign"
-			+"<br> <br> Variables can be reassigned as many times as you want, in order to change their value. In Python, variables don't have specific types, so you can assign a string to a variable, and later assign an integer to the same variable."],
-
-			["Variable Names and how to remove a variable", 
-			"Certain restrictions apply in regard to the characters that may be used in Python variable names. The only characters that are allowed are letters, numbers, and underscores. Also, they can't start with numbers."
+			+"<br> <br> Variables can be reassigned as many times as you want, in order to change their value. In Python, variables don't have specific types, so you can assign a string to a variable, and later assign an integer to the same variable."
+			+"<br> <br> Certain restrictions apply in regard to the characters that may be used in Python variable names. The only characters that are allowed are letters, numbers, and underscores. Also, they can't start with numbers."
 			+"Not following these rules results in errors."
 			+"<br> <br> use the del statement; means the reference from the name to the value is deleted, and trying to use the variable causes an error. Deleted variables can be reassigned to later as normal."],
 
@@ -273,13 +265,15 @@
 
 			//Control Stuctures end
 
-			["Reusing Code", 
+			["***Reusing Code", 
 			"Code reuse is a very important part of programming in any language. Increasing code size makes it harder to maintain. "
 			+"<br> For a large programming project to be successful, it is essential to abide by the Don't Repeat Yourself, or DRY, principle. We've already looked at one way of doing this: by using loops and FUNCTIONS"
-			+"<br> Bad, repetitive code is said to abide by the WET principle, which stands for Write Everything Twice, or We Enjoy Typing"],
+			+"<br> Bad, repetitive code is said to abide by the WET principle, which stands for Write Everything Twice, or We Enjoy Typing",
+			"Reusing-Code"],
 
-			["Functions", 
-			"Any statement that consists of a word followed by information in parentheses is a function call. and the comma-separated values inside the parentheses are function arguments."],
+			["***Functions", 
+			"is a block of code which only runs when it is called. Can pass data, known as parameters, into function and can return data as result. Any statement that consists of a word followed by information in parentheses is a function call. and the comma-separated values inside the parentheses are function arguments.",
+			"Functions"],
 
 			["pre-defined functions", 
 			"create your own functions by using the def statement. The code block within every function starts with a colon (:) and is indented. You must define functions before they are called"
@@ -396,6 +390,7 @@
 		function _(x) {
 			return document.getElementById(x);
 		}
+		//pos = 0;
 		function renderQuestion() {
 			test = _("test");
 
@@ -427,16 +422,20 @@
 				if (!sq.includes(pos)) break;
 			}
 			//pos = questions.length - 5;
-			pos = 0;
+			//pos = 41;
 			if (pos == questions.length)--pos;
 
 			_("test_status").innerHTML = "Question " + (pos + 1) + " of " + tot;
 			question = questions[pos][0];
 			Ans = questions[pos][1];
+			mus = questions[pos][2];
 			test.innerHTML = "<h3>" + question + "</h3>";
 			test.innerHTML += "<button onclick='checkAnswer()'>Flip</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
 			test.innerHTML += "<button onclick='nextQuestion()'>Next</button>";
-			test.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick='play()'>Audio</button>";
+			if(typeof(mus) != "undefined"){
+				test.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick='play(mus)'>Audio</button>";
+			}
+			
 			test.innerHTML += "<p id=\"myDIV\" hidden>" + Ans + "</p>";
 			
 		}
@@ -470,13 +469,14 @@
 		}
 		function nextQuestion() {
 			sq.push(pos);
+			//pos++;
 			renderQuestion();
 			window.scrollTo(0, 0);
 		}
-		function play() {
-			sq.push(pos);
-			renderQuestion();
-			window.scrollTo(0, 0);
+		function play(mus) {
+			song = "Record/Ja/"+mus+".ogg";
+			var audio = new Audio(song);
+			audio.play();
 		}
 
 		function HQuestion() {

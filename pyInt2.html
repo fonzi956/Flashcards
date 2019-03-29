@@ -23,7 +23,7 @@
 		
 	</style>
 	<script>
-		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+		var pos = 0, test, test_status, question, choice, mus, choices, chA, chB, chC, chD, correct = 0;
 		//
 		var questions = [
 
@@ -70,7 +70,7 @@
 			+"<br> "
 			+"<br> ZeroDivisionError: division by zero"],
 
-			["Assertions", 
+			["***Assertions", 
 			"An assertion is a sanity-check that you can turn on or turn off when you have finished testing the program. An expression is tested, and if the result comes up false, an exception is raised. "
 			+"Assertions are carried out through use of the assert statement. Programmers often place assertions at the start of a function to check for valid input, and after a function call to check for valid output."
 			+"<br> <br> print(1)"
@@ -78,14 +78,16 @@
 			+"<br> print(2)"
 			+"<br> assert 1 + 1 == 3"
 			+"<br> print(3)"
-			+"<br> <br> 1<br> 2<br> AssertionError"],
+			+"<br> <br> 1<br> 2<br> AssertionError",
+			"Assertions"],
 
 
-			["Can assert take a second argument", 
+			["***Can assert take a second argument", 
 			"The assert can take a second argument that is passed to the AssertionError raised if the assertion fails. AssertionError exceptions can be caught and handled like any other exception using the try-except statement, but if not handled, this type of exception will terminate the program."
 			+"<br> <br> temp = -10"
 			+"<br> assert (temp >= 0), \"Colder than absolute zero!\""
-			+"<br> <br> AssertionError: Colder than absolute zero!"],
+			+"<br> <br> AssertionError: Colder than absolute zero!",
+			"Can-assert-take-a-second-argument"],
 
 			["Files", 
 			"You can use Python to read and write the contents of files. Text files are the easiest to manipulate. Before a file can be edited, it must be opened, using the open function. The argument of the open function is the path to the file. If the file is in the current working directory of the program, you can specify only its name."
@@ -116,7 +118,7 @@
 			+"<br> print(cont)"
 			+"<br> file.close()"],
 
-			["read only a certain amount of a file", 
+			["***read only a certain amount of a file", 
 			"you can provide a number as an argument to the read function. This determines the number of bytes that should be read. You can make more calls to read on the same file object to read more of the file byte by byte. With no argument, read returns the rest of the file."
 			+"<br> Just like passing no arguments, negative values will return the entire contents."
 			+"<br> <br> file = open(\"filename.txt\", \"r\")"
@@ -124,7 +126,8 @@
 			+"<br> print(file.read(4))"
 			+"<br> print(file.read(4))"
 			+"<br> print(file.read())"
-			+"<br> file.close()"],
+			+"<br> file.close()",
+			"read-only-a-certain-amount-of-a-file"],
 			
 			["After all contents in a file have been read", 
 			"any attempts to read further from that file will return an empty string, because you are trying to read from the end of the file."],
@@ -160,32 +163,35 @@
 			+"<br> var = some_func()"
 			+"<br> print(var) <br> <br> Hi! <br> None"],
 
-			["Dictionaries", 
+			["***Dictionaries", 
 			"Dictionaries are data structures used to map arbitrary keys to values. Lists can be thought of as dictionaries with integer keys within a certain range. Dictionaries can be indexed in the same way as lists, using square brackets containing keys."
 			+"<br> <br> ages = {\"Dave\": 24, \"Mary\": 42, \"John\": 58}"
 			+"<br> print(ages[\"Dave\"]) # Each element in a dictionary is represented by a key:value pair."
-			+"<br> print(ages[\"Mary\"]) <br> <br> 24 <br> 42"],
+			+"<br> print(ages[\"Mary\"]) <br> <br> 24 <br> 42",
+			"Dictionaries"],
 
-			["When to use a dictionary:",
+			["***When to use a dictionary:",
 			"- When you need a logical association between a key:value pair."
 			+"<br> - When you need fast lookup for your data, based on a custom key."
-			+"<br> - When your data is being constantly modified. Remember, dictionaries are mutable."],
+			+"<br> - When your data is being constantly modified. Remember, dictionaries are mutable.",
+			"When-to-use-a-dictionary"],
 
 			["index a key that isn't part of the dictionary", 
 			"returns a KeyError and An empty dictionary is defined as {}."],
 
-			["Dictionaries immutable", 
+			["Dictionaries immutable or mutable", 
 			"Only immutable objects can be used as keys to dictionaries. Immutable objects are those that can't be changed. So far, the only mutable objects you've come across are lists and dictionaries. Trying to use a mutable object as a dictionary key causes a TypeError"
 			+"<br> <br> bad_dict = {"
 			+"<br> &nbsp; [1, 2, 3]: \"one two three\", "
 			+"<br> } <br> <br> TypeError: unhashable type: 'list'"],
 			
-			["dictionary keys", 
+			["***dictionary keys", 
 			"Just like lists, dictionary keys can be assigned to different values. However, unlike lists, a new dictionary key can also be assigned a value, not just ones that already exist."
 			+"<br> <br> squares = {1: 1, 2: 4, 3: \"error\", 4: 16,}"
 			+"<br> squares[8] = 64"
 			+"<br> squares[3] = 9"
-			+"<br> print(squares) <br> <br> {8: 64, 1: 1, 2: 4, 3: 9, 4: 16}"],
+			+"<br> print(squares) <br> <br> {8: 64, 1: 1, 2: 4, 3: 9, 4: 16}",
+			"dictionary-keys"],
 			
 
 			["To determine whether a key is in a dictionary, ", 
@@ -212,8 +218,9 @@
 			+"<br> print(pairs.get(12345, \"not in dictionary\"))"
 			+"<br> <br> [2, 3, 4] <br> None <br> not in dictionary"],
 
-			["Tuples", 
-			"Tuples are very similar to lists, except that they are immutable (they cannot be changed). Also, they are created using parentheses, rather than square brackets. Trying to reassign a value in a tuple causes a TypeError. tuples can be nested within each other. Tuples can be created without the parentheses, by just separating the values with commas. An empty tuple is created using an empty parenthesis pair. Tuples are faster than lists, but they cannot be changed. "],
+			["***Tuples", 
+			"Tuples are very similar to lists, except that they are immutable (they cannot be changed). Also, they are created using parentheses, rather than square brackets. Trying to reassign a value in a tuple causes a TypeError. tuples can be nested within each other. Tuples can be created without the parentheses, by just separating the values with commas. An empty tuple is created using an empty parenthesis pair. Tuples are faster than lists, but they cannot be changed. ",
+			"Tuples"],
 
 			["When to use Tuples",
 			"- Use tuples when your data cannot change. <br> <br> Many times, a tuple is used in combination with a dictionary, for example, a tuple might represent a key, because it's immutable."],
@@ -247,13 +254,14 @@
 			+"<br> print(squares[1:-1])"
 			+"<br> <br> [1, 4, 9, 16, 25, 36, 49, 64]"],
 
-			["List Comprehensions", 
+			["***List Comprehensions", 
 			"List comprehensions are a useful way of quickly creating lists whose contents obey a simple rule. List comprehensions are inspired by set-builder notation in mathematics."
 			+"<br> <br> # a list comprehension"
 			+"<br> cubes = [i**3 for i in range(5)]"
 			+"<br> "
 			+"<br> print(cubes)"
-			+"<br> <br> [0, 1, 8, 27, 64]"],
+			+"<br> <br> [0, 1, 8, 27, 64]",
+			"List-Comprehensions"],
 
 			["List Comprehensions if", 
 			"A list comprehension can also contain an if statement to enforce a condition on values in the list"
@@ -319,6 +327,7 @@
 		function _(x) {
 			return document.getElementById(x);
 		}
+		//pos = 0;
 		function renderQuestion() {
 			test = _("test");
 
@@ -356,9 +365,13 @@
 			_("test_status").innerHTML = "Question " + (pos + 1) + " of " + tot;
 			question = questions[pos][0];
 			Ans = questions[pos][1];
+			mus = questions[pos][2];
 			test.innerHTML = "<h3>" + question + "</h3>";
 			test.innerHTML += "<button onclick='checkAnswer()'>Flip</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
 			test.innerHTML += "<button onclick='nextQuestion()'>Next</button>";
+			if(typeof(mus) != "undefined"){
+				test.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick='play(mus)'>Audio</button>";
+			}
 			test.innerHTML += "<p id=\"myDIV\" hidden>" + Ans + "</p>";
 			
 		}
@@ -392,10 +405,15 @@
 		}
 		function nextQuestion() {
 			sq.push(pos);
+			//pos++;
 			renderQuestion();
 			window.scrollTo(0, 0);
 		}
-
+		function play(mus) {
+			song = "Record/Ja/"+mus+".ogg";
+			var audio = new Audio(song);
+			audio.play();
+		}
 		function HQuestion() {
 			hq.push(pos);
 			sq.push(pos);
