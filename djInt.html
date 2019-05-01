@@ -243,16 +243,70 @@
 		"File system caching, In-memory caching, Using Memcached, Database caching",
 		"List some caching strategies that you know in Django"],
 
+		["*args and **kwargs", 
+		"mostly used in function definitions; allow you to pass a variable number of arguments to a function. Variable means is that you do not know beforehand; how many arguments can be passsed to your function by the user so in this case you use these two keywords.", 
+		""],
+
+		
+		["*args", 
+		"used to send a non-keyworded variable length argument list to the function", 
+		""],
 
 
+		["**kwargs", 
+		"allows you to pass keyworded variable length of arguments to a function. use **kwargs if you want to handle named arguments in a function", 
+		""],		
+//new
 
-			/*
-			++"<br> 
-			<br> 
-			<br> &nbsp; //tab
-			
-			["", 
-			"", ""],
+		["what does python manage.py migrate do", 
+		"slinks setting with django project and apps to database", 
+		""],
+
+		["How to create a project", 
+		"django-admin startproject project_name", 
+		""],
+
+		["How to create a app ", 
+		"python manage.py startapp app_name", 
+		""],
+
+		["In settings.py what does BASE_DIR means", 
+		"knows where the paths (location) of the project and used to be portable", 
+		""],
+
+		["Secret key and Debug and domain names", 
+		"In settings.py, Secret key must be keep secret so don't push git without replace when developed, debug must be false when live, for domain names in ALLOWD_HOSTS = [put_domain_names_here]", 
+		""],
+
+		["What is INSTALLED_APPS and apps", 
+		"Apps are more in terms of components or little pices of the greater django project itself; INSTALLED_APPS are application definition and adding your own apps or third party apps and preintall apps like admin, auth, etc", 
+		""],
+
+		["In settings.py, MIDDLEWARE, ROOT_URLCONF, AND TEMPLATES", 
+		"MIDDLEWARE is mostly request and security features, ROOT_URLCONF is how django routes any given url, TEMPLATES is html templates how they are stores and how it renders", 
+		""],
+
+		["In settings.py, what is WSGI_APPLICATION and AUTH_PASSWORD_VALIDATORS", 
+		"its how your server works and AUTH_PASSWORD_VALIDATORS is password validation", 
+		""],
+
+
+		["In settings.py, STATIC_URL", 
+		"Static files (css, javascript, Images) where to store them", 
+		""],
+
+
+		["", 
+		"", 
+		""],
+		/*
+		++"<br> 
+		<br> 
+		<br> &nbsp; //tab
+		
+		["", 
+		"", 
+		""],
 
 			*/
 		];
@@ -289,14 +343,14 @@
 			rn = shuffle(rn);
 			pos = Math.floor(Math.random() * questions.length);
 			// pos = 0;
-			// while (sq.includes(pos)) {
-			// 	pos = Math.floor(Math.random() * questions.length);
-			// 	if (!sq.includes(pos)) break;
-			// }
+			while (sq.includes(pos)) {
+				pos = Math.floor(Math.random() * questions.length);
+				if (!sq.includes(pos)) break;
+			}
 			//pos = questions.length - 5;
 			// pos = 0;
 			if (pos == questions.length)--pos;
-
+			
 			_("test_status").innerHTML = "Question " + (pos + 1) + " of " + tot;
 			question = questions[pos][0];
 			Ans = questions[pos][1];
