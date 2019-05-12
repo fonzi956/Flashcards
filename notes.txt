@@ -1,0 +1,32 @@
+
+		["In urls.py, what does urlpatterns do?", 
+		"The urlpatterns list routes URLs to views", 
+		""],
+
+		["how to get functions from other apps for urls purposes", 
+		"from app_name.views import function_view, other_function_view", 
+		""],
+//stop urls
+		["", 
+		"", 
+		""],
+
+		["", 
+		"", 
+		""],
+
+		["", 
+		"", 
+		""],
+
+		["", 
+		"", 
+		""],
+
+		["", 
+		"", 
+		""],
+
+		["", 
+		"", 
+		""],
