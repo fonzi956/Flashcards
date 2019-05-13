@@ -64,7 +64,7 @@
 			+"<br> >>> my_boolean"
 			+"<br> True"],
 
-			["types of operator for conditionals: ", 
+			["Comparison operator: ", 
 			"==, !=, >, <, >=, <= use for CONDITIONALS"],
 
 			["if statements", 
@@ -81,6 +81,39 @@
 			+"<br> Program ended"
 			+"<br> >>>"],
 
+			//study harder
+			["for i in range(1, 11):"
+			+"<br> &nbsp; print i",
+			"<br> <br> 1 <br> 2 <br> 3 <br> 4 <br> 5 <br> 6 <br> 7 <br> 8 <br> 9 <br> 10"],
+
+			["i = 1 "
+			+"<br> while i <= 10: <br> &nbsp; print i <br> &nbsp; i += 1",
+			"<br> <br> 1 <br> 2 <br> 3 <br> 4 <br> 5 <br> 6 <br> 7 <br> 8 <br> 9 <br> 10"],
+
+			["a = 10 <br> b = 20 <br> if a < b: <br> &nbsp; print \"{} is less than {}\".format(a, b)"
+			+"<br> elif a == 20: <br> &nbsp; print \"{} is equal to {}\".format(a, b)"
+			+"<br> else: <br> &nbsp; print \"{} is greater than {}\".format(a, b)",
+			"<br> <br> 10 is less than 20"],
+
+			["# Fizz Buzz"
+			+"<br> for num in xrange(1,16):"
+			+"<br> &nbsp; if num % 5 == 0 and num % 3 == 0:"
+			+"<br> &nbsp; &nbsp; print \"FizzBuzz\""
+			+"<br> &nbsp; elif num % 3 == 0:"
+			+"<br> &nbsp; &nbsp; print \"Fizz\""
+			+"<br> &nbsp; elif num % 5 == 0:"
+			+"<br> &nbsp; &nbsp; print \"Buzz\""
+			+"<br> &nbsp; else:"
+			+"<br> &nbsp; &nbsp; print num",
+			"<br> 1 <br> 2 <br> Fizz <br> 4 <br> Buzz <br> Fizz <br>  7 <br> 8 <br> Fizz <br> Buzz <br> 11 <br> Fizz <br> 13 <br> 14 <br> FizzBuzz"],
+
+			["# Fibonacci Suquence"
+			+"<br> a, b = 0, 1"
+			+"<br> for i in xrange(0, 10):"
+			+"<br> &nbsp; print a"
+			+"<br> &nbsp; a, b = b, a + b",
+			"<br> 0 <br> 1 <br> 1 <br> 2 <br> 3 <br> 5 <br> 8 <br> 13 <br> 21"],
+			//study harder end
 			["else Statements", 
 			"An else statement follows an if statement, and contains code that is called when the if statement evaluates to False. "
 			+"You can chain if and else statements to determine which option in a series of possibilities is true. "],
@@ -210,12 +243,10 @@
 			+"<br> print(numbers)"
 			+"<br> <br> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] <br> <br> The call to list is necessary because range by itself creates a range object, and this must be converted to a list if you want to use it as one."],
 
-			["If range is called with one argument", 
+			["If range is called with one argument and does it have two or third?", 
 			"it produces an object with values from 0 to that argument. If it is called with two arguments, it produces values from the first to the second."
-			+"<br> <br> numbers = list(range(3, 8)) <br> print(numbers) <br> <br> [3, 4, 5, 6, 7]"],
-
-			["range can have a third argument", 
-			"which determines the interval of the sequence produced. This third argument must be an integer."
+			+"<br> <br> numbers = list(range(3, 8)) <br> print(numbers) <br> <br> [3, 4, 5, 6, 7]"
+			+"<br> <br> which determines the interval of the sequence produced. This third argument must be an integer."
 			+"<br> <br> numbers = list(range(5, 20, 2)) <br> print(numbers) <br> <br> [5, 7, 9, 11, 13, 15, 17, 19]"],
 
 			["for Loop", 
@@ -251,18 +282,16 @@
 			+"<br> my_func()"
 			+"<br> <br> spam <br> spam <br> spam <br> spam"],
 
-			["functions with one argument", 
-			"the argument is defined inside the parentheses. <br> <br> def print_with_exclamation(word):"
+			["functions with one argument the argument is defined? Can functions have more than one arguments", 
+			"inside the parentheses <br> def print_with_exclamation(word):"
 			+"<br>  &nbsp; print(word + \"!\")"
 			+"<br> "
 			+"<br> print_with_exclamation(\"spam\")"
 			+"<br> print_with_exclamation(\"eggs\")"
 			+"<br> print_with_exclamation(\"python\")"
-			+"<br> <br> spam! <br> eggs! <br> python!"],
-
-			["Can functions have more than one arguments", 
-			"yes separate them with commas"
-			+"<br> <br> def print_sum_twice(x, y): "
+			+"<br> <br> spam! <br> eggs! <br> python!"
+			+"<br> <br>  yes separate them with commas"
+			+"def print_sum_twice(x, y): "
 			+"<br>  &nbsp; print(x + y)"
 			+"<br>  &nbsp; print(x + y)"
 			+"<br> "
@@ -293,17 +322,7 @@
 			"Comments are annotations to code used to make it easier to understand. They don't affect how code is run. In Python, a comment is created by inserting an octothorpe (otherwise known as a number sign or hash symbol: #). All text after it on that line is ignored"
 			+"Docstrings (documentation strings) serve a similar purpose to comments, as they are designed to explain code. However, they are more specific and have a different syntax. They are created by putting a multiline string containing. Unlike conventional comments, docstrings are retained throughout the runtime of the program. This allows the programmer to inspect these comments at run time."],
 
-			["Can functions be assigned and reassigned  to a variable", 
-			"yes <br> "
-			+"<br> def multiply(x, y): "
-			+"<br> &nbsp; return x * y"
-			+"<br> "
-			+"<br> a = 4"
-			+"<br> b = 7"
-			+"<br> operation = multiply"
-			+"<br> print(operation(a, b)) <br> <br> 28"],
-
-			["Can functions be used as argument of other functions", 
+			["Can functions be used as argument of other functions; Can functions be assigned and reassigned  to a variable", 
 			"yes <br> "
 			+"<br> def add(x, y):"
 			+"<br> &nbsp; return x + y"
@@ -314,66 +333,28 @@
 			+"<br> a = 5"
 			+"<br> b = 10"
 			+"<br> "
-			+"<br> print(do_twice(add, a, b)) <br> <br> 30"],
+			+"<br> operation = do_twice"
+			+"<br> print(operation(add, a, b)) <br> <br> 30"],
 
-			["Modules", 
+
+			["what are Modules and what do from and as, also if no module exists", 
 			"Modules are pieces of code that other people have written to fulfill common tasks, such as generating random numbers, performing mathematical operations, etc. "
 			+"<br> "
-			+"The basic way to use a module is to add import module_name at the top of your code, and then using module_name.var to access functions and values with the name var in the module."],
-
-			["Modules from", 
-			"There is another kind of import that can be used if you only need certain functions from a module. "
+			+"The basic way to use a module is to add import module_name at the top of your code, and then using module_name.var to access functions and values with the name var in the module."
+			+"<br> "
+			+"There is another kind of import that can be used if you only need certain functions from a module. "
 			+"These take the form from module_name import var, and then var can be used as if it were defined normally in your code. imports all objects from a module. For example: from math import *"
-			+"This is generally discouraged, as it confuses variables in your code with variables in the external module."],
+			+"This is generally discouraged, as it confuses variables in your code with variables in the external module."
+			+"<br> You can import a module or object under a different name using the as keyword. This is mainly used when a module or object has a long or confusing name. Trying to import a module that isn't available causes an ImportError."
+			],
 
-			["Modules as and if no module exists", 
-			"You can import a module or object under a different name using the as keyword. This is mainly used when a module or object has a long or confusing name. Trying to import a module that isn't available causes an ImportError."],
 
 			["three main types of modules in Python", 
-			"those you write yourself, those you install from external sources, and those that are preinstalled with Python. (standard library)"],
+			"those you write yourself, those you install from external sources (third-party) are stored on the Python Package Index (PyPI) The best way to install these is using a program called pip. This comes installed by default with modern distributions of Python. and enter pip install library_name, and those that are preinstalled with Python. (standard library) Some of the modules in the standard library are written in Python, and some are written in C. Most are available on all platforms, but some are Windows or Unix specific. "],
 
-			["The Standard Library", 
-			"Some of the modules in the standard library are written in Python, and some are written in C. Most are available on all platforms, but some are Windows or Unix specific. "],
-
-			["third-party Python modules", 
-			"are stored on the Python Package Index (PyPI) The best way to install these is using a program called pip. This comes installed by default with modern distributions of Python. and enter pip install library_name"],
 
 			//Functions & Modules end
 
-
-			//study harder
-			["for i in range(1, 11):"
-			+"<br> &nbsp; print i",
-			"<br> <br> 1 <br> 2 <br> 3 <br> 4 <br> 5 <br> 6 <br> 7 <br> 8 <br> 9 <br> 10"],
-
-			["i = 1 "
-			+"<br> while i <= 10: <br> &nbsp; print i <br> &nbsp; i += 1",
-			"<br> <br> 1 <br> 2 <br> 3 <br> 4 <br> 5 <br> 6 <br> 7 <br> 8 <br> 9 <br> 10"],
-
-			["a = 10 <br> b = 20 <br> if a < b: <br> &nbsp; print \"{} is less than {}\".format(a, b)"
-			+"<br> elif a == 20: <br> &nbsp; print \"{} is equal to {}\".format(a, b)"
-			+"<br> else: <br> &nbsp; print \"{} is greater than {}\".format(a, b)",
-			"<br> <br> 10 is less than 20"],
-
-			["# Fizz Buzz"
-			+"<br> for num in xrange(1,16):"
-			+"<br> &nbsp; if num % 5 == 0 and num % 3 == 0:"
-			+"<br> &nbsp; &nbsp; print \"FizzBuzz\""
-			+"<br> &nbsp; elif num % 3 == 0:"
-			+"<br> &nbsp; &nbsp; print \"Fizz\""
-			+"<br> &nbsp; elif num % 5 == 0:"
-			+"<br> &nbsp; &nbsp; print \"Buzz\""
-			+"<br> &nbsp; else:"
-			+"<br> &nbsp; &nbsp; print num",
-			"<br> 1 <br> 2 <br> Fizz <br> 4 <br> Buzz <br> Fizz <br>  7 <br> 8 <br> Fizz <br> Buzz <br> 11 <br> Fizz <br> 13 <br> 14 <br> FizzBuzz"],
-
-			["# Fibonacci Suquence"
-			+"<br> a, b = 0, 1"
-			+"<br> for i in xrange(0, 10):"
-			+"<br> &nbsp; print a"
-			+"<br> &nbsp; a, b = b, a + b",
-			"<br> 0 <br> 1 <br> 1 <br> 2 <br> 3 <br> 5 <br> 8 <br> 13 <br> 21"],
-			//study harder end
 
 			/*
 			+"<br> 

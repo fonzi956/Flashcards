@@ -7,20 +7,20 @@
 		"from app_name.views import function_view, other_function_view", 
 		""],
 //stop urls
-		["", 
-		"", 
+		["within the urlpatterns list what is path", 
+		"In urlpatterns: The path returns an element for inclusion in urlpatterns; path(route, view, kwargs=None, name=None) ", 
 		""],
 
-		["", 
-		"", 
+		["In urlpatterns: The path returns an element for inclusion in urlpatterns; path(route, view, kwargs=None, name=None) what are the does route do", 
+		"The route argument should be a string or gettext_lazy() (see Translating URL patterns) that contains a URL pattern. The string may contain angle brackets (like <username> above) to capture part of the URL and send it as a keyword argument to the view. The angle brackets may include a converter specification (like the int part of <int:section>) which limits the characters matched and may also change the type of the variable passed to the view. <br> ", 
 		""],
 
-		["", 
-		"", 
+		["In urlpatterns: The path returns an element for inclusion in urlpatterns; path(route, view, kwargs=None, name=None) what are the does view and kwargs do", 
+		"The view argument is a view function or the result of as_view() for class-based views. It can also be an django.urls.include(). The kwargs argument allows you to pass additional arguments to the view function or method.", 
 		""],
 
-		["", 
-		"", 
+		["In urlpatterns: The path returns an element for inclusion in urlpatterns; path(route, view, kwargs=None, name=None) what are the does name do, 
+		"Use for naming URL patterns, choose names that are unlikely to clash with other applications’ choice of names for perform URL reverding. ", 
 		""],
 
 		["", 
