@@ -6,7 +6,7 @@
 		["how to get functions from other apps for urls purposes", 
 		"from app_name.views import function_view, other_function_view", 
 		""],
-//stop urls
+//new
 		["within the urlpatterns list what is path", 
 		"In urlpatterns: The path returns an element for inclusion in urlpatterns; path(route, view, kwargs=None, name=None) ", 
 		""],
@@ -23,6 +23,12 @@
 		"Use for naming URL patterns, choose names that are unlikely to clash with other applications’ choice of names for perform URL reverding. ", 
 		""],
 
+
+		["what is in models.py", 
+		"it has class that inherit from django models.Model that maps to the database using models.field and field type and etc: <br> <br> class ClassName(models.Model): <br> &nbsp; field_name = models.TextField(blank=True, null=True) <br> &nbsp; another_field_name = models.DecimalField(decimal_places=2, max_digits=10000)", 
+		""],
+
+		["
 		["", 
 		"", 
 		""],
