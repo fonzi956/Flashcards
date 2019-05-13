@@ -28,11 +28,16 @@
 		"it has class that inherit from django models.Model that maps to the database using models.field and field type and etc: <br> <br> class ClassName(models.Model): <br> &nbsp; field_name = models.TextField(blank=True, null=True) <br> &nbsp; another_field_name = models.DecimalField(decimal_places=2, max_digits=10000)", 
 		""],
 
-		["
-		["", 
-		"", 
+		["what is an instance method on our model or a function on our model", 
+		"creates dynamic linking of urls without going back to urls.py without include ti change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it's used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
 		""],
 
 		["", 
 		"", 
 		""],
+
+
+		/*
+		+"<br> 
+		<br> 
+		<br> &nbsp; //tab
