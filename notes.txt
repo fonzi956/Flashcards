@@ -29,8 +29,53 @@
 		""],
 
 		["what is an instance method on our model or a function on our model", 
-		"creates dynamic linking of urls without going back to urls.py without include ti change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it's used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
+		"creates dynamic linking of urls without going back to urls.py without include ti change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
 		""],
+
+		["how to get all data in the database", 
+		"In the app view, import the model, create a function that get the request inside of the function: views a list of the database Oject like <br> queryset = Product.objects.all() <br> and put it in the context to be render with the html template as a variable", 
+		""],
+
+		["how to get detail of data id when click a link", 
+		"In app view, import the model, create a function that takes request and id, inside the function: <br> obj = get_object_or_404(Product, id=id) and put the obj in the context to render with the html template", 
+		""],
+
+		["how to delete and confirm for individe id", 
+		"In app view, import the model, create a function that takes request and id, inside the function: <br> obj = get_object_or_404(Product, id=id) <br> #confirm delete <br> if request.method ==\"POST\" <br> &nbsp;  obj.delete() <br> #redirect to show deletion has happen", 
+		""],
+
+		["How to save user\'s info to database", 
+		"Create python file name forms.py and import app model: "
+        +"<br> class ProductForm(forms.ModelForm):"
+        +"<br> &nbsp; class Meta:"
+        +"<br> &nbsp; &nbsp; model = Product"
+        +"<br> &nbsp; &nbsp; fields = [\'title\',\'description\',\'price\']"
+        +"<br> <br> In view, import the forms.py, "
+        +"<br> def product_create_view(request):"
+        +"<br> &nbsp; form = ProductForm(request.POST or None) <br> &nbsp; if form.is_valid():"
+        +"<br> &nbsp; &nbsp; forms.save()"
+        +"<br> <br> the rest of the function redirect to another html showing that it is save and after the if statement save the form to the context to render with the html template that show the form to let the user save info"
+        , 
+		""],
+
+
+		["how to update data", 
+		"Like saving data from user, first create forms.py or reuse forms, in view: "
+        +"<br> def product_update_view(request, id=id):"
+        +"<br> &nbsp; obj = get_object_or_404(Product, id=id)"
+        +"<br> &nbsp; form = ProductForm(request.POST or None, instance=obj)"
+        +"<br> &nbsp; if form.is_valid():"
+        +"<br> &nbsp; &nbsp; form.save()"
+        +"<br> &nbsp; context = { \'form\': form }"
+        +"<br> &nbsp; return render(request, \"products/product_create.html\", context)"
+        , 
+		""],
+
+
+		["", 
+		"", 
+		""],
+
 
 		["", 
 		"", 
@@ -38,6 +83,10 @@
 
 
 		/*
-		+"<br> 
+		+"<br> "
+        +"<br> <br> "
+        +"<br> &nbsp; "
+        +"<br> &nbsp; &nbsp; "
 		<br> 
 		<br> &nbsp; //tab
+		
