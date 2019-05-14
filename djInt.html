@@ -118,7 +118,7 @@
 		"Does Django Follow Architectural pattern"],
 
 		["Mention What Does The Django Templates Consists Of?",
-		"The template is a simple text file.  It can create any text-based format like XML, CSV, HTML, etc.  A template contains variables that get replaced with values when the template is evaluated and tags (% tag %) that controls the logic of the template.",
+		"The template is a simple text file.  It can create any text-based format like XML, CSV, HTML, etc.  A template contains variables {{ variable_name }} that get replaced with values when the template is evaluated  and tags (% tag %) that controls the logic of the template like block tag that extends from another html, for, if, etc.",
 		"Mention What Does The Django Templates Consists Of"],
 
 		["Is Django stable or not?",
@@ -283,7 +283,7 @@
 		""],
 
 		["In settings.py, MIDDLEWARE, ROOT_URLCONF, AND TEMPLATES", 
-		"MIDDLEWARE is mostly request and security features, ROOT_URLCONF is how django routes any given url, TEMPLATES is html templates how they are stores and how it renders", 
+		"MIDDLEWARE is mostly request and security features, ROOT_URLCONF is how django routes any given url, TEMPLATES is html templates how they are stores and how it renders; there is a keyword DIRS that allows to store to a folder <br> \'DIRS\': [os.path.join(BASE_DIR, \"templates\")],", 
 		""],
 
 		["In settings.py, what is WSGI_APPLICATION and AUTH_PASSWORD_VALIDATORS", 
