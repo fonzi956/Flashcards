@@ -295,10 +295,106 @@
 		"Static files (css, javascript, Images) where to store them", 
 		""],
 
+//add new cards
+
+["In urls.py, what does urlpatterns do?", 
+		"The urlpatterns list routes URLs to views", 
+		""],
+
+		["how to get functions from other apps for urls purposes", 
+		"from app_name.views import function_view, other_function_view", 
+		""],
+//new
+		["within the urlpatterns list what is path", 
+		"In urlpatterns: The path returns an element for inclusion in urlpatterns; path(route, view, kwargs=None, name=None) ", 
+		""],
+
+		["In urlpatterns: The path returns an element for inclusion in urlpatterns; path(route, view, kwargs=None, name=None) what are the does route do", 
+		"The route argument should be a string or gettext_lazy() (see Translating URL patterns) that contains a URL pattern. The string may contain angle brackets (like <username> above) to capture part of the URL and send it as a keyword argument to the view. The angle brackets may include a converter specification (like the int part of <int:section>) which limits the characters matched and may also change the type of the variable passed to the view. <br> ", 
+		""],
+
+		["In urlpatterns: The path returns an element for inclusion in urlpatterns; path(route, view, kwargs=None, name=None) what are the does view and kwargs do", 
+		"The view argument is a view function or the result of as_view() for class-based views. It can also be an django.urls.include(). The kwargs argument allows you to pass additional arguments to the view function or method.", 
+		""],
+
+		["In urlpatterns: The path returns an element for inclusion in urlpatterns; path(route, view, kwargs=None, name=None) what are the does name do", 
+		"Use for naming URL patterns, choose names that are unlikely to clash with other applications’ choice of names for perform URL reverding. ", 
+		""],
+
+
+		["what is in models.py", 
+		"it has class that inherit from django models.Model that maps to the database using models.field and field type and etc: <br> <br> class ClassName(models.Model): <br> &nbsp; field_name = models.TextField(blank=True, null=True) <br> &nbsp; another_field_name = models.DecimalField(decimal_places=2, max_digits=10000)", 
+		""],
+
+		["what is an instance method on our model or a function on our model", 
+		"creates dynamic linking of urls without going back to urls.py without include ti change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
+		""],
+
+		["how to get all data in the database", 
+		"In the app view, import the model, create a function that get the request inside of the function: views a list of the database Oject like <br> queryset = Product.objects.all() <br> and put it in the context to be render with the html template as a variable", 
+		""],
+
+		["how to get detail of data id when click a link", 
+		"In app view, import the model, create a function that takes request and id, inside the function: <br> obj = get_object_or_404(Product, id=id) and put the obj in the context to render with the html template", 
+		""],
+
+		["how to delete and confirm for individe id", 
+		"In app view, import the model, create a function that takes request and id, inside the function: <br> obj = get_object_or_404(Product, id=id) <br> #confirm delete <br> if request.method ==\"POST\" <br> &nbsp;  obj.delete() <br> #redirect to show deletion has happen", 
+		""],
+
+		["How to save user\'s info to database", 
+		"Create python file name forms.py and import app model: "
+        +"<br> class ProductForm(forms.ModelForm):"
+        +"<br> &nbsp; class Meta:"
+        +"<br> &nbsp; &nbsp; model = Product"
+        +"<br> &nbsp; &nbsp; fields = [\'title\',\'description\',\'price\']"
+        +"<br> <br> In view, import the forms.py, "
+        +"<br> def product_create_view(request):"
+		+"<br> &nbsp; #all this does is renders out that form if post data comes through (request.POST) otherwise (or) we'll just render out an empty (None)"
+        +"<br> &nbsp; form = ProductForm(request.POST or None) <br> &nbsp; if form.is_valid():"
+        +"<br> &nbsp; &nbsp; forms.save()"
+        +"<br> <br> the rest of the function redirect to another html showing that it is save and after the if statement save the form to the context to render with the html template that show the form to let the user save info"
+        , 
+		""],
+
+
+		["how to update data", 
+		"Like saving data from user, first create forms.py or reuse forms, in view: "
+        +"<br> def product_update_view(request, id=id):"
+        +"<br> &nbsp; obj = get_object_or_404(Product, id=id)"
+        +"<br> &nbsp; form = ProductForm(request.POST or None, instance=obj)"
+        +"<br> &nbsp; if form.is_valid():"
+        +"<br> &nbsp; &nbsp; form.save()"
+        +"<br> &nbsp; context = { \'form\': form }"
+        +"<br> &nbsp; return render(request, \"products/product_create.html\", context)", 
+		""],
+
+		["what are widgets", 
+		"Allows for to change the forms within forms.py from change the class, id, etc like so: <br> class RawProductForm(forms.Form): <br> &nbsp; title = forms.CharField(label=\'\', widget=forms.TextInput(attrs={\"placeholder\": \"Your title\"})) <br> <br> also you can overwrite in the ModelForm", 
+		""],
+
+
+		["form Validation Methods", 
+		"to do so in the forms.py within the class where it inhert from forms.Model; create a function name clean_<fieldName> with self as first parameter, *args, **kwargs <br> field_name = self.cleaned_data.get(\"field_name\") afterwares add conditions with raise statement with forms.ValidationError(\"Input for user\")"
+		, 
+		""],
+
+		["Class based view vs Function base view", 
+		"one of the huge advantages of using class-based views is how easy it is to change things and inherit from things like inherited from the base classic view",
+		""],
 
 		["", 
-		"", 
+		"",
 		""],
+
+		["", 
+		"",
+		""],
+
+		["", 
+		"",
+		""],
+
 
 		
 		/*
@@ -350,10 +446,10 @@
 				if (!sq.includes(pos)) break;
 			}
 			//pos = questions.length - 5;
-			// pos = 0;
+			//pos = 0;
 			if (pos == questions.length)--pos;
 			
-			_("test_status").innerHTML = "Question " + (pos + 1) + " of " + tot;
+			_("test_status").innerHTML = "Question " + (pos) + " of " + tot;
 			question = questions[pos][0];
 			Ans = questions[pos][1];
 			mus = questions[pos][2];
@@ -363,7 +459,7 @@
 			if(typeof(mus) != "undefined"){
 				test.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick='play(mus)'>Audio</button>";
 			}
-			test.innerHTML += "<p id=\"myDIV\" hidden>" + Ans + "</p>";
+			test.innerHTML += "<p id=\"myDIV\" >" + Ans + "</p>";
 			
 		}
 		function checkAnswer() {
