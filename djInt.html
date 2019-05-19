@@ -330,19 +330,19 @@
 		"creates dynamic linking of urls without going back to urls.py without include ti change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
 		""],
 
-		["how to get all data in the database", 
+		["how to get all data in the database using function base view", 
 		"In the app view, import the model, create a function that get the request inside of the function: views a list of the database Oject like <br> queryset = Product.objects.all() <br> and put it in the context to be render with the html template as a variable", 
 		""],
 
-		["how to get detail of data id when click a link", 
+		["how to get detail of data id when click a link using function base view", 
 		"In app view, import the model, create a function that takes request and id, inside the function: <br> obj = get_object_or_404(Product, id=id) and put the obj in the context to render with the html template", 
 		""],
 
-		["how to delete and confirm for individe id", 
+		["how to delete and confirm for individe id using function base view", 
 		"In app view, import the model, create a function that takes request and id, inside the function: <br> obj = get_object_or_404(Product, id=id) <br> #confirm delete <br> if request.method ==\"POST\" <br> &nbsp;  obj.delete() <br> #redirect to show deletion has happen", 
 		""],
 
-		["How to save user\'s info to database", 
+		["How to save user\'s info to database using function base view", 
 		"Create python file name forms.py and import app model: "
         +"<br> class ProductForm(forms.ModelForm):"
         +"<br> &nbsp; class Meta:"
@@ -358,7 +358,7 @@
 		""],
 
 
-		["how to update data", 
+		["how to update data using function base view", 
 		"Like saving data from user, first create forms.py or reuse forms, in view: "
         +"<br> def product_update_view(request, id=id):"
         +"<br> &nbsp; obj = get_object_or_404(Product, id=id)"
@@ -381,6 +381,88 @@
 
 		["Class based view vs Function base view", 
 		"one of the huge advantages of using class-based views is how easy it is to change things and inherit from things like inherited from the base classic view",
+		""],
+
+		["How to get list of all data using class base view", 
+		"Must have modelname import on top of the view"
+		+"<br> # class is inheirt from the ListView; didn't need to add render, template name etc"
+		+"<br> class ArticleListView(ListView):"
+		+"<br> &nbsp; # by default class base view look for a specific template like"
+		+"<br> &nbsp; # <app_name>/<modelname>_list.html"
+		+"<br> &nbsp; template_name = \'articles/article_list.html\'"
+		+"<br> &nbsp; queryset = Article.objects.all()",
+		""],
+
+		["how to create data using class base view", 
+		"Must have modelname and modelform import on top of the view"
+		+"<br> class ArticleCreateView(CreateView):"
+		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
+		+"<br> &nbsp; # this will bring in the model form "
+		+"<br> &nbsp; form_class = ArticleModelForm"
+		+"<br> &nbsp; queryset = Article.objects.all() "
+		+"<br> &nbsp; # another way to override to go some way to different url "
+		+"<br> &nbsp; # other than def get_absolute_url(self): in models.py "
+		+"<br> &nbsp; #success_url = \'/\'"
+		+"<br> "
+		+"<br> &nbsp; def form_valid(self, form):"
+		+"<br> &nbsp; &nbsp; print(form.cleaned_data)"
+		+"<br> &nbsp; &nbsp; # this save user\'s info to the database, but "
+		+"<br> &nbsp; &nbsp; # must have get_aboslute_url to when it is done save the data"
+		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
+		""],
+
+		["Get detail from id using class base view", 
+		"Must have modelname on top of the view"
+		+"<br> class ArticleDetailView(DetailView):"
+		+"<br> "
+		+"<br> &nbsp; template_name = \'articles/article_detail.html\'"
+		+"<br> &nbsp; # queryset does is limit the available for the detailview so don\'t need for this"
+		+"<br> &nbsp; #queryset = Article.objects.all() "
+		+"<br> "
+		+"<br> &nbsp; # actual keyword arguments that are being passed through that url"
+		+"<br> &nbsp; # this override what that keyword arguments is to our url"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
+		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
+		""],
+
+		["How to update using class base view", 
+		"Must have modelname import on top of the view"
+		+"<br> class ArticleUpdateView(UpdateView):"
+		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
+		+"<br> &nbsp; form_class = ArticleModelForm"
+		+"<br> "
+		+"<br> &nbsp; # this gets the object puts in the form"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
+		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)"
+		+"<br> "
+		+"<br> &nbsp; # saves the new update if or not change"
+		+"<br> &nbsp; def form_valid(self, form):"
+		+"<br> &nbsp; &nbsp; print(form.cleaned_data)"
+		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
+		""],
+
+		["how to delete a data with id using class base view", 
+		"<br> class ArticleDeleteView(DeleteView):"
+		+"<br> &nbsp; template_name = \'articles/article_delete.html\'"
+		+"<br> &nbsp; #queryset = Article.objects.all() # <blog>/<modelname>_list.html"
+		+"<br> &nbsp; #success_url = \'/blog/\'"
+		+"<br> "
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
+		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)"
+		+"<br> "
+		+"<br> #//this is in the urls.py"
+		+"<br> # app_name = 'articles'"
+		+"<br> # urlpatterns = ["
+		+"<br> #     path('', ArticleListView.as_view(), name='article-list'),"
+		+"<br> #     #path('<int:pk>/', ArticleDetailView.as_view(), name='article-detail'),"
+		+"<br> # this allows that the user's wants to the delete the item so "
+		+"<br> # get_success_url goes to the article-list url using the reverse function"
+		+"<br> # must use the get_success_url to delete item if not error will happen with no deletion"
+		+"<br> &nbsp; def get_success_url(self):"
+		+"<br> &nbsp; &nbsp; return reverse(\'articles:article-list\')",
 		""],
 
 		["", 
