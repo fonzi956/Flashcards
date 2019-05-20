@@ -26,6 +26,7 @@
 		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
 		//
 		var questions = [
+		/*
 		["What is model",
 		"A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table."
 		+"<br>"
@@ -39,7 +40,7 @@
 		["how to use the model",
 		"Once you have defined your models, you need to tell Django you’re going to use those models. Do this by editing your settings file and changing the INSTALLED_APPS setting to add the name of the module that contains your models.py.",
 		"how to use the model"],
-
+		*/
 		//other parts from the internet
 
 		["Explain the architecture of Django?",
@@ -185,8 +186,10 @@
 		"As Django is Python Framework, in order to install Django Python is required. Django comes with an inbuilt lightweight web server that you can use for the testing purpose.If you are using Django on production Apache with mod_wsgi is required.",
 		"List server requirement to install Django Framework"],
 
+		/*
 		["List the database backends supported by Django Framework?",
 		"PostgreSQL, MySQL, SQLite, Oracle and 3d parties: SAP SQL Anywhere, IBM DM2, Microsoft SQL Server, Firebird, ODBC"],
+		*/
 
 		["What is recommended way to install Django?",
 		"Installing using pip is the recommended way to install Django Framework.: <br> Install pip. <br> Configure virtualenv and virtualenvwrapper <br> Once virtual environment is created and activated, enter the command pip install Django to install Django",
@@ -297,7 +300,7 @@
 
 //add new cards
 
-["In urls.py, what does urlpatterns do?", 
+		["In urls.py, what does urlpatterns do?", 
 		"The urlpatterns list routes URLs to views", 
 		""],
 
@@ -443,8 +446,9 @@
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 
-		["how to delete a data with id using class base view", 
-		"<br> class ArticleDeleteView(DeleteView):"
+		["how to delete a data with id using class base view",
+		"Must have modelname import on top of the view" 
+		+"<br> class ArticleDeleteView(DeleteView):"
 		+"<br> &nbsp; template_name = \'articles/article_delete.html\'"
 		+"<br> &nbsp; #queryset = Article.objects.all() # <blog>/<modelname>_list.html"
 		+"<br> &nbsp; #success_url = \'/blog/\'"
@@ -464,22 +468,189 @@
 		+"<br> &nbsp; def get_success_url(self):"
 		+"<br> &nbsp; &nbsp; return reverse(\'articles:article-list\')",
 		""],
-
-		["", 
-		"",
-		""],
-
-		["", 
-		"",
-		""],
-
-		["", 
-		"",
-		""],
-
-
-		
 		/*
+//RawClassBaseView
+		["What are custom Mixin? (RawClassBaseView)", 
+		"Use for inheirt code from class so DRY; put parameter as first, use self for refer the instance calling of the method"
+		+"<br> class CourseObjectMixin(object):"
+		+"<br> &nbsp; model = Course"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id = self.kwargs.get(\'id\')"
+		+"<br> &nbsp; &nbsp; obj = None"
+		+"<br> &nbsp; &nbsp; if id is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; obj = get_object_or_404(self.model, id=id)"
+		+"<br> &nbsp; &nbsp; return obj "
+		+"<br> "
+		+"<br> class CourseDeleteView(CourseObjectMixin, View):"
+		+"<br> &nbsp; template_name = \"courses/course_delete.html\" # DetailView"
+		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # GET method"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; # The obj came from the custom Mixin that was inhernit "
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; # other code"
+		+"<br> "
+		+"<br> &nbsp; def post(self, request, id=None,  *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # POST method"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()",
+		""],
+
+		["how to delete using RawClassView", 
+		""
+		+"<br> class CourseDeleteView(CourseObjectMixin, View):"
+		+"<br> &nbsp; template_name = \"courses/course_delete.html\" # DetailView"
+		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # GET method"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; # The obj came from the custom Mixin that was inhernit "
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; if obj is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'object\'] = obj"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> "
+		+"<br> &nbsp; def post(self, request, id=None,  *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # POST method"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; if obj is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; obj.delete()"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'object\'] = None"
+		+"<br> &nbsp; &nbsp; &nbsp; return redirect(\'/courses/\')"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)",
+		""],
+
+		["how to update using RawClassView", 
+		""
+		+"<br> class CourseUpdateView(CourseObjectMixin, View):"
+		+"<br> &nbsp; template_name = \"courses/course_update.html\" # DetailView"
+		+"<br> &nbsp; # override what you would typically do for your detailview"
+		+"<br> &nbsp; # having a method in there called objects to use in various methods"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; # get id to update"
+		+"<br> &nbsp; &nbsp; id = self.kwargs.get(\'id\')"
+		+"<br> &nbsp; &nbsp; # grabs the obj"
+		+"<br> &nbsp; &nbsp; obj = None"
+		+"<br> &nbsp; &nbsp; if id is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; obj = get_object_or_404(Course, id=id)"
+		+"<br> &nbsp; &nbsp; return obj"
+		+"<br> "
+		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # GET method"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; if obj is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; # pass in to myform as instance so "
+		+"<br> &nbsp; &nbsp; &nbsp; form = CourseModelForm(instance=obj)"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'object\'] = obj"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'form\'] = form"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> "
+		+"<br> &nbsp; def post(self, request, id=None,  *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # POST method"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; # having object inside of our context"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; if obj is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; # this is grabbing that post data along with that instance "
+		+"<br> &nbsp; &nbsp; &nbsp; form = CourseModelForm(request.POST, instance=obj)"
+		+"<br> &nbsp; &nbsp; &nbsp; if form.is_valid():"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; form.save()"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'object\'] = obj"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'form\'] = form"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)",
+		""],
+
+		["how to create using RawClassView", 
+		""
+		+"<br> class CourseCreateView(View):"
+		+"<br> &nbsp; template_name = \"courses/course_create.html\" # DetailView"
+		+"<br> &nbsp; def get(self, request, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # GET method"
+		+"<br> &nbsp; &nbsp; form = CourseModelForm()"
+		+"<br> &nbsp; &nbsp; context = {\"form\": form}"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> "
+		+"<br> &nbsp; def post(self, request, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # POST method"
+		+"<br> &nbsp; &nbsp; form = CourseModelForm(request.POST)"
+		+"<br> &nbsp; &nbsp; if form.is_valid():"
+		+"<br> &nbsp; &nbsp; &nbsp; form.save()"
+		+"<br> &nbsp; &nbsp; &nbsp; # starting all over to make another form"
+		+"<br> &nbsp; &nbsp; &nbsp; form = CourseModelForm()"
+		+"<br> &nbsp; &nbsp; context = {\"form\": form}"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)",
+		""],
+
+		["how to get a list of database using RawClassView", 
+		""
+		+"<br> class CourseListView(View):"
+		+"<br> &nbsp; template_name = \"courses/course_list.html\""
+		+"<br> &nbsp; queryset = Course.objects.all()"
+		+"<br> "
+		+"<br> &nbsp; # for inherit purposes"
+		+"<br> &nbsp; def get_queryset(self):"
+		+"<br> &nbsp; &nbsp; return self.queryset"
+		+"<br> "
+		+"<br> &nbsp; def get(self, request, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; context = {\'object_list\': self.get_queryset()}"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> "
+		+"<br> # BASE VIEW Class = VIEW"
+		+"<br> class CourseView(CourseObjectMixin, View):"
+		+"<br> &nbsp; template_name = \"courses/course_detail.html\" # DetailView"
+		+"<br> "
+		+"<br> &nbsp; # new object of a class, "
+		+"<br> &nbsp; # object is an instace of that class sort of reference, reference self inside"
+		+"<br> &nbsp; "
+		+"<br> &nbsp; \"\"\""
+		+"<br> &nbsp; # pass in a parameter from url"
+		+"<br> &nbsp; # make sure both templates be able to work:"
+		+"<br> &nbsp; # path(\'\', CourseListView.as_view(), name=\'courses-list\'),"
+		+"<br> &nbsp; # path(\'<int:id>/\', CourseView.as_view(), name=\'course-detail\'),"
+		+"<br> &nbsp; # pass in "
+		+"<br> &nbsp; # "
+		+"<br> &nbsp; # id=None means id is no longer required; default"
+		+"<br> &nbsp; \"\"\""
+		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # GET method"
+		+"<br> "
+		+"<br> &nbsp; &nbsp; context = {\'object\': self.get_object()}"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> "
+		+"<br> &nbsp; # def post(request, *args, **kwargs):"
+		+"<br> &nbsp; #     return render(request, \'about.html\', {})",
+		""],
+
+		["how to get detail of data id using RawClassView", 
+		""
+		+"<br> # BASE VIEW Class = VIEW"
+		+"<br> class CourseView(CourseObjectMixin, View):"
+		+"<br> &nbsp; template_name = \"courses/course_detail.html\" # DetailView"
+		+"<br> "
+		+"<br> &nbsp; # new object of a class, "
+		+"<br> &nbsp; # object is an instace of that class sort of reference, reference self inside"
+		+"<br> &nbsp; "
+		+"<br> &nbsp; \"\"\""
+		+"<br> &nbsp; # pass in a parameter from url"
+		+"<br> &nbsp; # make sure both templates be able to work:"
+		+"<br> &nbsp; # path(\'\', CourseListView.as_view(), name=\'courses-list\'),"
+		+"<br> &nbsp; # path(\'<int:id>/\', CourseView.as_view(), name=\'course-detail\'),"
+		+"<br> &nbsp; # pass in "
+		+"<br> &nbsp; # "
+		+"<br> &nbsp; # id=None means id is no longer required; default"
+		+"<br> &nbsp; \"\"\""
+		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; # GET method"
+		+"<br> "
+		+"<br> &nbsp; &nbsp; context = {\'object\': self.get_object()}"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> "
+		+"<br> &nbsp; # def post(request, *args, **kwargs):"
+		+"<br> &nbsp; #     return render(request, \'about.html\', {})", 
+		""],
+		
+		
 		+"<br> "
         +"<br> <br> "
         +"<br> &nbsp; "
@@ -544,7 +715,7 @@
 			if(typeof(mus) != "undefined"){
 				test.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick='play(mus)'>Audio</button>";
 			}
-			test.innerHTML += "<p id=\"myDIV\" >" + Ans + "</p>";
+			test.innerHTML += "<p id=\"myDIV\" hidden>" + Ans + "</p>";
 			
 		}
 		function checkAnswer() {
