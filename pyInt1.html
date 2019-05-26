@@ -57,17 +57,26 @@
 
 			//Basic Concepts end
 
-			["Booleans", 
+			["Booleans and Boolean Logic", 
 			"is a type. There are two Boolean values: True and False. "
 			+"They can be created by comparing values, for instance by using the equal operator ==."
 			+"<br><br> >>> my_boolean = True"
 			+"<br> >>> my_boolean"
-			+"<br> True"],
+			+"<br> True"
+			+"<br> <br> Boolean logic is used to make more complicated conditions for if statements that rely on more than one condition. "
+			+"Python's Boolean operators are and, or, and not. "
+			+"The and operator takes two arguments, and evaluates as True if, and only if, both of its arguments are True. Otherwise, it evaluates to False."
+			+"<br><br> >>> 1 == 1 and 2 == 2"
+			+"<br> True"
+			+"<br> >>> 1 != 1 or 2 == 2"
+			+"<br> True"
+			+"<br> >>> not 1 == 1"
+			+"<br> False"],
 
-			["Comparison operator: ", 
-			"==, !=, >, <, >=, <= use for CONDITIONALS"],
+			["operator for  CONDITIONALS", 
+			"==, !=, >, <, >=, <= "],
 
-			["if statements", 
+			["if, else, elif statements", 
 			"to run code if a certain condition holds. "
 			+"If an expression evaluates to True, some statements are carried out. Otherwise, they aren't carried out. "
 			+"To perform more complex checks, if statements can be nested, one inside the other. "
@@ -79,7 +88,12 @@
 			+"<br><br> >>>"
 			+"<br> 10 greater than 5"
 			+"<br> Program ended"
-			+"<br> >>>"],
+			+"<br> >>>"
+			
+			+"<br> <br> An else statement follows an if statement, and contains code that is called when the if statement evaluates to False. "
+			+"<br> <br> The elif (short for else if) statement is a shortcut to use when chaining if and else statements. "
+			+"A series of if elif statements can have a final else block, which is called if none of the if or elif expressions is True."],
+
 
 			//study harder
 			["for i in range(1, 11):"
@@ -114,27 +128,9 @@
 			+"<br> &nbsp; a, b = b, a + b",
 			"<br> 0 <br> 1 <br> 1 <br> 2 <br> 3 <br> 5 <br> 8 <br> 13 <br> 21"],
 			//study harder end
-			["else Statements", 
-			"An else statement follows an if statement, and contains code that is called when the if statement evaluates to False. "
-			+"You can chain if and else statements to determine which option in a series of possibilities is true. "],
-
-			["elif Statements", 
-			"The elif (short for else if) statement is a shortcut to use when chaining if and else statements. "
-			+"A series of if elif statements can have a final else block, which is called if none of the if or elif expressions is True."],
-
-			["Boolean Logic", 
-			"Boolean logic is used to make more complicated conditions for if statements that rely on more than one condition. "
-			+"Python's Boolean operators are and, or, and not. "
-			+"The and operator takes two arguments, and evaluates as True if, and only if, both of its arguments are True. Otherwise, it evaluates to False."
-			+"<br><br> >>> 1 == 1 and 2 == 2"
-			+"<br> True"
-			+"<br> >>> 1 != 1 or 2 == 2"
-			+"<br> True"
-			+"<br> >>> not 1 == 1"
-			+"<br> False"],
 
 			["Operator precedence", 
-			"is a very important concept in programming. It is an extension of the mathematical idea of order of operations (multiplication being performed before addition, etc.) to include other operators, such as those in Boolean logic."],
+			"is a very important concept in programming. It is an extension of the mathematical idea of order of operations (multiplication being performed before addition, etc.) to include other operators"],
 
 			["while Loops", 
 			"A while statement is similar to if statement, except that it can be run more than once. The statements inside it are repeatedly executed, as long as the condition holds. Once it evaluates to False, the next section of code is executed. Loop is also called iteration"
@@ -152,12 +148,11 @@
 			+"<br> 5"
 			+"<br> Finished!"],
 
-			["infinite loop", 
-			"is a special kind of while loop; it never stops running. Its condition always remains True. stop the program's execution by using the Ctrl-C shortcut or by closing the program."],
-
-			["break and continue", 
-			"To end a while loop prematurely, the break statement can be used. "
+			["infinite loop, break and continue", 
+			"is a special kind of while loop; it never stops running. Its condition always remains True. stop the program's execution by using the Ctrl-C shortcut or by closing the program."
+			+"To end a while loop prematurely, the break statement can be used. "
 			+"When encountered inside a loop, the break statement causes the loop to finish immediately. <br><br>Unlike break, continue jumps back to the top of the loop, rather than stopping it."],
+
 
 			["Lists", 
 			"Lists are another type of object in Python. They are used to store an indexed list of items. "
@@ -269,18 +264,16 @@
 			+"<br> Bad, repetitive code is said to abide by the WET principle, which stands for Write Everything Twice, or We Enjoy Typing",
 			"Reusing-Code"],
 
-			["***Functions", 
-			"is a block of code which only runs when it is called. Can pass data, known as parameters, into function and can return data as result. Any statement that consists of a word followed by information in parentheses is a function call. and the comma-separated values inside the parentheses are function arguments.",
-			"Functions"],
-
-			["pre-defined functions", 
-			"create your own functions by using the def statement. The code block within every function starts with a colon (:) and is indented. You must define functions before they are called"
+			["***Functions and pre-defined functions", 
+			"is a block of code which only runs when it is called. Can pass data, known as parameters, into function and can return data as result. Any statement that consists of a word followed by information in parentheses is a function call. and the comma-separated values inside the parentheses are function arguments. <br>"
+			+"create your own functions by using the def statement. The code block within every function starts with a colon (:) and is indented. You must define functions before they are called"
 			+"<br> <br> def my_func():"
 			+"<br>  &nbsp; print(\"spam\")"
 			+"<br>  &nbsp; print(\"spam\")"
 			+"<br>  &nbsp; print(\"spam\")"
 			+"<br> my_func()"
-			+"<br> <br> spam <br> spam <br> spam <br> spam"],
+			+"<br> <br> spam <br> spam <br> spam <br> spam",
+			"Functions"],
 
 			["functions with one argument the argument is defined? Can functions have more than one arguments", 
 			"inside the parentheses <br> def print_with_exclamation(word):"

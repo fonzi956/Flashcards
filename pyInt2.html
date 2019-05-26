@@ -27,11 +27,9 @@
 		//
 		var questions = [
 
-			["Exceptions", 
-			"They occur when something goes wrong, due to incorrect code or input. When an exception occurs, the program immediately stops."],
-
-			["Exception Handling", 
-			"To handle exceptions, and to call code when an exception occurs, you can use a try/except statement. "
+			["Exceptions and Exception Handling", 
+			"They occur when something goes wrong, due to incorrect code or input. When an exception occurs, the program immediately stops."
+			+"<br> <br> To handle exceptions, and to call code when an exception occurs, you can use a try/except statement. "
 			+"The try block contains code that might throw an exception. If that exception occurs, the code in the try block stops being executed, and the code in the except block is run. If no error occurs, the code in the except block doesn't run. And can have multiple different except blocks to handle different exceptions. "
 			+"Multiple exceptions can also be put into a single except block using parentheses, to have the except block handle all of them."],
 
@@ -70,7 +68,7 @@
 			+"<br> "
 			+"<br> ZeroDivisionError: division by zero"],
 
-			["***Assertions", 
+			["***Assertions and Can assert take a second argument", 
 			"An assertion is a sanity-check that you can turn on or turn off when you have finished testing the program. An expression is tested, and if the result comes up false, an exception is raised. "
 			+"Assertions are carried out through use of the assert statement. Programmers often place assertions at the start of a function to check for valid input, and after a function call to check for valid output."
 			+"<br> <br> print(1)"
@@ -78,48 +76,37 @@
 			+"<br> print(2)"
 			+"<br> assert 1 + 1 == 3"
 			+"<br> print(3)"
-			+"<br> <br> 1<br> 2<br> AssertionError",
-			"Assertions"],
-
-
-			["***Can assert take a second argument", 
-			"The assert can take a second argument that is passed to the AssertionError raised if the assertion fails. AssertionError exceptions can be caught and handled like any other exception using the try-except statement, but if not handled, this type of exception will terminate the program."
+			+"<br> <br> 1<br> 2<br> AssertionError"
+			+"<br> <br> The assert can take a second argument that is passed to the AssertionError raised if the assertion fails. AssertionError exceptions can be caught and handled like any other exception using the try-except statement, but if not handled, this type of exception will terminate the program."
 			+"<br> <br> temp = -10"
 			+"<br> assert (temp >= 0), \"Colder than absolute zero!\""
 			+"<br> <br> AssertionError: Colder than absolute zero!",
-			"Can-assert-take-a-second-argument"],
+			"Can-assert-take-a-second-argument",
+			"Assertions"],
 
-			["Files", 
+			["Files and specify the mode used to open a file and close method", 
 			"You can use Python to read and write the contents of files. Text files are the easiest to manipulate. Before a file can be edited, it must be opened, using the open function. The argument of the open function is the path to the file. If the file is in the current working directory of the program, you can specify only its name."
-			+"<br> myfile = open(\"filename.txt\")"],
-
-
-			["specify the mode used to open a file", 
-			"by applying a second argument to the open function. "
+			+"<br> myfile = open(\"filename.txt\")"
+			+"<br> <br> by applying a second argument to the open function. "
 			+"<br> Sending \"r\" means open in read mode, which is the default. "
 			+"<br> Sending \"w\" means write mode, for rewriting the contents of a file."
 			+"<br> Sending \"a\" means append mode, for adding new content to the end of the file."
 			+"<br> "
 			+"<br> Adding \"b\" to a mode opens it in binary mode, which is used for non-text files (such as image and sound files)."
-			+"<br><br> # binary write modeopen(\"filename.txt\", \"wb\")"],
-
-
-			["close method", 
-			"Once a file has been opened and used, you should close it. This is done with the close method of the file object."
+			+"<br><br> # binary write modeopen(\"filename.txt\", \"wb\")"
+			+"<br><br>Once a file has been opened and used, you should close it. This is done with the close method of the file object."
 			+"<br> file = open(\"filename.txt\", \"w\")"
 			+"<br> # do stuff to the file"
 			+"<br> file.close()"],
 
-			["Reading Files", 
+			["Reading Files and read only a certain amount of a file", 
 			"The contents of a file that has been opened in text mode can be read using the read method."
 			+"<br> <br> file = open(\"filename.txt\", \"r\")"
 			+"<br> cont = file.read()"
 			+"<br> # This will print all of the contents of the file \"filename.txt\"."
 			+"<br> print(cont)"
-			+"<br> file.close()"],
-
-			["***read only a certain amount of a file", 
-			"you can provide a number as an argument to the read function. This determines the number of bytes that should be read. You can make more calls to read on the same file object to read more of the file byte by byte. With no argument, read returns the rest of the file."
+			+"<br> file.close()"
+			+"<br> <br> you can provide a number as an argument to the read function. This determines the number of bytes that should be read. You can make more calls to read on the same file object to read more of the file byte by byte. With no argument, read returns the rest of the file."
 			+"<br> Just like passing no arguments, negative values will return the entire contents."
 			+"<br> <br> file = open(\"filename.txt\", \"r\")"
 			+"<br> print(file.read(16))"
@@ -128,12 +115,10 @@
 			+"<br> print(file.read())"
 			+"<br> file.close()",
 			"read-only-a-certain-amount-of-a-file"],
-			
-			["After all contents in a file have been read", 
-			"any attempts to read further from that file will return an empty string, because you are trying to read from the end of the file."],
 
-			["To retrieve each line in a file", 
-			"use the readlines method to return a list in which each element is a line in the file. or \"for line in file:\" "],
+			["After all contents in a file have been read any attempts to read further from that file will; and To retrieve each line in a file", 
+			"return an empty string, because you are trying to read from the end of the file."
+			+"<br> use the readlines method to return a list in which each element is a line in the file. or \"for line in file:\" "],
 
 			["Writing Files", 
 			"To write to files you use the write method, which writes a string to the file. The \"w\" mode will create a file, if it does not already exist. When a file is opened in write mode, the file's existing content is deleted. The write method returns the number of bytes written to a file, if successful."
@@ -143,20 +128,18 @@
 			+"<br> "
 			+"<br> file = open(\"newfile.txt\", \"r\")"
 			+"<br> print(file.read())"
-			+"<br> file.close() <br> <br> This has been written to a file"],
+			+"<br> file.close() #This has been written to a file"],
 
-			["Working with Files: It is good practice to avoid wasting resources by ", 
-			"making sure that files are always closed after they have been used. One way of doing this is to use try and finally. And An alternative way of doing this is using with statements. This creates a temporary variable (often called f), which is only accessible in the indented block of the with statement."
+			["Working with Files: It is good practice to avoid wasting resources by making sure that files are always closed after they have been used.", 
+			"One way of doing this is to use try and finally. And An alternative way of doing this is using with statements. This creates a temporary variable (often called f), which is only accessible in the indented block of the with statement."
 			+"<br> <br> with open(\"filename.txt\") as f: "
    			+"<br> &nbsp;print(f.read())"],
 
 			//Exceptions & Files end
 
-			["None", 
-			"The None object is used to represent the absence of a value. It is similar to null in other programming languages.  Like other \"empty\" values, such as 0, [] and the empty string, it is False when converted to a Boolean variable.  When entered at the Python console, it is displayed as the empty string."],
-
-			[" None object", 
-			"is returned by any function that doesn't explicitly return anything else."
+			["None and None object", 
+			"The None object is used to represent the absence of a value. It is similar to null in other programming languages.  Like other \"empty\" values, such as 0, [] and the empty string, it is False when converted to a Boolean variable.  When entered at the Python console, it is displayed as the empty string."
+			+"<br> is returned by any function that doesn't explicitly return anything else."
 			+"<br> <br> def some_func():"
 			+"<br> &nbsp; print(\"Hi!\")"
 			+"<br> "
@@ -176,8 +159,6 @@
 			+"<br> - When your data is being constantly modified. Remember, dictionaries are mutable.",
 			"When-to-use-a-dictionary"],
 
-			["index a key that isn't part of the dictionary", 
-			"returns a KeyError and An empty dictionary is defined as {}."],
 
 			["Dictionaries immutable or mutable", 
 			"Only immutable objects can be used as keys to dictionaries. Immutable objects are those that can't be changed. So far, the only mutable objects you've come across are lists and dictionaries. Trying to use a mutable object as a dictionary key causes a TypeError"
@@ -185,12 +166,13 @@
 			+"<br> &nbsp; [1, 2, 3]: \"one two three\", "
 			+"<br> } <br> <br> TypeError: unhashable type: 'list'"],
 			
-			["***dictionary keys", 
+			["***dictionary keys and index a key that isn't part of the dictionary", 
 			"Just like lists, dictionary keys can be assigned to different values. However, unlike lists, a new dictionary key can also be assigned a value, not just ones that already exist."
 			+"<br> <br> squares = {1: 1, 2: 4, 3: \"error\", 4: 16,}"
 			+"<br> squares[8] = 64"
 			+"<br> squares[3] = 9"
-			+"<br> print(squares) <br> <br> {8: 64, 1: 1, 2: 4, 3: 9, 4: 16}",
+			+"<br> print(squares) <br> <br> {8: 64, 1: 1, 2: 4, 3: 9, 4: 16}"
+			+"<br> <br> for index key it returns a KeyError",
 			"dictionary-keys"],
 			
 
@@ -218,12 +200,10 @@
 			+"<br> print(pairs.get(12345, \"not in dictionary\"))"
 			+"<br> <br> [2, 3, 4] <br> None <br> not in dictionary"],
 
-			["***Tuples", 
-			"Tuples are very similar to lists, except that they are immutable (they cannot be changed). Also, they are created using parentheses, rather than square brackets. Trying to reassign a value in a tuple causes a TypeError. tuples can be nested within each other. Tuples can be created without the parentheses, by just separating the values with commas. An empty tuple is created using an empty parenthesis pair. Tuples are faster than lists, but they cannot be changed. ",
+			["***Tuples and When to use Tuples", 
+			"Tuples are very similar to lists, except that they are immutable (they cannot be changed). Also, they are created using parentheses, rather than square brackets. Trying to reassign a value in a tuple causes a TypeError. tuples can be nested within each other. Tuples can be created without the parentheses, by just separating the values with commas. An empty tuple is created using an empty parenthesis pair. Tuples are faster than lists, but they cannot be changed. "
+			+"<br> - Use tuples when your data cannot change. <br> <br> Many times, a tuple is used in combination with a dictionary, for example, a tuple might represent a key, because it's immutable.",
 			"Tuples"],
-
-			["When to use Tuples",
-			"- Use tuples when your data cannot change. <br> <br> Many times, a tuple is used in combination with a dictionary, for example, a tuple might represent a key, because it's immutable."],
 
 			["List slices", 
 			"List slices provide a more advanced way of retrieving values from a list. Basic list slicing involves indexing a list with two colon-separated integers. This returns a new list containing all the values in the old list between the indices. Like the arguments to range, the first index provided in a slice is included in the result, but the second isn't."
@@ -254,38 +234,34 @@
 			+"<br> print(squares[1:-1])"
 			+"<br> <br> [1, 4, 9, 16, 25, 36, 49, 64]"],
 
-			["***List Comprehensions", 
+			["***List Comprehensions and List Comprehensions if", 
 			"List comprehensions are a useful way of quickly creating lists whose contents obey a simple rule. List comprehensions are inspired by set-builder notation in mathematics."
 			+"<br> <br> # a list comprehension"
 			+"<br> cubes = [i**3 for i in range(5)]"
 			+"<br> "
 			+"<br> print(cubes)"
-			+"<br> <br> [0, 1, 8, 27, 64]",
-			"List-Comprehensions"],
-
-			["List Comprehensions if", 
-			"A list comprehension can also contain an if statement to enforce a condition on values in the list"
+			+"<br> <br> [0, 1, 8, 27, 64]"
+			+"<br> <br> A list comprehension can also contain an if statement to enforce a condition on values in the list"
 			+"<br> <br> evens=[i**2 for i in range(10) if i**2 % 2 == 0]"
 			+"<br> "
 			+"<br> print(evens)"
-			+"<br> <br> [0, 4, 16, 36, 64]"],
+			+"<br> <br> [0, 4, 16, 36, 64]",
+			"List-Comprehensions"],
 
 			["List Comprehensions MemoryError", 
 			"Trying to create a list in a very extensive range will result in a MemoryError."
 			+"<br> <br> even = [2*i for i in range(10**100)]"
 			+"<br> <br> MemoryError # This issue is solved by generators"],
 
-			["String Formatting", 
+			["String Formatting and can String formatting be done with named arguments.", 
 			"So far, to combine strings and non-strings, you've converted the non-strings to strings and added them. String formatting provides a more powerful way to embed non-strings within strings. String formatting uses a string's format method to substitute a number of arguments in the string."
 			+"<br> <br> # string formatting"
 			+"<br> nums = [4, 5, 6]"
 			+"<br> msg = \"Numbers: {0} {1} {2}\". format(nums[0], nums[1], nums[2])"
 			+"<br> print(msg)"
 			+"<br> <br> Numbers: 4 5 6"
-			+"<br> <br> # Each argument of the format function is placed in the string at the corresponding position, which is determined using the curly braces { }."],
-
-			["can String formatting be done with named arguments.", 
-			"yes "
+			+"<br> <br> # Each argument of the format function is placed in the string at the corresponding position, which is determined using the curly braces { }."
+			+"<br> <br> yes can have named arguments"
 			+"<br> <br> a = \"{x}, {y}\".format(x=5, y=12)"
 			+"<br> print(a)"
 			+"<br> <br> 5, 12"],
