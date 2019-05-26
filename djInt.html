@@ -26,35 +26,8 @@
 		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
 		//
 		var questions = [
-		/*
-		["What is model",
-		"A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table."
-		+"<br>"
-		+"<br>The basics:"
-		+"<br>"
-		+"<br>Each model is a Python class that subclasses django.db.models.Model."
-		+"<br>Each attribute of the model represents a database field."
-		+"<br>With all of this, Django gives you an automatically-generated database-access API",
-		"What is model"],
 
-		["how to use the model",
-		"Once you have defined your models, you need to tell Django you’re going to use those models. Do this by editing your settings file and changing the INSTALLED_APPS setting to add the name of the module that contains your models.py.",
-		"how to use the model"],
-
-		["Can you explain the working philosophy of Django?",
-		"Django can be broken into many components:"
-		+"<br>Models.py file: This file defines your data model by extending your single line of code into full database tables and add a pre-built administration section to manage content."
-		+"<br>Urls.py file: It uses a regular expression to capture URL patterns for processing."
-		+"<br>Views.py file: It is the main part of Django. The actual processing happens in view."
-		+"<br>When a visitor lands on Django page:"
-		+"<br>1.Django checks the various URLs pattern you have created and uses the information to retrieve the view."
-		+"<br>2.The view processes the request, querying your database if necessary"
-		+"<br>3.The view passes the requested information on to your template."
-		+"<br>4.The template renders the data in a layout you have created and displays the page.",
-		"Can you explain the working philosophy of Django"],
-
-		*/
-		//other parts from the internet
+		
 
 		["Explain the architecture of Django?",
 		"Django architecture consists of:"
@@ -171,27 +144,10 @@
 		+" <br> pre_delete and post_delete"
 		+" <br> pre_request and post_request",
 		"What are signals in Django"],
-/*
 
-		["***What is the process of creating a project in Django?",
-		"To start a project in Django, use the command $django-admin.py and then use the following command:Project"
-		+" <br> __init__.py, manage.py, settings.py, urls.py"],
-
-		["Django is based on which design pattern.",
-		"Django closely follows the MVC (Model View Controller) design pattern, however, it does use its own logic in the implementation. Because the C is handled by the framework itself and most of the excitement in Django happens in models, templates, and views, Django is often referred to as an MTV framework. In the MTV development pattern:"
-		+" <br> M stands for Model, the data access layer. This layer contains anything and everything about the data: how to access it, how to validate it, which behaviors it has, and the relationships between the data."
-		+" <br> T stands for Template, the presentation layer. This layer contains presentation-related decisions: how something should be displayed on a Web page or other type of document."
-		+" <br> V stands for View, the business logic layer. This layer contains the logic that accesses the model and defers to the appropriate template(s). You can think of it as the bridge between models and templates.",
-		""],
-*/
 		["List server requirement to install Django Framework.",
 		"As Django is Python Framework, in order to install Django Python is required. Django comes with an inbuilt lightweight web server that you can use for the testing purpose.If you are using Django on production Apache with mod_wsgi is required.",
 		"List server requirement to install Django Framework"],
-
-		/*
-		["List the database backends supported by Django Framework?",
-		"PostgreSQL, MySQL, SQLite, Oracle and 3d parties: SAP SQL Anywhere, IBM DM2, Microsoft SQL Server, Firebird, ODBC"],
-		*/
 
 		["What is recommended way to install Django?",
 		"Installing using pip is the recommended way to install Django Framework.: <br> Install pip. <br> Configure virtualenv and virtualenvwrapper <br> Once virtual environment is created and activated, enter the command pip install Django to install Django",
@@ -331,10 +287,6 @@
 		"it has class that inherit from django models.Model that maps to the database using models.field and field type and etc: <br> <br> class ClassName(models.Model): <br> &nbsp; field_name = models.TextField(blank=True, null=True) <br> &nbsp; another_field_name = models.DecimalField(decimal_places=2, max_digits=10000)", 
 		""],
 
-		["what is an instance method on our model or a function on our model (dynamic linking)", 
-		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
-		""],
-
 		["how to get all data in the database using function base view", 
 		"In the app view, import the model, create a function that get the request inside of the function: views a list of the database Oject like <br> queryset = Product.objects.all() <br> and put it in the context to be render with the html template as a variable", 
 		""],
@@ -374,6 +326,51 @@
         +"<br> &nbsp; return render(request, \"products/product_create.html\", context)", 
 		""],
 
+		/*
+		["What is model",
+		"A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you’re storing. Generally, each model maps to a single database table."
+		+"<br>"
+		+"<br>The basics:"
+		+"<br>"
+		+"<br>Each model is a Python class that subclasses django.db.models.Model."
+		+"<br>Each attribute of the model represents a database field."
+		+"<br>With all of this, Django gives you an automatically-generated database-access API",
+		"What is model"],
+
+		["how to use the model",
+		"Once you have defined your models, you need to tell Django you’re going to use those models. Do this by editing your settings file and changing the INSTALLED_APPS setting to add the name of the module that contains your models.py.",
+		"how to use the model"],
+
+		["Can you explain the working philosophy of Django?",
+		"Django can be broken into many components:"
+		+"<br>Models.py file: This file defines your data model by extending your single line of code into full database tables and add a pre-built administration section to manage content."
+		+"<br>Urls.py file: It uses a regular expression to capture URL patterns for processing."
+		+"<br>Views.py file: It is the main part of Django. The actual processing happens in view."
+		+"<br>When a visitor lands on Django page:"
+		+"<br>1.Django checks the various URLs pattern you have created and uses the information to retrieve the view."
+		+"<br>2.The view processes the request, querying your database if necessary"
+		+"<br>3.The view passes the requested information on to your template."
+		+"<br>4.The template renders the data in a layout you have created and displays the page.",
+		"Can you explain the working philosophy of Django"],
+
+
+		["***What is the process of creating a project in Django?",
+		"To start a project in Django, use the command $django-admin.py and then use the following command:Project"
+		+" <br> __init__.py, manage.py, settings.py, urls.py"],
+
+		["Django is based on which design pattern.",
+		"Django closely follows the MVC (Model View Controller) design pattern, however, it does use its own logic in the implementation. Because the C is handled by the framework itself and most of the excitement in Django happens in models, templates, and views, Django is often referred to as an MTV framework. In the MTV development pattern:"
+		+" <br> M stands for Model, the data access layer. This layer contains anything and everything about the data: how to access it, how to validate it, which behaviors it has, and the relationships between the data."
+		+" <br> T stands for Template, the presentation layer. This layer contains presentation-related decisions: how something should be displayed on a Web page or other type of document."
+		+" <br> V stands for View, the business logic layer. This layer contains the logic that accesses the model and defers to the appropriate template(s). You can think of it as the bridge between models and templates.",
+		""],
+
+		["List the database backends supported by Django Framework?",
+		"PostgreSQL, MySQL, SQLite, Oracle and 3d parties: SAP SQL Anywhere, IBM DM2, Microsoft SQL Server, Firebird, ODBC"],
+
+		//other parts from the internet
+		*/
+//here
 		["what are widgets", 
 		"Allows for to change the forms within forms.py from change the class, id, etc like so: <br> class RawProductForm(forms.Form): <br> &nbsp; title = forms.CharField(label=\'\', widget=forms.TextInput(attrs={\"placeholder\": \"Your title\"})) <br> <br> also you can overwrite in the ModelForm", 
 		""],
@@ -382,6 +379,10 @@
 		["form Validation Methods", 
 		"to do so in the forms.py within the class where it inhert from forms.Model; create a function name clean_<fieldName> with self as first parameter, *args, **kwargs <br> field_name = self.cleaned_data.get(\"field_name\") afterwares add conditions with raise statement with forms.ValidationError(\"Input for user\")"
 		, 
+		""],
+
+		["what is an instance method on our model or a function on our model (dynamic linking)", 
+		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
 		""],
 
 		["Class based view vs Function base view", 
