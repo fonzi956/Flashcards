@@ -61,30 +61,18 @@
 			+"They can also be more difficult to write in some situations.",
 			"advantages-and-disadvantages-of-using-pure-functions"],
 
-			["***Lambdas", 
-			"Creating a function normally (using def) assigns it to a variable automatically. This is different from the creation of other objects - such as strings and integers - which can be created on the fly, without assigning them to a variable. The same is possible with functions, provided that they are created using lambda syntax. Functions created this way are known as anonymous. This approach is most commonly used when passing a simple function as an argument to another function."
+			["***Lambdas and why use Lambdas and can Lambdas be assigned to variable", 
+			"Creating a function normally (using def) assigns it to a variable automatically. This is different from the creation of other objects; same is possible with functions, provided that they are created using lambda syntax. Functions created this way are known as anonymous. This approach is most commonly used when passing a simple function as an argument to another function."
 			+"<br> <br> def my_func(f, arg):"
 			+"<br> &nbsp; return f(arg)"
 			+"<br> "
-			+"<br> my_func(lambda x: 2*x*x, 5)",
-			"Lambdas"],
-
-			["why use Lambdas", 
-			"Lambda functions aren't as powerful as named functions. "
+			+"<br> my_func(lambda x: 2*x*x, 5)"
+			+"<br> <br> Lambdas functions aren't as powerful as named functions. "
 			+"They can only do things that require a single expression - usually equivalent to a single line of code."
-			+"<br> <br> #named function"
-			+"<br> def polynomial(x):"
-			+"<br> &nbsp; return x**2 + 5*x + 4"
-			+"print(polynomial(-4))"
-			+"<br> "
-			+"<br> #lambda"
-			+"<br> print((lambda x: x**2 + 5*x + 4) (-4))"
-			+"<br> <br> 0 <br> 0 <br> <br> In the code above, we created an anonymous function on the fly and called it with an argument."],
-
-			["can Lambdas be assigned to variable", 
-			"yes and use like normal functions"
+			+"yes and use like normal functions. However, there is rarely a good reason to do this - it is usually better to define a function with def instead."
 			+"<br> <br> double = lambda x: x * 2"
-			+"<br> print(double(7)) <br> <br> 14 <br> <br> However, there is rarely a good reason to do this - it is usually better to define a function with def instead."],
+			+"<br> print(double(7)) <br> <br> 14 ",
+			"Lambdas"],
 
 			["***map", 
 			"The built-in functions map and filter are very useful higher-order functions that operate on lists (or similar objects called iterables). The function map takes a function and an iterable as arguments, and returns a new iterable with the function applied to each argument. "

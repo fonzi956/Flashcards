@@ -34,8 +34,10 @@
 			"The print statement can also be used to output multiple lines of text. <br><br> >>> print('Hello world!') <br> Hello world!"
 			+"<br> <br> use the intuitively named input function. The function prompts the user for input, and returns what they enter as a string <br><br> >>> input(\"Enter something please: \") <br> Enter something please: This is what the user enters! <br> This is what the user enters!"],
 
-			["Concatenation", 
-			"integers and floats, strings in Python can be added together; You can’t concatenate strings with numbers (integers)"],
+			["Concatenation and In-place operators", 
+			"integers and floats, strings in Python can be added together; You can’t concatenate strings with numbers (integers)"
+			+"<br> <br> allow you to write code like 'x = x + 3' more concisely, as 'x += 3'. "
+			+"The same thing is possible with other operators such as -, *, / and % as well as strings too"],
 
 			["what is Type Conversion and example of type conversion", 
 			"Turning string numbers into numbers(int, float, str) <br> >>> int(\"2\") + int(\"3\") <br> 5  <br> <br> turning user input (which is a string) to numbers (integers or floats), to allow for the performance of calculations. <br> "
@@ -50,10 +52,6 @@
 			+"<br> <br> Certain restrictions apply in regard to the characters that may be used in Python variable names. The only characters that are allowed are letters, numbers, and underscores. Also, they can't start with numbers."
 			+"Not following these rules results in errors."
 			+"<br> <br> use the del statement; means the reference from the name to the value is deleted, and trying to use the variable causes an error. Deleted variables can be reassigned to later as normal."],
-
-			["In-place operators", 
-			"allow you to write code like 'x = x + 3' more concisely, as 'x += 3'. "
-			+"The same thing is possible with other operators such as -, *, / and % as well as strings too"],
 
 			//Basic Concepts end
 
@@ -73,8 +71,9 @@
 			+"<br> >>> not 1 == 1"
 			+"<br> False"],
 
-			["operator for  CONDITIONALS", 
-			"==, !=, >, <, >=, <= "],
+			["operator for  CONDITIONALS and Operator precedence", 
+			"==, !=, >, <, >=, <= "
+			+"<br> Operator precedence is a very important concept in programming. It is an extension of the mathematical idea of order of operations (multiplication being performed before addition, etc.) to include other operators"],
 
 			["if, else, elif statements", 
 			"to run code if a certain condition holds. "
@@ -129,8 +128,6 @@
 			"<br> 0 <br> 1 <br> 1 <br> 2 <br> 3 <br> 5 <br> 8 <br> 13 <br> 21"],
 			//study harder end
 
-			["Operator precedence", 
-			"is a very important concept in programming. It is an extension of the mathematical idea of order of operations (multiplication being performed before addition, etc.) to include other operators"],
 
 			["while Loops", 
 			"A while statement is similar to if statement, except that it can be run more than once. The statements inside it are repeatedly executed, as long as the condition holds. Once it evaluates to False, the next section of code is executed. Loop is also called iteration"
@@ -154,7 +151,7 @@
 			+"When encountered inside a loop, the break statement causes the loop to finish immediately. <br><br>Unlike break, continue jumps back to the top of the loop, rather than stopping it."],
 
 
-			["Lists", 
+			["Lists and When to use a list and Indexing out of the bounds", 
 			"Lists are another type of object in Python. They are used to store an indexed list of items. "
 			+"A list is created using square brackets with commas separating items. "
 			+"The certain item in the list can be accessed by using its index in square brackets."
@@ -162,24 +159,20 @@
 			+"<br> print(words[0])"
 			+"<br> print(words[1])"
 			+"<br> print(words[2])"
-			+"<br><br>Hello <br>world <br>!"],
-
-			["When to use a list",
-			"- Use lists if you have a collection of data that does not need random access. Try to choose lists when you need a simple, iterable collection that is modified frequently."],
-
-			["empty list and Can List have different types", 
-			"is created with an empty pair of square brackets. //prints out []"
-			+"<br><br>yes, Typically, a list will contain items of a single item type, but it is also possible to include several different types. "
-			+"Lists can also be nested within other lists."],
-
-			["Indexing out of the bounds", 
-			"causes an IndexError. Some types, such as strings, can be indexed like lists. Indexing strings behaves as though you are indexing a list containing each character in the string. "
+			+"<br><br>Hello <br>world <br>!"
+			+"<br>- Use lists if you have a collection of data that does not need random access. Try to choose lists when you need a simple, iterable collection that is modified frequently."
+			+"<br>Indexing out of the bounds causes an IndexError. Some types, such as strings, can be indexed like lists. Indexing strings behaves as though you are indexing a list containing each character in the string. "
 			+" For other types, such as integers, indexing them isn't possible, and it causes a TypeError."],
 
-			["Lists of lists", 
-			"are often used to represent 2D grids, as Python lacks the multidimensional arrays that would be used for this in other languages."],
 
-			["To check if an item is in a list,", 
+			["empty list and Can List have different types and Lists of lists", 
+			"is created with an empty pair of square brackets. //prints out []"
+			+"<br><br>yes, Typically, a list will contain items of a single item type, but it is also possible to include several different types. "
+			+"Lists can also be nested within other lists."
+			+" Lists of listsare often used to represent 2D grids, as Python lacks the multidimensional arrays that would be used for this in other languages."],
+
+
+			["To check if an item is in a list, and To check if an item is not in a list", 
 			"the in operator can be used. It returns True if the item occurs one or more times in the list, and False if it doesn't."
 			+"<br><br> words = [\"spam\", \"egg\", \"spam\", \"sausage\"]"
 			+"<br> print(\"spam\" in words)"
@@ -187,10 +180,8 @@
 			+"<br> print(\"tomato\" in words)"
 			+"<br><br> True"
 			+"<br> True"
-			+"<br> False"],
-
-			["To check if an item is not in a list", 
-			"use the not operator with the in operator"
+			+"<br> False"
+			+"<br> <br> use the not operator with the in operator"
 			+"<br><br> nums = [1, 2, 3]"
 			+"<br> print(not 4 in nums)"
 			+"<br> print(4 not in nums)"
@@ -198,35 +189,29 @@
 			+"<br> print(3 not in nums)"
 			+"<br> True <br> True <br> False <br> False"],
 
-			["List Functions append method", 
+			["List Functions append method, List Functions len, List Functions insert", 
 			"adds an item to the end of an existing list. The dot before append is there because it is a method of the list class. "
 			+"<br><br> nums = [1, 2, 3]"
 			+"<br> nums.append(4)"
 			+"<br> print(nums)"
-			+"<br> <br> [1,2,3,4]"],
-
-			["List Functions len", 
-			"gets the number of items in a list Unlike append, len is a normal function, rather than a method. This means it is written before the list it is being called on, without a dot. "
-			+"<br><br> nums = [1, 3, 5, 2, 4] <br> print(len(nums)) <br><br> 5"],
-
-			["List Functions insert", 
-			"The insert method is similar to append, except that it allows you to insert a new item at any position in the list, as opposed to just at the end."
+			+"<br> <br> [1,2,3,4]"
+			+"<br><br>List Functions len gets the number of items in a list Unlike append, len is a normal function, rather than a method. This means it is written before the list it is being called on, without a dot. "
+			+"<br><br> nums = [1, 3, 5, 2, 4] <br> print(len(nums)) <br><br> 5"
+			+"<br><br>List Functions insert The insert method is similar to append, except that it allows you to insert a new item at any position in the list, as opposed to just at the end."
 			+"<br><br> words = [\"Python\", \"fun\"]"
 			+"<br> index = 1"
 			+"<br> words.insert(index, \"is\")"
 			+"<br> print(words)"
 			+"<br> <br> [\'Python\', \'is\', \'fun\']"],
 
-			["List Functions index", 
-			"The index method finds the first occurrence of a list item and returns its index. If the item isn't in the list, it raises a ValueError."
+			["List Functions index and There are a few more useful functions and methods for lists. ", 
+			+"The index method finds the first occurrence of a list item and returns its index. If the item isn't in the list, it raises a ValueError."
 			+"<br><br>letters = [\'p\', \'q\', \'r\', \'s\', \'p\', \'u\']"
 			+"<br> print(letters.index(\'r\'))"
 			+"<br> print(letters.index(\'p\'))"
 			+"<br> print(letters.index(\'z\'))"
-			+"<br><br> 2 <br> 0 <br> ValueError: 'z' is not in list"],
-
-			["There are a few more useful functions and methods for lists. ", 
-			"<br> max(list): Returns the list item with the maximum value"
+			+"<br><br> 2 <br> 0 <br> ValueError: 'z' is not in list"
+			+"<br> <br> max(list): Returns the list item with the maximum value"
 			+"<br> min(list): Returns the list item with minimum value"
 			+"<br> list.count(obj): Returns a count of how many times an item occurs in a list"
 			+"<br> list.remove(obj): Removes an object from a list"
@@ -330,7 +315,7 @@
 			+"<br> print(operation(add, a, b)) <br> <br> 30"],
 
 
-			["what are Modules and what do from and as, also if no module exists", 
+			["what are Modules and what does from and as, also if no module exists", 
 			"Modules are pieces of code that other people have written to fulfill common tasks, such as generating random numbers, performing mathematical operations, etc. "
 			+"<br> "
 			+"The basic way to use a module is to add import module_name at the top of your code, and then using module_name.var to access functions and values with the name var in the module."
