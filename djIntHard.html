@@ -26,6 +26,42 @@
 		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
 		//
 		var questions = [
+		["what are widgets", 
+		"Allows to change the forms style, class, id in forms.py "
+		+"<br> <font color=\"green\"># Using pure django and inheirt Form from forms</font> "
+		+"<br> <font color=\"green\"># we have to declare our inputs (title)</font> "
+		+"<br> class RawProductForm(forms.Form):"
+		+"<br> &nbsp; <font color=\"green\"># form widgets inside the field check default in Doc</font> "
+		+"<br> &nbsp; <font color=\"green\"># using widget=forms. </font> "
+		+"<br> &nbsp; title = forms.CharField(label=\'\', widget=forms.TextInput(attrs={\"placeholder\": \"Your title\"})"
+		+"<br> <font color=\"green\"># you can as override the modelform inherited class inside before the class meta: so less cold</font> ",
+		""],
+
+
+		["form Validation Methods", 
+		"Django has a lot of built-in validation that will check to make sure that data matches that built-in validation to do so in the forms.py within the class where it inhert from forms.ModelForm; create a function name clean_<fieldName> with self as first parameter, *args, **kwargs"
+		+"<br> &nbsp; def clean_email(self, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; email = self.cleaned_data.get(\"email\")"
+		+"<br> &nbsp; &nbsp; if not email.endswith(\"edu\"):"
+		+"<br> &nbsp; &nbsp; &nbsp; raise forms.ValidationError(\"Not an valid email \")"
+		+"<br> &nbsp; &nbsp; else:"
+		+"<br> &nbsp; &nbsp; &nbsp; return email  ", 
+		""],
+
+		["what is an instance method on our model or a function on our model (dynamic linking)", 
+		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py and inside the inheirt models.Model class use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs"
+		+"<br> &nbsp; def get_absolute_url(self):"
+		+"<br> &nbsp; "
+		+"<br> &nbsp; <font color=\"green\"> 1st arugment is the call the name of actual url handle the data in urls.py </font> "
+		+"<br> &nbsp; <font color=\"green\"> 2nd arugment is </font> "
+		+"<br> &nbsp; <font color=\"green\"> kwargs are passing id and self.id </font> "
+		+"<br> &nbsp; <font color=\"green\"> self is referring to the instance of the object and</font> "
+		+"<br> &nbsp; <font color=\"green\"> id is refferring to the id built into it</font> "
+		+"<br> "
+		+"<br> &nbsp; <font color=\"green\"> namespace appname products:product-detail or app_name:urlname</font> "
+		+"<br> &nbsp; <font color=\"green\"> is now reverse is based off of the app itself</font> "
+		+"<br> &nbsp; return reverse(\"products:product-detail\", kwargs={\"id\": self.id})", 
+		""],
 
 		["Class based view vs Function base view", 
 		"one of the huge advantages of using class-based views is how easy it is to change things and inherit from things like inherited from the base classic view",
