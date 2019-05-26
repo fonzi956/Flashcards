@@ -331,10 +331,6 @@
 		"it has class that inherit from django models.Model that maps to the database using models.field and field type and etc: <br> <br> class ClassName(models.Model): <br> &nbsp; field_name = models.TextField(blank=True, null=True) <br> &nbsp; another_field_name = models.DecimalField(decimal_places=2, max_digits=10000)", 
 		""],
 
-		["what is an instance method on our model or a function on our model (dynamic linking)", 
-		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
-		""],
-
 		["how to get all data in the database using function base view", 
 		"In the app view, import the model, create a function that get the request inside of the function: views a list of the database Oject like <br> queryset = Product.objects.all() <br> and put it in the context to be render with the html template as a variable", 
 		""],
@@ -373,7 +369,7 @@
         +"<br> &nbsp; context = { \'form\': form }"
         +"<br> &nbsp; return render(request, \"products/product_create.html\", context)", 
 		""],
-
+//here
 		["what are widgets", 
 		"Allows for to change the forms within forms.py from change the class, id, etc like so: <br> class RawProductForm(forms.Form): <br> &nbsp; title = forms.CharField(label=\'\', widget=forms.TextInput(attrs={\"placeholder\": \"Your title\"})) <br> <br> also you can overwrite in the ModelForm", 
 		""],
@@ -382,6 +378,10 @@
 		["form Validation Methods", 
 		"to do so in the forms.py within the class where it inhert from forms.Model; create a function name clean_<fieldName> with self as first parameter, *args, **kwargs <br> field_name = self.cleaned_data.get(\"field_name\") afterwares add conditions with raise statement with forms.ValidationError(\"Input for user\")"
 		, 
+		""],
+
+		["what is an instance method on our model or a function on our model (dynamic linking)", 
+		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
 		""],
 
 		["Class based view vs Function base view", 
