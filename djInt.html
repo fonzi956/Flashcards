@@ -372,17 +372,40 @@
 		*/
 //here
 		["what are widgets", 
-		"Allows for to change the forms within forms.py from change the class, id, etc like so: <br> class RawProductForm(forms.Form): <br> &nbsp; title = forms.CharField(label=\'\', widget=forms.TextInput(attrs={\"placeholder\": \"Your title\"})) <br> <br> also you can overwrite in the ModelForm", 
+		"Allows to change the forms style, class, id in forms.py "
+		+"<br> <font color=\"green\"># Using pure django and inheirt Form from forms</font> "
+		+"<br> <font color=\"green\"># we have to declare our inputs (title)</font> "
+		+"<br> class RawProductForm(forms.Form):"
+		+"<br> &nbsp; <font color=\"green\"># form widgets inside the field check default in Doc</font> "
+		+"<br> &nbsp; <font color=\"green\"># using widget=forms. </font> "
+		+"<br> &nbsp; title = forms.CharField(label=\'\', widget=forms.TextInput(attrs={\"placeholder\": \"Your title\"})"
+		+"<br> <font color=\"green\"># you can as override the modelform inherited class inside before the class meta: so less cold</font> ",
 		""],
 
 
 		["form Validation Methods", 
-		"to do so in the forms.py within the class where it inhert from forms.Model; create a function name clean_<fieldName> with self as first parameter, *args, **kwargs <br> field_name = self.cleaned_data.get(\"field_name\") afterwares add conditions with raise statement with forms.ValidationError(\"Input for user\")"
-		, 
+		"Django has a lot of built-in validation that will check to make sure that data matches that built-in validation to do so in the forms.py within the class where it inhert from forms.ModelForm; create a function name clean_<fieldName> with self as first parameter, *args, **kwargs"
+		+"<br> &nbsp; def clean_email(self, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; email = self.cleaned_data.get(\"email\")"
+		+"<br> &nbsp; &nbsp; if not email.endswith(\"edu\"):"
+		+"<br> &nbsp; &nbsp; &nbsp; raise forms.ValidationError(\"Not an valid email \")"
+		+"<br> &nbsp; &nbsp; else:"
+		+"<br> &nbsp; &nbsp; &nbsp; return email  ", 
 		""],
 
 		["what is an instance method on our model or a function on our model (dynamic linking)", 
-		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs", 
+		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py and inside the inheirt models.Model class use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs"
+		+"<br> &nbsp; def get_absolute_url(self):"
+		+"<br> &nbsp; "
+		+"<br> &nbsp; <font color=\"green\"> 1st arugment is the call the name of actual url handle the data in urls.py </font> "
+		+"<br> &nbsp; <font color=\"green\"> 2nd arugment is </font> "
+		+"<br> &nbsp; <font color=\"green\"> kwargs are passing id and self.id </font> "
+		+"<br> &nbsp; <font color=\"green\"> self is referring to the instance of the object and</font> "
+		+"<br> &nbsp; <font color=\"green\"> id is refferring to the id built into it</font> "
+		+"<br> "
+		+"<br> &nbsp; <font color=\"green\"> namespace appname products:product-detail or app_name:urlname</font> "
+		+"<br> &nbsp; <font color=\"green\"> is now reverse is based off of the app itself</font> "
+		+"<br> &nbsp; return reverse(\"products:product-detail\", kwargs={\"id\": self.id})", 
 		""],
 
 		["Class based view vs Function base view", 
@@ -390,16 +413,38 @@
 		""],
 
 		["How to get list of all data using class base view", 
-		"Must have modelname import on top of the view"
+		"Must have modelname import on top of the view and \"from django.views.generic import ListView\""
 		+"<br> <font color=\"green\"># class is inheirt from the ListView; didn't need to add render, template name etc </font>"
 		+"<br> class ArticleListView(ListView):"
 		+"<br> &nbsp; <font color=\"green\"># by default class base view look for a specific template like </font>"
-		+"<br> &nbsp; <font color=\"green\"># <app_name>/<modelname>_list.html </font>"
+		+"<br> &nbsp; <font color=\"green\"># <app_name>/<modelname>_list.html you can override reasigning template_name</font>"
 		+"<br> &nbsp; template_name = \'articles/article_list.html\'"
 		+"<br> &nbsp; queryset = Article.objects.all()",
 		""],
+		
+		["For class base view, in urls.py in urlpatterns in path() how to put the view as?",
+		"<font color=\"green\"># path(\'route\', class_base_view.as_view(), name=\'name_url\')"
+		+"<br> added note if passing id or data to the view like the <int:pk> pk is default in class base can overrided </font>"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
+		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
+		""],
 
-		["how to create data using class base view", 
+		["Get detail from id using class base view and \"from django.views.generic import DetailView\"", 
+		"Must have modelname on top of the view"
+		+"<br> class ArticleDetailView(DetailView):"
+		+"<br> "
+		+"<br> &nbsp; template_name = \'articles/article_detail.html\'"
+		+"<br> &nbsp; <font color=\"green\"># the query set does is it limits the choices available for that detail view</font>"
+		+"<br> &nbsp; <font color=\"green\"># queryset = Article.objects.all()  </font>"
+		+"<br> "
+		+"<br> &nbsp; <font color=\"green\"># this override pk to id </font>"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
+		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
+		""],
+
+		["how to create data using class base view and \"from django.views.generic import CreateView\"", 
 		"Must have modelname and modelform import on top of the view"
 		+"<br> class ArticleCreateView(CreateView):"
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
@@ -413,26 +458,11 @@
 		+"<br> &nbsp; def form_valid(self, form):"
 		+"<br> &nbsp; &nbsp; print(form.cleaned_data)"
 		+"<br> &nbsp; &nbsp; <font color=\"green\"># this save user\'s info to the database, but  </font>"
-		+"<br> &nbsp; &nbsp; <font color=\"green\"># must have get_aboslute_url to when it is done save the data </font>"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># must have get_aboslute_url with return reverse function to when it is done save the data </font>"
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 
-		["Get detail from id using class base view", 
-		"Must have modelname on top of the view"
-		+"<br> class ArticleDetailView(DetailView):"
-		+"<br> "
-		+"<br> &nbsp; template_name = \'articles/article_detail.html\'"
-		+"<br> &nbsp; <font color=\"green\"># queryset does is limit the available for the detailview so don\'t need for this </font>"
-		+"<br> &nbsp; <font color=\"green\">#queryset = Article.objects.all()  </font>"
-		+"<br> "
-		+"<br> &nbsp; <font color=\"green\"># actual keyword arguments that are being passed through that url </font>"
-		+"<br> &nbsp; <font color=\"green\"># this override what that keyword arguments is to our url </font>"
-		+"<br> &nbsp; def get_object(self):"
-		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
-		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
-		""],
-
-		["How to update using class base view", 
+		["How to update using class base view and \"from django.views.generic import UpdateView\"", 
 		"Must have modelname import on top of the view"
 		+"<br> class ArticleUpdateView(UpdateView):"
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
@@ -449,23 +479,16 @@
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 
-		["how to delete a data with id using class base view",
+		["how to delete a data with id using class base view and \"from django.views.generic import DeleteView\"",
 		"Must have modelname import on top of the view" 
 		+"<br> class ArticleDeleteView(DeleteView):"
 		+"<br> &nbsp; template_name = \'articles/article_delete.html\'"
-		+"<br> &nbsp; <font color=\"green\">#queryset = Article.objects.all() <font color=\"green\"># <blog>/<modelname>_list.html </font>"
 		+"<br> &nbsp; <font color=\"green\">#success_url = \'/blog/\' </font>"
 		+"<br> "
 		+"<br> &nbsp; def get_object(self):"
 		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
 		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)"
 		+"<br> "
-		+"<br> <font color=\"green\">#//this is in the urls.py </font>"
-		+"<br> <font color=\"green\"># app_name = 'articles' </font>"
-		+"<br> <font color=\"green\"># urlpatterns = [ </font>"
-		+"<br> <font color=\"green\">#     path('', ArticleListView.as_view(), name='article-list'), </font>"
-		+"<br> <font color=\"green\">#     <font color=\"green\">#path('<int:pk>/', ArticleDetailView.as_view(), name='article-detail'), </font>"
-		+"<br> <font color=\"green\"># this allows that the user's wants to the delete the item so  </font>"
 		+"<br> <font color=\"green\"># get_success_url goes to the article-list url using the reverse function </font>"
 		+"<br> <font color=\"green\"># must use the get_success_url to delete item if not error will happen with no deletion </font>"
 		+"<br> &nbsp; def get_success_url(self):"
