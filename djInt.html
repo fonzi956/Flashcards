@@ -116,6 +116,10 @@
 		+" <br> Fantastic Documentation",
 		"Name the features available in Django web framework"],
 
+		["How to start virtual environment for django",
+		"I 1st choose a folder and in terminal put \"python3 -m venv env\" and to activate the env: \"source env/bin/activate\" ",
+		""]
+
 		["Is Django a content management system (CMS)?",
 		"No, Django is not a Content Management System (CMS). Instead, it is a Web framework and a programming tool that helps you in building elegant websites."],
 
@@ -232,7 +236,7 @@
 		""],
 
 		["In settings.py what does BASE_DIR means", 
-		"knows where the paths (location) of the project and used to be portable", 
+		"knows where the paths (location) of the project and used to be portable <br># in the list template: 'DIRS': [], os path to the django projects templates 'DIRS': [os.path.join(BASE_DIR, \"templates\")],", 
 		""],
 
 		["Secret key and Debug and domain names", 
@@ -390,16 +394,16 @@
 		+"<br> &nbsp; &nbsp; if not email.endswith(\"edu\"):"
 		+"<br> &nbsp; &nbsp; &nbsp; raise forms.ValidationError(\"Not an valid email \")"
 		+"<br> &nbsp; &nbsp; else:"
-		+"<br> &nbsp; &nbsp; &nbsp; return email  ", 
+		+"<br> &nbsp; &nbsp; &nbsp; return email  "
+		+"<br> <font color=\"green\"># so if the email end is not edu then raise a error not an valid email else return email</font> ", 
 		""],
 
 		["what is an instance method on our model or a function on our model (dynamic linking)", 
-		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py and inside the inheirt models.Model class use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs"
+		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py and inside the inheirt models.Model class use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function"
 		+"<br> &nbsp; def get_absolute_url(self):"
 		+"<br> &nbsp; "
 		+"<br> &nbsp; <font color=\"green\"> 1st arugment is the call the name of actual url handle the data in urls.py </font> "
-		+"<br> &nbsp; <font color=\"green\"> 2nd arugment is </font> "
-		+"<br> &nbsp; <font color=\"green\"> kwargs are passing id and self.id </font> "
+		+"<br> &nbsp; <font color=\"green\"> 2nd arugment is kwargs are passing id and self.id </font> "
 		+"<br> &nbsp; <font color=\"green\"> self is referring to the instance of the object and</font> "
 		+"<br> &nbsp; <font color=\"green\"> id is refferring to the id built into it</font> "
 		+"<br> "
@@ -430,12 +434,11 @@
 		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
 		""],
 
-		["Get detail from id using class base view and \"from django.views.generic import DetailView\"", 
-		"Must have modelname on top of the view"
+		["Get detail from id using class base view", 
+		"Must have modelname on top of the view and \"from django.views.generic import DetailView\""
 		+"<br> class ArticleDetailView(DetailView):"
 		+"<br> "
 		+"<br> &nbsp; template_name = \'articles/article_detail.html\'"
-		+"<br> &nbsp; <font color=\"green\"># the query set does is it limits the choices available for that detail view</font>"
 		+"<br> &nbsp; <font color=\"green\"># queryset = Article.objects.all()  </font>"
 		+"<br> "
 		+"<br> &nbsp; <font color=\"green\"># this override pk to id </font>"
@@ -444,8 +447,8 @@
 		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
 		""],
 
-		["how to create data using class base view and \"from django.views.generic import CreateView\"", 
-		"Must have modelname and modelform import on top of the view"
+		["how to create data using class base view", 
+		"Must have modelname and modelform import on top of the view  and \"from django.views.generic import CreateView\""
 		+"<br> class ArticleCreateView(CreateView):"
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
 		+"<br> &nbsp; <font color=\"green\"># this will bring in the model form  </font>"
@@ -462,8 +465,8 @@
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 
-		["How to update using class base view and \"from django.views.generic import UpdateView\"", 
-		"Must have modelname import on top of the view"
+		["How to update using class base view and", 
+		"Must have modelname import on top of the view \"from django.views.generic import UpdateView\""
 		+"<br> class ArticleUpdateView(UpdateView):"
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
 		+"<br> &nbsp; form_class = ArticleModelForm"
@@ -479,8 +482,8 @@
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 
-		["how to delete a data with id using class base view and \"from django.views.generic import DeleteView\"",
-		"Must have modelname import on top of the view" 
+		["how to delete a data with id using class base view ",
+		"Must have modelname import on top of the view and \"from django.views.generic import DeleteView\"" 
 		+"<br> class ArticleDeleteView(DeleteView):"
 		+"<br> &nbsp; template_name = \'articles/article_delete.html\'"
 		+"<br> &nbsp; <font color=\"green\">#success_url = \'/blog/\' </font>"

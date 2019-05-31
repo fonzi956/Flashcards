@@ -46,16 +46,16 @@
 		+"<br> &nbsp; &nbsp; if not email.endswith(\"edu\"):"
 		+"<br> &nbsp; &nbsp; &nbsp; raise forms.ValidationError(\"Not an valid email \")"
 		+"<br> &nbsp; &nbsp; else:"
-		+"<br> &nbsp; &nbsp; &nbsp; return email  ", 
+		+"<br> &nbsp; &nbsp; &nbsp; return email  "
+		+"<br> <font color=\"green\"># so if the email end is not edu then raise a error not an valid email else return email</font> ", 
 		""],
 
 		["what is an instance method on our model or a function on our model (dynamic linking)", 
-		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py and inside the inheirt models.Model class use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function with the name name arugment (in urls.py in the urlpatterns and in the path has a name argument to match the url path) and the kwargs"
+		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py and inside the inheirt models.Model class use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function"
 		+"<br> &nbsp; def get_absolute_url(self):"
 		+"<br> &nbsp; "
 		+"<br> &nbsp; <font color=\"green\"> 1st arugment is the call the name of actual url handle the data in urls.py </font> "
-		+"<br> &nbsp; <font color=\"green\"> 2nd arugment is </font> "
-		+"<br> &nbsp; <font color=\"green\"> kwargs are passing id and self.id </font> "
+		+"<br> &nbsp; <font color=\"green\"> 2nd arugment is kwargs are passing id and self.id </font> "
 		+"<br> &nbsp; <font color=\"green\"> self is referring to the instance of the object and</font> "
 		+"<br> &nbsp; <font color=\"green\"> id is refferring to the id built into it</font> "
 		+"<br> "
@@ -86,8 +86,8 @@
 		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
 		""],
 
-		["Get detail from id using class base view and \"from django.views.generic import DetailView\"", 
-		"Must have modelname on top of the view"
+		["Get detail from id using class base view", 
+		"Must have modelname on top of the view and \"from django.views.generic import DetailView\""
 		+"<br> class ArticleDetailView(DetailView):"
 		+"<br> "
 		+"<br> &nbsp; template_name = \'articles/article_detail.html\'"
@@ -100,8 +100,8 @@
 		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
 		""],
 
-		["how to create data using class base view and \"from django.views.generic import CreateView\"", 
-		"Must have modelname and modelform import on top of the view"
+		["how to create data using class base view", 
+		"Must have modelname and modelform import on top of the view and \"from django.views.generic import CreateView\""
 		+"<br> class ArticleCreateView(CreateView):"
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
 		+"<br> &nbsp; <font color=\"green\"># this will bring in the model form  </font>"
@@ -118,8 +118,8 @@
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 
-		["How to update using class base view and \"from django.views.generic import UpdateView\"", 
-		"Must have modelname import on top of the view"
+		["How to update using class base view", 
+		"Must have modelname import on top of the view and \"from django.views.generic import UpdateView\""
 		+"<br> class ArticleUpdateView(UpdateView):"
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
 		+"<br> &nbsp; form_class = ArticleModelForm"
@@ -135,8 +135,8 @@
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 
-		["how to delete a data with id using class base view and \"from django.views.generic import DeleteView\"",
-		"Must have modelname import on top of the view" 
+		["how to delete a data with id using class base view",
+		"Must have modelname import on top of the view and \"from django.views.generic import DeleteView\"" 
 		+"<br> class ArticleDeleteView(DeleteView):"
 		+"<br> &nbsp; template_name = \'articles/article_delete.html\'"
 		+"<br> &nbsp; <font color=\"green\">#success_url = \'/blog/\' </font>"
@@ -168,7 +168,7 @@
 		+"<br> "
 		+"<br> class CourseView(CourseObjectMixin, View):"
 		+"<br> &nbsp; template_name = \"courses/course_detail.html\""
-		+"<br> "+
+		+"<br> "
 		+"<br> &nbsp; <font color=\"green\"># id=None means id is no longer required; default </font>"
 		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
 		+"<br> &nbsp; &nbsp; <font color=\"green\"># GET method </font>"
@@ -189,7 +189,7 @@
 		+"<br> &nbsp; &nbsp; return obj "
 		+"<br> "
 		+"<br> class CourseDeleteView(CourseObjectMixin, View):"
-		+"<br> &nbsp; template_name = \"courses/course_delete.html\" <font color=\"green\">"
+		+"<br> &nbsp; template_name = \"courses/course_delete.html\""
 		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
 		+"<br> &nbsp; &nbsp; <font color=\"green\"># GET method </font>"
 		+"<br> &nbsp; &nbsp; context = {}"
