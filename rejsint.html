@@ -28,44 +28,96 @@
 		var questions = [
 
         ["What is React", 
-		"It is a JavaScript library for building user interfaces. Used to build single page applications. Allows us to create reusable UI components.", 
+		"It is a JavaScript library for building user interfaces by Facebook. Used to build single page applications. Allows us to create reusable UI components.", 
 		""],
 
         ["EX", 
 		""
-        +"<br> import React from \'react\';"
-        +"<br> import ReactDOM from \'react-dom\';"
-        +"<br> "
-        +"<br> class Test extends React.Component {"
-        +"<br> render() {"
-        +"<br> &nbsp; return &lt;h1&gt;Hello World!&lt;/h1&gt;;"
-        +"<br> }"
-        +"<br> }"
-        +"<br> "
-        +"<br> ReactDOM.render(&lt;Test /&gt;, document.getElementById(\'root\'));"
-        +"<br> "
-        +"<br> <font color=\"green\"># In this example we create a component called \'Test\'.</font> " 
-        +"<br> <font color=\"green\"># The component is rendered in a container called \'root\'.</font> " 
-        +"<br> <font color=\"green\"># In the index.html that has <div id=\"root\"></div></font> "
+		+"<br> import React from \'react\';"
+		+"<br> import ReactDOM from \'react-dom\';"
+
+		+"<br> class Test extends React.Component {"
+		+"<br>   render() {"
+		+"<br>     return &gt;h1&gt;Hello World!&gt;/h1&gt;;"
+		+"<br>   }"
+		+"<br> }"
+
+		+"<br> ReactDOM.render(&gt;Test /&gt;, document.getElementById(\'root\'));"
+
+		+"<br> <font color=\"green\">/*"
+		+"<br> The examples in this tutorial are created using the"
+		+"<br> create-react-app. Install the create-react-app,"
+		+"<br> and you will be able to run the same examples on your compouter."
+
+		+"<br> In this example we create a component called \'Test\'."
+		+"<br> The component is rendered in a container called \'root\' in index.html."
+		+"<br> */<font color=\"green\">"
+		
         , 
 		""],
 
 
+        ["how to set up a React Enviroment", 
+		""
+		+"<br> The create-react-app is an officially supported way to create React applications."
+		+"<br> If you have NPM and Node.js installed, you can create a React application by first installing the create-react-app."
+		+"<br> Install create-react-app by running this command in your terminal:"
+		+"<br> npm install -g create-react-ap",
+		+"<br> You are now ready to create your first React application!"
+		+"<br> Run this command to create a React application named myfirstreact:"
+		+"<br> npx create-react-app myfirstreact"
+		+"<br> The create-react-app will set up everything you need to run a React application.",
+		""],
+
+        ["Run the React Application", 
+		""
+		+"<br> If you followed the two commands above, you are ready to run your first real React application!"
+		+"<br> Run this command to move to the myfirstreact directory:"
+		+"<br> cd myfirstreact"
+		+"<br> Run this command to execute the React application myfirstreact:"
+		+"<br> npm start"
+		+"<br> A new browser window will pop up as localhost:3000 with new React app", 
+		""],
+
+        ["How does React Work?", 
+		""
+		+"<br> React creates a VIRTUAL DOM in memory."
+
+		+"<br> Instead of manipulating the browser\'s DOM directly, React creates a virtual DOM in memory, where it does all the necessary manipulating, before making the changes in the browser DOM."
+
+		+"<br> It finds out what changes have been made, and changes only what needs to be changed.", 
+		""],
+
+		["How does React Work?",
+
+		"<br> React creates a VIRTUAL DOM in memory."
+
+		+"<br> Instead of manipulating the browser\'s DOM directly, React creates a virtual DOM in memory, where it does all the necessary manipulating, before making the changes in the browser DOM."
+		+"<br> React finds out what changes have been made, and changes only what needs to be changed."
+		,""],
+
+        ["", 
+		"", 
+		""],
+
         /*
+
+
+        ["", 
+		"", 
+		""],
+
+        ["", 
+		"", 
+		""],
+
         In HTML proper, there’s no way short of escaping some characters:
 
         & as &amp;
         < as &gt;
         > as &gt;
-        ["", 
-		"", 
-		""],
 
-        ["", 
-		"", 
-		""],
 
-		+"<br> "
         +"<br> <br> "
         +"<br> &nbsp; "
         +"<br> &nbsp; &nbsp; "
