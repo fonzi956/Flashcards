@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=1000">
+	<style>
+		@font-face {
+		font-family: myFirstFont;
+		src: url(SansForgetica-Regular.otf);
+		}
+		body {
+			font-family: myFirstFont;
+		}
+		div#test {
+			border: #000 1px solid;
+			padding: 10px 40px 40px 40px;
+		}
+
+		input {
+			float: right;
+		}
+
+		
+	</style>
+	<script>
+		var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+		//
+		var questions = [
+
+		["what are widgets", 
+		"Allows to change the forms style, class, id in forms.py "
+		+"<br> <font color=\"green\"># Using pure django and inheirt Form from forms</font> "
+		+"<br> <font color=\"green\"># we have to declare our inputs (title)</font> "
+		+"<br> class RawProductForm(forms.Form):"
+		+"<br> &nbsp; <font color=\"green\"># form widgets inside the field check default in Doc</font> "
+		+"<br> &nbsp; <font color=\"green\"># using widget=forms. </font> "
+		+"<br> &nbsp; title = forms.CharField(label=\'\', widget=forms.TextInput(attrs={\"placeholder\": \"Your title\"})"
+		+"<br> <font color=\"green\"># you can as override the modelform inherited class inside before the class meta: so less cold</font> ",
+		""],
+
+
+		["form Validation Methods", 
+		"Django has a lot of built-in validation that will check to make sure that data matches that built-in validation to do so in the forms.py within the class where it inhert from forms.ModelForm; create a function name clean_<fieldName> with self as first parameter, *args, **kwargs"
+		+"<br> &nbsp; def clean_email(self, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; email = self.cleaned_data.get(\"email\")"
+		+"<br> &nbsp; &nbsp; if not email.endswith(\"edu\"):"
+		+"<br> &nbsp; &nbsp; &nbsp; raise forms.ValidationError(\"Not an valid email \")"
+		+"<br> &nbsp; &nbsp; else:"
+		+"<br> &nbsp; &nbsp; &nbsp; return email  "
+		+"<br> <font color=\"green\"># so if the email end is not edu then raise a error not an valid email else return email</font> ", 
+		""],
+
+		["what is an instance method on our model or a function on our model (dynamic linking)", 
+		"creates dynamic linking use for urls without going back to urls.py without include to change the route;  In model.py and inside the inheirt models.Model class use get_absolute_url function that grabs the URL inside of Django so it\'s used in other places like html template and in the function returns reverse function"
+		+"<br> &nbsp; def get_absolute_url(self):"
+		+"<br> &nbsp; "
+		+"<br> &nbsp; <font color=\"green\"> 1st arugment is the call the name of actual url handle the data in urls.py </font> "
+		+"<br> &nbsp; <font color=\"green\"> 2nd arugment is kwargs are passing id and self.id </font> "
+		+"<br> &nbsp; <font color=\"green\"> self is referring to the instance of the object and</font> "
+		+"<br> &nbsp; <font color=\"green\"> id is refferring to the id built into it</font> "
+		+"<br> "
+		+"<br> &nbsp; <font color=\"green\"> namespace appname products:product-detail or app_name:urlname</font> "
+		+"<br> &nbsp; <font color=\"green\"> is now reverse is based off of the app itself</font> "
+		+"<br> &nbsp; return reverse(\"products:product-detail\", kwargs={\"id\": self.id})", 
+		""],
+
+		["Class based view vs Function base view", 
+		"one of the huge advantages of using class-based views is how easy it is to change things and inherit from things like inherited from the base classic view",
+		""],
+
+		["How to get list of all data using class base view", 
+		"Must have modelname import on top of the view and \"from django.views import View\""
+		+"<br> <font color=\"green\"># class is inheirt from the ListView; didn't need to add render, template name etc </font>"
+		+"<br> class ArticleListView(ListView):"
+		+"<br> &nbsp; <font color=\"green\"># by default class base view look for a specific template like </font>"
+		+"<br> &nbsp; <font color=\"green\"># <app_name>/<modelname>_list.html you can override reasigning template_name</font>"
+		+"<br> &nbsp; template_name = \'articles/article_list.html\'"
+		+"<br> &nbsp; queryset = Article.objects.all()",
+		""],
+		
+		["For class base view, in urls.py in urlpatterns in path() how to put the view as?",
+		"<font color=\"green\"># path(\'route\', class_base_view.as_view(), name=\'name_url\')"
+		+"<br> added note if passing id or data to the view like the <int:pk> pk is default in class base can overrided </font>"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
+		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
+		""],
+
+		["Get detail from id using class base view", 
+		"Must have modelname on top of the view and \"from django.views import View\""
+		+"<br> class ArticleDetailView(DetailView):"
+		+"<br> "
+		+"<br> &nbsp; template_name = \'articles/article_detail.html\'"
+		+"<br> &nbsp; <font color=\"green\"># the query set does is it limits the choices available for that detail view</font>"
+		+"<br> &nbsp; <font color=\"green\"># queryset = Article.objects.all()  </font>"
+		+"<br> "
+		+"<br> &nbsp; <font color=\"green\"># this override pk to id </font>"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
+		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)",
+		""],
+
+		["how to create data using class base view", 
+		"Must have modelname and modelform import on top of the view  and \"from django.views import View\""
+		+"<br> class ArticleCreateView(CreateView):"
+		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
+		+"<br> &nbsp; <font color=\"green\"># this will bring in the model form  </font>"
+		+"<br> &nbsp; form_class = ArticleModelForm"
+		+"<br> &nbsp; <font color=\"green\"># another way to override to go some way to different url  </font>"
+		+"<br> &nbsp; <font color=\"green\"># other than def get_absolute_url(self): in models.py  </font>"
+		+"<br> &nbsp; <font color=\"green\">#success_url = \'/\' </font>"
+		+"<br> "
+		+"<br> &nbsp; def form_valid(self, form):"
+		+"<br> &nbsp; &nbsp; print(form.cleaned_data)"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># this save user\'s info to the database, but  </font>"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># must have get_aboslute_url with return reverse function to when it is done save the data </font>"
+		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
+		""],
+
+		["How to update using class base view", 
+		"Must have modelname import on top of the view \"from django.views import View\""
+		+"<br> class ArticleUpdateView(UpdateView):"
+		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
+		+"<br> &nbsp; form_class = ArticleModelForm"
+		+"<br> "
+		+"<br> &nbsp; <font color=\"green\"># this gets the object puts in the form </font>"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
+		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)"
+		+"<br> "
+		+"<br> &nbsp; <font color=\"green\"># saves the new update if or not change </font>"
+		+"<br> &nbsp; def form_valid(self, form):"
+		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
+		""],
+
+		["how to delete a data with id using class base view",
+		"Must have modelname import on top of the view and \"from django.views import View\"" 
+		+"<br> class ArticleDeleteView(DeleteView):"
+		+"<br> &nbsp; template_name = \'articles/article_delete.html\'"
+		+"<br> &nbsp; <font color=\"green\">#success_url = \'/blog/\' </font>"
+		+"<br> "
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id_ = self.kwargs.get(\"id\")"
+		+"<br> &nbsp; &nbsp; return get_object_or_404(Article, id=id_)"
+		+"<br> "
+		+"<br> <font color=\"green\"># get_success_url goes to the article-list url using the reverse function </font>"
+		+"<br> <font color=\"green\"># must use the get_success_url to delete item if not error will happen with no deletion </font>"
+		+"<br> &nbsp; def get_success_url(self):"
+		+"<br> &nbsp; &nbsp; return reverse(\'articles:article-list\')",
+		""],
+//RawClassBaseView
+		["How does class base view work",
+		"Must inheirt from django.views import View. Actual name for our function based views dont really matter but inside of a class based view they do matter and they're correlated to the HTTP method that its trying to handle like get and post for forms. Also using self. one of the huge advantages of using class-based views is how easy it is to change things and inherit from things",
+		""],
+
+		["how to get detail of data id using RawClassView", 
+		""
+		+"<br> class CourseObjectMixin(object):"
+		+"<br> &nbsp; model = Course"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id = self.kwargs.get(\'id\')"
+		+"<br> &nbsp; &nbsp; obj = None"
+		+"<br> &nbsp; &nbsp; if id is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; obj = get_object_or_404(self.model, id=id)"
+		+"<br> &nbsp; &nbsp; return obj "
+		+"<br> "
+		+"<br> class CourseView(CourseObjectMixin, View):"
+		+"<br> &nbsp; template_name = \"courses/course_detail.html\""
+		+"<br> "
+		+"<br> &nbsp; <font color=\"green\"># id=None means id is no longer required; default </font>"
+		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># GET method </font>"
+		+"<br> <font color=\"green\"># The get_object() came from the custom Mixin that was inhernit  </font>"
+		+"<br> &nbsp; &nbsp; context = {\'object\': self.get_object()}"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)", 
+		""],
+
+		["What are custom Mixin? (RawClassBaseView)", 
+		"Use for inheirt code from class so DRY; put parameter as first, use self for refer the instance calling of the method"
+		+"<br> class CourseObjectMixin(object):"
+		+"<br> &nbsp; model = Course"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id = self.kwargs.get(\'id\')"
+		+"<br> &nbsp; &nbsp; obj = None"
+		+"<br> &nbsp; &nbsp; if id is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; obj = get_object_or_404(self.model, id=id)"
+		+"<br> &nbsp; &nbsp; return obj "
+		+"<br> "
+		+"<br> class CourseDeleteView(CourseObjectMixin, View):"
+		+"<br> &nbsp; template_name = \"courses/course_delete.html\""
+		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># GET method </font>"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># The obj came from the custom Mixin that was inhernit  </font>"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># other code </font>"
+		+"<br> "
+		+"<br> &nbsp; def post(self, request, id=None,  *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># POST method </font>"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()",
+		""],
+
+		["how to get a list of database using RawClassView", 
+		""
+		+"<br> class CourseListView(View):"
+		+"<br> &nbsp; template_name = \"courses/course_list.html\""
+		+"<br> &nbsp; queryset = Course.objects.all()"
+		+"<br> "
+		+"<br> &nbsp; <font color=\"green\"># instances method</font>"
+		+"<br> &nbsp; def get_queryset(self):"
+		+"<br> &nbsp; &nbsp; return self.queryset"
+		+"<br> "
+		+"<br> &nbsp; def get(self, request, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; context = {\'object_list\': self.get_queryset()}"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> <br> <font color=\"green\"># can inheirt from CourseListView</font>"
+		+"<br> class MyListView(CourseListView):"
+		+"<br> &nbsp; queryset = Course.objects.filter(id=1)",
+		""],
+
+		["how to create using RawClassView", 
+		""
+		+"<br> class CourseCreateView(View):"
+		+"<br> &nbsp; template_name = \"courses/course_create.html\""
+		+"<br> &nbsp; def get(self, request, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># GET method </font>"
+		+"<br> &nbsp; &nbsp; form = CourseModelForm()"
+		+"<br> &nbsp; &nbsp; context = {\"form\": form}"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> "
+		+"<br> &nbsp; def post(self, request, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># POST method </font>"
+		+"<br> &nbsp; &nbsp; form = CourseModelForm(request.POST)"
+		+"<br> &nbsp; &nbsp; if form.is_valid():"
+		+"<br> &nbsp; &nbsp; &nbsp; form.save()"
+		+"<br> &nbsp; &nbsp; &nbsp; <font color=\"green\"># making form blank again </font>"
+		+"<br> &nbsp; &nbsp; &nbsp; form = CourseModelForm()"
+		+"<br> &nbsp; &nbsp; context = {\"form\": form}"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)",
+		""],
+
+		["how to update using RawClassView", 
+		""
+		+"<br> class CourseUpdateView(CourseObjectMixin, View):"
+		+"<br> &nbsp; template_name = \"courses/course_update.html\""
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># get id to update for get and post </font>"
+		+"<br> &nbsp; def get_object(self):"
+		+"<br> &nbsp; &nbsp; id = self.kwargs.get(\'id\')"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># grabs the obj </font>"
+		+"<br> &nbsp; &nbsp; obj = None"
+		+"<br> &nbsp; &nbsp; if id is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; obj = get_object_or_404(Course, id=id)"
+		+"<br> &nbsp; &nbsp; return obj"
+		+"<br> "
+		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># GET method </font>"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; if obj is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; <font color=\"green\"># pass in to myform as instance adding the data on form  </font>"
+		+"<br> &nbsp; &nbsp; &nbsp; form = CourseModelForm(instance=obj)"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'object\'] = obj"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'form\'] = form"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> "
+		+"<br> &nbsp; def post(self, request, id=None,  *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># POST method </font>"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># having object inside of our context </font>"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; if obj is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; <font color=\"green\"># this is grabbing that post data along with that instance and initializing</font>"
+		+"<br> &nbsp; &nbsp; &nbsp; form = CourseModelForm(request.POST, instance=obj)"
+		+"<br> &nbsp; &nbsp; &nbsp; if form.is_valid():"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; form.save()"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'object\'] = obj"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'form\'] = form"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)",
+		""],
+
+		["how to delete using RawClassView", 
+		""
+		+"<br> class CourseDeleteView(CourseObjectMixin, View):"
+		+"<br> &nbsp; template_name = \"courses/course_delete.html\""
+		+"<br> &nbsp; def get(self, request, id=None, *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># GET method </font>"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># The get_object() came from the custom Mixin that was inhernit  </font>"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; if obj is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'object\'] = obj"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)"
+		+"<br> "
+		+"<br> &nbsp; def post(self, request, id=None,  *args, **kwargs):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># POST method </font>"
+		+"<br> &nbsp; &nbsp; context = {}"
+		+"<br> &nbsp; &nbsp; obj = self.get_object()"
+		+"<br> &nbsp; &nbsp; if obj is not None:"
+		+"<br> &nbsp; &nbsp; &nbsp; obj.delete()"
+		+"<br> &nbsp; &nbsp; &nbsp; context[\'object\'] = None"
+		+"<br> &nbsp; &nbsp; &nbsp; return redirect(\'/courses/\')"
+		+"<br> &nbsp; &nbsp; return render(request, self.template_name, context)",
+		""],
+
+		
+		/*
+		+"<br> "
+        +"<br> <br> "
+        +"<br> &nbsp; "
+        +"<br> &nbsp; &nbsp; "
+	
+
+		/*
+		+"<br> "
+        +"<br> <br> "
+        +"<br> &nbsp; "
+        +"<br> &nbsp; &nbsp; "
+		<br> 
+		<br> &nbsp; //tab
+		
+		["", 
+		"", 
+		""],
+
+			*/
+		];
+		var shq = [];
+		var hq = [];
+		var sq = [];
+		pos = 0;
+		function _(x) {
+			return document.getElementById(x);
+		}
+		function renderQuestion() {
+			test = _("test");
+
+			if (sq.length == questions.length) {
+				test.innerHTML = "<p>" + sq + "</p>";
+				test.innerHTML += +"<br><p>" + hq + "</p>";
+				test.innerHTML += +"<br><button onclick='nextQuestion()'>Next Question</button>";
+				pos = 0;
+				correct = 0;
+				return false;
+			}
+
+			// if(pos >= questions.length){
+			// 	test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" </h2> ";
+			// 	_("test_status").innerHTML = "Test Completed";
+			// 	pos = 0;
+			// 	correct = 0;
+			// 	return false;
+			// }
+			var tot = questions.length - sq.length;
+			var rq = [];
+			var rpn = Math.floor(Math.random() * 3) + 1;
+			var rn = [1, 3, 4, 2];
+			rn = shuffle(rn);
+			pos = Math.floor(Math.random() * questions.length);
+			// pos = 0;
+			while (sq.includes(pos)) {
+				pos = Math.floor(Math.random() * questions.length);
+				if (!sq.includes(pos)) break;
+			}
+			//pos = questions.length - 5;
+			//pos = 0;
+			if (pos == questions.length)--pos;
+			
+			_("test_status").innerHTML = "Question " + (pos) + " of " + tot;
+			question = questions[pos][0];
+			Ans = questions[pos][1];
+			mus = questions[pos][2];
+			test.innerHTML = "<h3>" + question + "</h3>";
+			test.innerHTML += "<button onclick='checkAnswer()'>Flip</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
+			test.innerHTML += "<button onclick='nextQuestion()'>Next</button>";
+			if(typeof(mus) != "undefined"){
+				test.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick='play(mus)'>Audio</button>";
+			}
+			test.innerHTML += "<p id=\"myDIV\" hidden>" + Ans + "</p>";
+			
+		}
+		function checkAnswer() {
+			var x = document.getElementById("myDIV");
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
+			}
+
+
+		}
+		function shuffle(array) {
+			var currentIndex = array.length, temporaryValue, randomIndex;
+
+			// While there remain elements to shuffle...
+			while (0 !== currentIndex) {
+
+				// Pick a remaining element...
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+
+				// And swap it with the current element.
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			}
+
+			return array;
+		}
+		function nextQuestion() {
+			sq.push(pos);
+			//pos++;
+			renderQuestion();
+			window.scrollTo(0, 0);
+		}
+
+		function play(name){
+			console.log(name);
+			song = "Record/Dja/"+name+".ogg";
+			var audio = new Audio(song);
+			audio.play();
+		}
+
+		function HQuestion() {
+			hq.push(pos);
+			sq.push(pos);
+			renderQuestion();
+		}
+
+		function done() {
+			test.innerHTML = "<p>" + sq + "</p>";
+			test.innerHTML += +"<br><p>" + hq + "</p>";
+			test.innerHTML += +"<br><button onclick='nextQuestion()'>Next Question</button>";
+		}
+		window.addEventListener("load", renderQuestion, false);
+	</script>
+</head>
+
+<body>
+	<h2 id="test_status"></h2>
+	<div id="test"></div>
+</body>
+
+</html>
