@@ -296,25 +296,52 @@
 		""],
 
 		["how to get detail of data id when click a link using function base view", 
-		"In app view, import the model, create a function that takes request and id, inside the function: <br> obj = get_object_or_404(Product, id=id) and put the obj in the context to render with the html template", 
+		"In app view, import the model and from django.shortcuts import render, get_object_or_404, redirect (redirect is for delete data), create a function that takes request and id, inside the function: <br> obj = get_object_or_404(Product, id=id) and put the obj in the context to render with the html template"
+		+"<br>def dynamic_lookup_view(request, id):"
+		+"<br> &nbsp; &nbsp; obj = get_object_or_404(Product, id=id)"
+		+"<br> "
+		+"<br> &nbsp; &nbsp; context = {"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; \'object\': obj"
+		+"<br> &nbsp; &nbsp; }"
+		+"<br> &nbsp; &nbsp; return render(request, \"products/product_detail.html\", context)", 
 		""],
 
 		["how to delete and confirm for individe id using function base view", 
-		"In app view, import the model, create a function that takes request and id, inside the function: <br> obj = get_object_or_404(Product, id=id) <br> #confirm delete <br> if request.method ==\"POST\" <br> &nbsp;  obj.delete() <br> #redirect to show deletion has happen", 
+		"In app view, import the model and from django.shortcuts import render, get_object_or_404, redirect (redirect is for delete data), create a function that takes request and id, inside the function: "
+		+"<br> def product_delete_view(request, id):"
+		+"<br> &nbsp; &nbsp; obj = get_object_or_404(Product, id=id)"
+		+"<br> <font color=\"green\"># confirming delete</font>"
+		+"<br> &nbsp; &nbsp; if request.method ==\"POST\":"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; obj.delete()"
+		+"<br> <font color=\"green\"># redirect returning the users back a few pages</font>"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; return redirect(\'../../\')"
+		+"<br> &nbsp; &nbsp; context = {"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; \'object\': obj"
+		+"<br> &nbsp; &nbsp; }"
+		+"<br> &nbsp; &nbsp; return render(request, \"products/product_delete.html\", context)", 
 		""],
 
 		["How to save user\'s info to database using function base view", 
+		"Create python file name forms.py amd app modelname and create class that inheirt from forms.ModelFor inside have class Meta: inside of that assign import modelname to model variable below that assign fields to get info from user import "
+        +"<br> <br> In view, import the forms.py, "
+		+"<br> def product_update_view(request, id=id):"
+		+"<br> &nbsp; &nbsp; obj = get_object_or_404(Product, id=id)"
+		+"<br> &nbsp; &nbsp; form = ProductForm(request.POST or None, instance=obj)"
+		+"<br> &nbsp; &nbsp; if form.is_valid():"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; form.save()"
+		+"<br> &nbsp; &nbsp; context = {"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; \'form\': form"
+		+"<br> &nbsp; &nbsp; }"
+		+"<br> &nbsp; &nbsp; return render(request, \"products/product_create.html\", context)"
+        , 
+		""],
+
+		["How to create a form in django", 
 		"Create python file name forms.py and import app model: "
         +"<br> class ProductForm(forms.ModelForm):"
         +"<br> &nbsp; class Meta:"
         +"<br> &nbsp; &nbsp; model = Product"
         +"<br> &nbsp; &nbsp; fields = [\'title\',\'description\',\'price\']"
-        +"<br> <br> In view, import the forms.py, "
-        +"<br> def product_create_view(request):"
-		+"<br> &nbsp; #all this does is renders out that form if post data comes through (request.POST) otherwise (or) we'll just render out an empty (None)"
-        +"<br> &nbsp; form = ProductForm(request.POST or None) <br> &nbsp; if form.is_valid():"
-        +"<br> &nbsp; &nbsp; forms.save()"
-        +"<br> <br> the rest of the function redirect to another html showing that it is save and after the if statement save the form to the context to render with the html template that show the form to let the user save info"
         , 
 		""],
 
@@ -453,7 +480,6 @@
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
 		+"<br> &nbsp; <font color=\"green\"># this will bring in the model form  </font>"
 		+"<br> &nbsp; form_class = ArticleModelForm"
-		+"<br> &nbsp; queryset = Article.objects.all() "
 		+"<br> &nbsp; <font color=\"green\"># another way to override to go some way to different url  </font>"
 		+"<br> &nbsp; <font color=\"green\"># other than def get_absolute_url(self): in models.py  </font>"
 		+"<br> &nbsp; <font color=\"green\">#success_url = \'/\' </font>"
@@ -465,7 +491,7 @@
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 
-		["How to update using class base view and", 
+		["How to update using class base view", 
 		"Must have modelname import on top of the view \"from django.views.generic import UpdateView\""
 		+"<br> class ArticleUpdateView(UpdateView):"
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
@@ -478,7 +504,6 @@
 		+"<br> "
 		+"<br> &nbsp; <font color=\"green\"># saves the new update if or not change </font>"
 		+"<br> &nbsp; def form_valid(self, form):"
-		+"<br> &nbsp; &nbsp; print(form.cleaned_data)"
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 

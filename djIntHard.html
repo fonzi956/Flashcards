@@ -69,7 +69,7 @@
 		""],
 
 		["How to get list of all data using class base view", 
-		"Must have modelname import on top of the view and \"from django.views.generic import ListView\""
+		"Must have modelname import on top of the view and \"from django.views import View\""
 		+"<br> <font color=\"green\"># class is inheirt from the ListView; didn't need to add render, template name etc </font>"
 		+"<br> class ArticleListView(ListView):"
 		+"<br> &nbsp; <font color=\"green\"># by default class base view look for a specific template like </font>"
@@ -87,7 +87,7 @@
 		""],
 
 		["Get detail from id using class base view", 
-		"Must have modelname on top of the view and \"from django.views.generic import DetailView\""
+		"Must have modelname on top of the view and \"from django.views import View\""
 		+"<br> class ArticleDetailView(DetailView):"
 		+"<br> "
 		+"<br> &nbsp; template_name = \'articles/article_detail.html\'"
@@ -101,12 +101,11 @@
 		""],
 
 		["how to create data using class base view", 
-		"Must have modelname and modelform import on top of the view and \"from django.views.generic import CreateView\""
+		"Must have modelname and modelform import on top of the view  and \"from django.views import View\""
 		+"<br> class ArticleCreateView(CreateView):"
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
 		+"<br> &nbsp; <font color=\"green\"># this will bring in the model form  </font>"
 		+"<br> &nbsp; form_class = ArticleModelForm"
-		+"<br> &nbsp; queryset = Article.objects.all() "
 		+"<br> &nbsp; <font color=\"green\"># another way to override to go some way to different url  </font>"
 		+"<br> &nbsp; <font color=\"green\"># other than def get_absolute_url(self): in models.py  </font>"
 		+"<br> &nbsp; <font color=\"green\">#success_url = \'/\' </font>"
@@ -119,7 +118,7 @@
 		""],
 
 		["How to update using class base view", 
-		"Must have modelname import on top of the view and \"from django.views.generic import UpdateView\""
+		"Must have modelname import on top of the view \"from django.views import View\""
 		+"<br> class ArticleUpdateView(UpdateView):"
 		+"<br> &nbsp; template_name = \'articles/article_create.html\'"
 		+"<br> &nbsp; form_class = ArticleModelForm"
@@ -131,12 +130,11 @@
 		+"<br> "
 		+"<br> &nbsp; <font color=\"green\"># saves the new update if or not change </font>"
 		+"<br> &nbsp; def form_valid(self, form):"
-		+"<br> &nbsp; &nbsp; print(form.cleaned_data)"
 		+"<br> &nbsp; &nbsp; return super().form_valid(form)",
 		""],
 
 		["how to delete a data with id using class base view",
-		"Must have modelname import on top of the view and \"from django.views.generic import DeleteView\"" 
+		"Must have modelname import on top of the view and \"from django.views import View\"" 
 		+"<br> class ArticleDeleteView(DeleteView):"
 		+"<br> &nbsp; template_name = \'articles/article_delete.html\'"
 		+"<br> &nbsp; <font color=\"green\">#success_url = \'/blog/\' </font>"
