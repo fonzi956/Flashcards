@@ -1,4 +1,5 @@
-module.exports = [
+module.exports = 
+[
     ["What do you understand by Django?",
     "Django is a free and open source web application framework, written in Python. Django is named after Django Reinhardt, Jazz guitarist from the 1930s to early 1950s who is one of the best guitarists of all time. Django was mainly developed to handle the intensive design of the newsroom. You can even build high-quality web applications using this. It adheres to the DRY principle and focuses completely on automating as much as possible.",
     ""],
