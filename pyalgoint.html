@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=1000">
+	<style>
+		@font-face {
+			font-family: myFirstFont;
+			src: url(SansForgetica-Regular.otf);
+		}
+
+		body {
+			font-family: myFirstFont;
+		}
+
+		div#test {
+			border: #000 1px solid;
+			padding: 10px 40px 40px 40px;
+		}
+
+		input {
+			float: right;
+		}
+	</style>
+	<script>
+		var pos = 0, test, test_status, question, choice, chA, chB, chC, chD, correct = 0;
+		//
+		var questions = [
+
+		["Why Analyze Algorithms?",
+		"<font color=\"green\"># Procedure or formula for solving a problem. </font>"
+		+"<br> <font color=\"green\"># Some are so useful thet have names: merge sort, bubble sort etc... </font>"
+		,""],
+
+		["How can we compare the algos to know which is better?",
+		"<font color=\"green\"># Imagine I came with this function... </font>"
+		+"<br> def sum1(n):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># Function sum1 uses a for loop to iteratively add across our range + 1 </font>"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># Take an input of n and return the sum of the numbers from 0 to n </font>"
+		+"<br> &nbsp; &nbsp; final_sum = 0"
+		+"<br> &nbsp; &nbsp; for x in range(n + 1):"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; final_sum += x"
+		+"<br> &nbsp; &nbsp; return final_sum"
+		+"<br> print(sum1(5))<font color=\"green\"># 15 </font>"
+		+"<br> "
+		+"<br> <font color=\"green\"># Function sum2 makes use of a formula to solve a problem </font>"
+		+"<br> def sum2(n):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># Take an input of n and return the sum of the numbers from 0 to n </font>"
+		+"<br> &nbsp; &nbsp; return (n*(n+1)/2)"
+		+"<br> print(sum2(5))<font color=\"green\"># 15.0 </font>"
+		+"<br> "
+		+"<br> <font color=\"green\"># OBJECTIVELY COMPARE THEM </font>"
+		+"<br> <font color=\"green\"># Memory space </font>"
+		+"<br> <font color=\"green\"># time to run </font>"
+		+"<br> sum1(100)<font color=\"green\"># takes 100000 loops, best of 3: 3.74 microseconds per loop </font>"
+		+"<br> "
+		+"<br> sum2(100)<font color=\"green\"># takes 10000000 loops, best of 3: 3.144 nanoseconds per loop </font>"
+		+"<br> "
+		+"<br> <font color=\"green\"># smaller numbers is obviously faster, but cannot simply rely on time to run because all computers are different and some faster than others </font>"
+		+"<br> <font color=\"green\"># to be hardware independent = Big O </font>"
+		+"<br> <font color=\"green\"># Big O is the objectively compare the efficiency of these two algorithms </font>"
+		+"<br> <font color=\"green\"># * compare the number of assignments each algorithm makes </font>"
+		+"<br> "
+		+"<br> <font color=\"green\"># the original sum1 function will create an assignment n+1 times, we can see this from the range based function. This means it will assign the final_sum variable n+1 times. We can then say that for a problem of n size(in this case just a number n) this function will take 1+n steps. </font>"
+		+"<br> "
+		+"<br> <font color=\"green\"># This n notation allows us to compare solutions and algorithms relative to the size of the problem, since sum1(10) and sum1(1000000) would take very different times to run but be using the same algorithm. We can also note that as n grows very large, the +1 won\'t have much effect. So let\'s begin discussing how to build a syntax for this notation. </font>"
+		+"<br> "
+		+"<br> <font color=\"green\"># Big-O notation describes how quicky runtime will grow relative to the input as the input get arbitrarily large. </font>"
+		,""],
+
+		["HOW WELL CAN IT SCALE as data increases?",
+		"<font color=\"green\"># Remeber, we want to compare how quickly runtime will grow, not compare exact runtimes, since those can vary depending on hardware. </font>"
+		+"<br> <font color=\"green\"># Since we want to compare for a variety of input sized, we are only concerned with runtime grow relative to the input. This is why we use n for notation. </font>"
+		+"<br> <font color=\"green\"># As n gets arbitrarily large we only worry about terms that will grow the fastest as n gets large, to this point, Big-O analysis is also known as asymptoic analysis </font>"
+		+"<br> <font color=\"green\"># In math, asymptotic analysis = describing limiting behavior </font>"
+		+"<br> <font color=\"green\"># * which part of the algorithm has the GREATEST effect on final answer, which part of algo is the real bottleneck, which part is the limiting factor. </font>"
+		+"<br> <font color=\"green\"># As for syntax sum1() can be said to be O(n) since its runtime grows linearly with the input size. </font>"
+		+"<br> def Bigo(n):"
+		+"<br> &nbsp; &nbsp; return 45*n**3 + 20*n**2 + 19"
+		+"<br> "
+		+"<br> print(Bigo(1))<font color=\"green\"># 84 </font>"
+		+"<br> "
+		+"<br> print(2)<font color=\"green\"># 459 </font>"
+		+"<br> "
+		+"<br> print(Bigo(10))<font color=\"green\"># 47019 </font>"
+		+"<br> "
+		+"<br> <font color=\"green\"># It can be seen that the 19 does not hold much weight anymore. </font>"
+		+"<br> <font color=\"green\"># the 20n**2 in this case is 2000 </font>"
+		+"<br> <font color=\"green\"># the 45n**3 in this case is 45000 </font>"
+		+"<br> "
+		+"<br> <font color=\"green\"># The part of this algo that really has a lot to do with final answer as data scales, will not be 45 but the n3. so this algo has an order of n3. O(n**3) </font>"
+		,""],
+
+		["Big-O | Name",
+		"<font color=\"green\"># 1 | Constant </font>"
+		+"<br> <font color=\"green\"># log(n) | Logarithmic </font>"
+		+"<br> <font color=\"green\"># n | Linear </font>"
+		+"<br> <font color=\"green\"># nlog(n) | log linear </font>"
+		+"<br> <font color=\"green\"># n^2 | Quadratic </font>"
+		+"<br> <font color=\"green\"># n^3 | Cubic </font>"
+		+"<br> <font color=\"green\"># 2^n | Exponential </font>"
+		+"<br> "
+		+"<br> <font color=\"green\"># clearly we want to choose algorithms that stay away from any exponential, cubic, quadratic behavior </font>"
+		,""],
+
+		["O(1) Constant",
+		"def func_constant(values):"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># Prints first item in a list of values </font>"
+		+"<br> &nbsp; &nbsp; print(values[0])"
+		+"<br> "
+		+"<br> func_constant([1,2,3])"
+		+"<br> <font color=\"green\"># It does not matter how large my values list becomes, the function/algo will only grab the indexed position 0 in that list </font>"
+		,""],
+
+		["O(n) Linear",
+		"def func_lin(list): </font>"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># Takes in list and prints out all values </font>"
+		+"<br> &nbsp; &nbsp; for val in list:"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; print(val)"
+		+"<br> "
+		+"<br> func_lin([1,2,3])"
+		+"<br> <font color=\"green\"># 1 </font>"
+		+"<br> <font color=\"green\"># 2 </font>"
+		+"<br> <font color=\"green\"># 3 </font>"
+		+"<br> <font color=\"green\"># Every value will print for the list, each time, so the larger the list gets the larger the BigO, this algo wil scale linearly with n. </font>"
+		,""],
+
+		["O(n^2) Quadratic",
+		"def func_quad(lst): </font>"
+		+"<br> &nbsp; &nbsp; <font color=\"green\"># Prints pairs for every item in list </font>"
+		+"<br> &nbsp; &nbsp; for item_1 in lst:"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; for item_2 in lst:"
+		+"<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; print(item_1, item_2)"
+		+"<br> "
+		+"<br> lst = [1,2,3]"
+		+"<br> func_quad(lst)"
+		+"<br> <font color=\"green\"># 1 1 </font>"
+		+"<br> <font color=\"green\"># 1 2 </font>"
+		+"<br> <font color=\"green\"># 1 3 </font>"
+		+"<br> <font color=\"green\"># 2 1 </font>"
+		+"<br> <font color=\"green\"># 2 2 </font>"
+		+"<br> <font color=\"green\"># 2 3 </font>"
+		+"<br> <font color=\"green\"># 3 1 </font>"
+		+"<br> <font color=\"green\"># 3 2 </font>"
+		+"<br> <font color=\"green\"># 3 3 </font>"
+		+"<br> <font color=\"green\"># two loops, one nested inside another </font>"
+		+"<br> <font color=\"green\"># for a list of n items, we will have to perform n operations for every item in the list! This means in total, we will perform n times n assignments, or n^2. So a list of 10 items will have 10^2 or 100 operations. You can see how dangerous this can get for very large inputs! This is why Big-O is so important to be aware of! </font>"
+		+"<br> <font color=\"green\"># Hence, the input of 3 gives us 9 outputs iterations. </font>"
+		,""],
+
+		];
+		var shq = [];
+		var hq = [];
+		var sq = [];
+		pos = 0;
+		function _(x) {
+			return document.getElementById(x);
+		}
+		function renderQuestion() {
+			test = _("test");
+
+			if (sq.length == questions.length) {
+				test.innerHTML = "<p>" + sq + "</p>";
+				test.innerHTML += +"<br><p>" + hq + "</p>";
+				test.innerHTML += +"<br><button onclick='nextQuestion()'>Next Question</button>";
+				pos = 0;
+				correct = 0;
+				return false;
+			}
+
+			// if(pos >= questions.length){
+			// 	test.innerHTML = "<h2>You got "+correct+" of "+questions.length+" </h2> ";
+			// 	_("test_status").innerHTML = "Test Completed";
+			// 	pos = 0;
+			// 	correct = 0;
+			// 	return false;
+			// }
+			var tot = questions.length - sq.length;
+			var rq = [];
+			var rpn = Math.floor(Math.random() * 3) + 1;
+			var rn = [1, 3, 4, 2];
+			rn = shuffle(rn);
+			pos = Math.floor(Math.random() * questions.length);
+			// pos = 0;
+			while (sq.includes(pos)) {
+				pos = Math.floor(Math.random() * questions.length);
+				if (!sq.includes(pos)) break;
+			}
+			//pos = questions.length - 5;
+			//pos = 0;
+			//pos = questions.length;
+			if (pos == questions.length)--pos;
+
+			_("test_status").innerHTML = "Question " + (pos) + " of " + tot;
+			question = questions[pos][0];
+			Ans = questions[pos][1];
+			mus = questions[pos][2];
+			test.innerHTML = "<h3>" + question + "</h3>";
+			test.innerHTML += "<button onclick='checkAnswer()'>Flip</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ";
+			test.innerHTML += "<button onclick='nextQuestion()'>Next</button>";
+			if (typeof (mus) != "undefined") {
+				test.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick='play(mus)'>Audio</button>";
+			}
+			test.innerHTML += "<p id=\"myDIV\" hidden>" + Ans + "</p>";
+
+		}
+		function checkAnswer() {
+			var x = document.getElementById("myDIV");
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
+			}
+
+
+		}
+		function shuffle(array) {
+			var currentIndex = array.length, temporaryValue, randomIndex;
+
+			// While there remain elements to shuffle...
+			while (0 !== currentIndex) {
+
+				// Pick a remaining element...
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+
+				// And swap it with the current element.
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			}
+
+			return array;
+		}
+		function nextQuestion() {
+			sq.push(pos);
+			//pos++;
+			renderQuestion();
+			window.scrollTo(0, 0);
+		}
+
+		function play(name) {
+			console.log(name);
+			song = "Record/Dja/" + name + ".ogg";
+			var audio = new Audio(song);
+			audio.play();
+		}
+
+		function HQuestion() {
+			hq.push(pos);
+			sq.push(pos);
+			renderQuestion();
+		}
+
+		function done() {
+			test.innerHTML = "<p>" + sq + "</p>";
+			test.innerHTML += +"<br><p>" + hq + "</p>";
+			test.innerHTML += +"<br><button onclick='nextQuestion()'>Next Question</button>";
+		}
+		window.addEventListener("load", renderQuestion, false);
+	</script>
+</head>
+
+<body>
+	<h2 id="test_status"></h2>
+	<div id="test"></div>
+</body>
+
+</html>
