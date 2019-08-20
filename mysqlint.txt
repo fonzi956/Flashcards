@@ -1,9 +1,9 @@
-what does Python needs to use MySQL
+[}what does Python needs to use MySQL
 # Python needs a MySQL driver to access the MySQL database.
 # We recommend that you use PIP to install MySQL Connector:
 # pip install mysql-connector
-
-Create Connection
+{]
+[}Create Connection
 # demo_mysql_connection.py:
 import mysql.connector
 
@@ -14,11 +14,10 @@ mydb = mysql.connector.connect(
 )
 
 print(mydb)
-
-Creating a Database
+{]
+[}Creating a Database
 # To create a database in MySQL, use the "CREATE DATABASE" statement:
 # Ex: create a database named "mydatabase":
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -30,11 +29,10 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 mycursor.execute("CREATE DATABASE mydatabase")
-
-Check if Database Exists
+{]
+[}Check if Database Exists
 # You can check if a database exist by listing all databases in your system by using the "SHOW DATABASES" statement:
 # Ex: Return a list of your system's databases:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -52,7 +50,6 @@ for x in mycursor:
 
 # Or you can try to access the database when making the connection:
 # Ex:Try connecting to the database "mydatabase":
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -62,13 +59,11 @@ mydb = mysql.connector.connect(
   database="mydatabase"
 )
 # If the database does not exist, you will get an error.
-
-
-Creating a Table
+{]
+[}Creating a Table
 # To create a table in MySQL, use the "CREATE TABLE" statement.
 # Make sure you define the name of the database when you create the connection
 # Ex: Create a table named "customers":
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -81,12 +76,10 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
-
-
-Check if Table Exists
+{]
+[}Check if Table Exists
 # You can check if a table exist by listing all tables in your database with the "SHOW TABLES" statement:
 # Ex: Return a list of your system's databases:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -102,14 +95,12 @@ mycursor.execute("SHOW TABLES")
 
 for x in mycursor:
   print(x)
-
-
-Primary Key
+{]
+[}Primary Key
 # When creating a table, you should also create a column with a unique key for each record.
 # This can be done by defining a PRIMARY KEY.
 # We use the statement "INT AUTO_INCREMENT PRIMARY KEY" which will insert a unique number for each record. Starting at 1, and increased by one for each record.
 # Ex: Create primary key when creating the table:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -125,14 +116,11 @@ mycursor.execute("CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, nam
 
 # If the table already exists, use the ALTER TABLE keyword:
 # Ex: Create primary key on an existing table:
-
 mycursor.execute("ALTER TABLE customers ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY")
-
-
-Insert Into Table
+{]
+[}Insert Into Table
 # To fill a table in MySQL, use the "INSERT INTO" statement.
 # Ex: Insert a record in the "customers" table:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -152,13 +140,11 @@ mydb.commit()
 
 print(mycursor.rowcount, "record inserted.")
 # Important!: Notice the statement: mydb.commit(). It is required to make the changes, otherwise no changes are made to the table.
-
-
-Insert Multiple Rows
+{]
+[}Insert Multiple Rows
 # To insert multiple rows into a table, use the executemany() method.
 # The second parameter of the executemany() method is a list of tuples, containing the data you want to insert:
 # Ex: Fill the "customers" table with data:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -192,16 +178,11 @@ mycursor.executemany(sql, val)
 mydb.commit()
 
 print(mycursor.rowcount, "was inserted.")
-
-
-
-
-
-Get Inserted ID
+{]
+[}Get Inserted ID
 # You can get the id of the row you just inserted by asking the cursor object.
 # Note: If you insert more that one row, the id of the last inserted row is returned.
 # Ex: Insert one row, and return the ID:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -220,13 +201,10 @@ mycursor.execute(sql, val)
 mydb.commit()
 
 print("1 record inserted, ID:", mycursor.lastrowid)
-
-
-
-Select From a Table
+{]
+[}Select From a Table
 # To select from a table in MySQL, use the "SELECT" statement:
 # Ex: Select all records from the "customers" table, and display the result:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -249,12 +227,10 @@ for x in myresult:
 # (3, 'Amy', 'Apple st 652')
 # (4, 'Hannah', 'Mountain 21')
 # (5, 'Michael', 'Valley 345')
-
-
-Selecting Columns
+{]
+[}Selecting Columns
 # To select only some of the columns in a table, use the "SELECT" statement followed by the column name(s):
 # Ex: Select only the name and address columns:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -276,12 +252,11 @@ for x in myresult:
 # ('Peter', 'Lowstreet 27')
 # ('Amy', 'Apple st 652')
 # ('Hannah', 'Mountain 21')
-
-Using the fetchone() Method
+{]
+[}Using the fetchone() Method
 # If you are only interested in one row, you can use the fetchone() method.
 # The fetchone() method will return the first row of the result:
 # Ex:Fetch only one row:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -299,9 +274,8 @@ myresult = mycursor.fetchone()
 
 print(myresult)
 # (1, 'John', 'Highway 21')
-
-
-Select With a Filter
+{]
+[}Select With a Filter
 # When selecting records from a table, you can filter the selection by using the "WHERE" statement:
 # Ex: Select record(s) where the address is "Park Lane 38": result:
 import mysql.connector
@@ -324,13 +298,11 @@ myresult = mycursor.fetchall()
 for x in myresult:
   print(x)
 # (11, 'Ben', 'Park Lane 38')
-
-
-Wildcard Characters
+{]
+[}Wildcard Characters
 # You can also select the records that starts, includes, or ends with a given letter or phrase.
 # Use the % to represent wildcard characters:
 # Ex: Select records where the address contains the word "way":
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -353,14 +325,12 @@ for x in myresult:
 # (1, 'John', 'Highway 21')
 # (9, 'Susan', 'One way 98')
 # (14, 'Viola', 'Sideway 1633')
-
-
-Prevent SQL Injection
+{]
+[}(Where)Prevent SQL Injection
 # When query values are provided by the user, you should escape the values.
 # This is to prevent SQL injections, which is a common web hacking technique to destroy or misuse your database.
 # The mysql.connector module has methods to escape query values:
 # Ex: Escape query values by using the placholder %s method:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -382,13 +352,11 @@ myresult = mycursor.fetchall()
 for x in myresult:
   print(x)
 # (10, 'Vicky', 'Yellow Garden 2')
-
-
-Sort the Result
+{]
+[}Sort the Result
 # Use the ORDER BY statement to sort the result in ascending or descending order.
 # The ORDER BY keyword sorts the result ascending by default. To sort the result in descending order, use the DESC keyword.
 # Ex: Sort the result alphabetically by name: result:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -413,11 +381,10 @@ for x in myresult:
 # (7, 'Betty', 'Green Grass 1')
 # (13, 'Chuck', 'Main Road 989')
 # (4, 'Hannah', 'Mountain 21')
-
-ORDER BY DESC
+{]
+[}ORDER BY DESC
 # Use the DESC keyword to sort the result in a descending order.
 # Ex: Sort the result reverse alphabetically by name:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -443,12 +410,10 @@ for x in myresult:
 # (6, 'Sandy', 'Ocean blvd 2')
 # (8, 'Richard', 'Sky st 331')
 # (2, 'Peter', 'Lowstreet 27')
-
-
-Delete Record
+{]
+[}Delete Record
 # You can delete records from an existing table by using the "DELETE FROM" statement:
 # Ex: Delete any record where the address is "Mountain 21":
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -469,9 +434,8 @@ mydb.commit()
 
 print(mycursor.rowcount, "record(s) deleted")
 # 1 record(s) deleted
-
-
-Prevent SQL Injection
+{]
+[}(Delete)Prevent SQL Injection
 # It is considered a good practice to escape the values of any query, also in delete statements.
 # This is to prevent SQL injections, which is a common web hacking technique to destroy or misuse your database.
 # The mysql.connector module uses the placeholder %s to escape values in the delete statement:
@@ -497,13 +461,10 @@ mydb.commit()
 
 print(mycursor.rowcount, "record(s) deleted")
 # 1 record(s) deleted
-
-
-
-Delete a Table
+{]
+[}Delete a Table
 # You can delete an existing table by using the "DROP TABLE" statement:
 # Ex:Delete the table "customers":
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -519,12 +480,10 @@ sql = "DROP TABLE customers"
 
 mycursor.execute(sql)
 #If this page was executed with no error(s), you have successfully deleted the "customers" table.
-
-
-Drop Only if Exist
+{]
+[}Drop Only if Exist
 # If the the table you want to delete is already deleted, or for any other reason does not exist, you can use the IF EXISTS keyword to avoid getting an error.
 # Ex: Delete the table "customers" if it exists:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -540,12 +499,10 @@ sql = "DROP TABLE IF EXISTS customers"
 
 mycursor.execute(sql)
 #If this page was executed with no error(s), you have successfully deleted the "customers" table.
-
-
-Update Table
+{]
+[}Update Table
 # You can update existing records in a table by using the "UPDATE" statement:
 # Ex: Overwrite the address column from "Valley 345" to "Canyoun 123":
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -566,14 +523,12 @@ mydb.commit()
 
 print(mycursor.rowcount, "record(s) affected")
 # 1 record(s) affected
-
-
-Prevent SQL Injection
+{]
+[}(Update)Prevent SQL Injection
 # It is considered a good practice to escape the values of any query, also in update statements.
 # This is to prevent SQL injections, which is a common web hacking technique to destroy or misuse your database.
 # The mysql.connector module uses the placeholder %s to escape values in the delete statement:
 # Ex: Escape values by using the placholder %s method:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -594,11 +549,10 @@ mydb.commit()
 
 print(mycursor.rowcount, "record(s) affected")
 # 1 record(s) affected
-
-Limit the Result
+{]
+[}Limit the Result
 # You can limit the number of records returned from the query, by using the "LIMIT" statement:
 # Ex: Select the 5 first records in the "customers" table:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -621,11 +575,10 @@ for x in myresult:
 # (3, 'Amy', 'Apple st 652')
 # (4, 'Hannah', 'Mountain 21')
 # (5, 'Michael', 'Valley 345')
-
-Limit the Result Start From Another Position
+{]
+[}Limit the Result Start From Another Position
 # If you want to return five records, starting from the third record, you can use the "OFFSET" keyword:
 # Ex: Start from position 3, and return 5 records:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -648,8 +601,8 @@ for x in myresult:
 # (5, 'Michael', 'Valley 345')
 # (6, 'Sandy', 'Ocean blvd 2')
 # (7, 'Betty', 'Green Grass 1')
-
-# Join Two or More Tables
+{]
+[}Join Two or More Tables
 # You can combine rows from two or more tables, based on a related column between them, by using a JOIN statement.
 # Consider you have a "users" table and a "products" table:
 # users
@@ -664,7 +617,6 @@ for x in myresult:
 # { id: 156, name: 'Vanilla Dreams' }
 # These two tables can be combined by using users' fav field and products' id field.
 # Ex: Join users and products to see the name of the users favorite product:
-
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -692,9 +644,8 @@ for x in myresult:
 # ('Peter', 'Chocolate Heaven')
 # ('Amy', 'Tasty Lemon')
 # Note: You can use JOIN instead of INNER JOIN. They will both give you the same result.
-
-
-LEFT JOIN
+{]
+[}LEFT JOIN
 # In the example above, Hannah, and Michael were excluded from the result, that is because INNER JOIN only shows the records where there is a match.
 # If you want to show all users, even if they do not have a favorite product, use the LEFT JOIN statement:
 # Ex: Select all users and their favorite product:
@@ -736,8 +687,8 @@ for x in myresult:
 # ('Amy', 'Tasty Lemon')
 # ('Hannah', None)
 # ('Michael', None)
-
-RIGHT JOIN
+{]
+[}RIGHT JOIN
 # If you want to return all products, and the users who have them as their favorite, even if no user have them as their favorite, use the RIGHT JOIN statement:
 # Ex: Select all products, and the user(s) who have them as their favorite:
 # users
@@ -778,3 +729,4 @@ for x in myresult:
 # ('Amy', 'Tasty Lemon')
 # (None, 'Vanilla Dreams')
 # Note: Hannah and Michael, who have no favorite product, are not included in the result.
+{]
