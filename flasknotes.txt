@@ -1,0 +1,153 @@
+[}why use virtual environment
+# it is setup to makes it easier to work with other people
+{]
+[}things you need to use flask
+# pip3 install flask flask-sqlalchemy
+{]
+[}after installing flask how do you start
+# create a pyhton file so app.py
+# we need to set up our application
+from flask import Flask
+# referencing the app.py file
+app = Flask(__name__)
+
+# create a index route so that when we browse to
+# the URL we don't immediately just 404
+# and in flask you set up routes with the
+# @app of route decorator
+@app.route('/') # url string
+def index():
+    # return a string on the browser
+    return "Hello, World"
+
+# runs the app
+if __name__ == "__main__":
+    # runs app with debug to run if error occurs will show on browser
+    app.run(debug=True)
+# "python3 app.py" in terminal to run the app
+{]
+[0}return render_template(template_name_or_list, and/or **context)
+[+}# Renders a template from the template folder with the given context.
+[+}{% extends 'base.html' %}
+[+}{% block head %}
+[+}<title>Task Master</title>
+[+}{% endblock %}
+[-}{% block body %}
+# Jinja is a the template engine that flask uses so
+# basically using a block name and endblock in the template and
+# in another template
+# that inherit that replace the block name and endblock using the extends 'base.html'
+{]
+[}How to do css in Flask
+# create a static folder and css and the main.css
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+# same with javascript
+{]
+[}initializing the database now
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+app = Flask(__name__)
+# app.config is telling our app where our database is located
+# SQLite colon (four slashes is an absolute path, three is a relative path)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+# initialize our database with the settings from our app
+db = SQLAlchemy(app)
+{]
+[}Create a model
+# create a Todo db table that inherent from db.Model
+class Todo(db.Model):
+    # creating columns of the db table
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(200), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # return a string every time we create a new element
+    def __repr__(self):
+        # return tasks and the id of that task
+        return '<Task %r>' % self.id
+{]
+[}set up the database after created model
+# go to terminal and env is activate
+# then "python3" for shell then "from app import db" 
+# last "db.create_all()" to set up the database 
+# and will create a db file
+{]
+[}How to create in Flask
+# this route can accept now
+# instead of just get by default we can
+# now post to this route as well and send
+# data to our database
+@app.route('/', methods=['POST', 'GET'])
+def index():
+    # submiting form
+    if request.method == 'POST':
+        # object form for that forum(html file) we
+        # created and then we're just going to
+        # pass in the ID of the input 
+        task_content = request.form['content']
+        # create a to-do object thats going to have its contents equal to the content of that input 
+        new_task = Todo(content=task_content)
+
+        # save the new_task object to db except fail error
+        try:
+            db.session.add(new_task)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue adding your task'
+
+    else:
+        # this is going to look at
+        # all of the database contents in the
+        # order they were created and it's just
+        # going to return all of them
+        tasks = Todo.query.order_by(Todo.date_created).all()
+        # tasks=tasks is the context
+        return render_template('index.html', tasks=tasks)
+{]
+[}How to delete in Flask
+# when link is click 
+# <a href="/delete/{{task.id}}">Delete</a>
+# decorator route matches the href url if so runs delete function
+@app.route('/delete/<int:id>')
+# id goes to the function
+def delete(id):
+    # id is use to find the data of id
+    task_to_delete = Todo.query.get_or_404(id)
+
+    # this delete the data and redirect to homepage
+    try:
+        db.session.delete(task_to_delete)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was a problem deleting that task'
+{]
+[}How to update in Flask
+# when link is click 
+# <a href="/update/{{task.id}}">Delete</a>
+# decorator route matches the href url if so runs update function
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+# id goes to the function
+def update(id):
+    # id is use to find the data of id
+    task = Todo.query.get_or_404(id)
+
+    # update.html form is submit
+    if request.method == 'POST':
+        # get new or old content value assign to task.content
+        # task.content means only changing the content
+        task.content = request.form['content']
+
+        try:
+            # commit is excute update, delete, or add
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue updating your task'
+    # if post not POST go to update.html with task object
+    else:
+        # render update.html with task object
+        return render_template('update.html', task=task)
+{]

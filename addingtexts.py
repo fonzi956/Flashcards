@@ -1,4 +1,4 @@
-file = open("mysqlint.txt", "r")
+file = open("flasknotes.txt", "r")
 newtexts = ""
 
 def comments(line):
