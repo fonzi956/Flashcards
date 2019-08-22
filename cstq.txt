@@ -1,0 +1,59 @@
+[}http vs https
+
+{]
+[}tracking the robot state
+
+{]
+[}third person and scrolling games
+
+{]
+[}moblie app improve memory
+
+{]
+[}improve memory
+
+{]
+[}oo vs procedural
+
+{]
+[}control of robot feedback
+
+{]
+[}what control flow to same as array
+
+{]
+[}robot auth
+
+{]
+[}robot connecting remote
+
+{]
+[}voliate vs pres...?
+
+{]
+[}call swap if ref or value
+
+{]
+[}DNS Maps
+
+{]
+[}fib, waterfall
+
+{]
+[}fib
+
+{]
+[}waterfall
+
+{]
+[}simulation
+
+{]
+[}low level is abstraction vs high level
+
+{]
+[}function (overloading and overwritten)
+
+{]
+[}control loop to control robot
+{]
