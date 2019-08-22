@@ -1,4 +1,4 @@
-file = open("flasknotes.txt", "r")
+file = open("test.txt", "r")
 newtexts = ""
 
 def comments(line):
