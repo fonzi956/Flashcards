@@ -1,0 +1,145 @@
+[}How do you login in to server?
+in terminal # "ssh userORroot@192.58.119.183"
+it will ask for password 
+{]
+[}what do if it is the first time in the linux server
+in terminal # "apt-get update && apt-get upgrade"
+{]
+[}how to set the host name in linux ubuntu?
+in terminal # "hostnamectl set-hostname name_host"
+next is setting the hostname in host file
+# "nano /etc/hosts"
+under the first line add 
+# "192.58.119.183    name_host"
+then save
+{]
+[}how to add user in linux ubuntu
+in terminal # "adduser user_name"
+it will ask for password and other info
+to add to group like sudo
+in terminal # "adduser user_name sudo"
+{]
+[}setup SSH key based authentication to login without a password
+in terminal as login server create a folder ssh # "mkdir -p ~/.ssh"
+go back to the local machine in terminal # "ssh-keygen -b 4096"
+to generating public private key id_rsa and it will ask for password
+this will generate a identification and public key (in local machine)
+copy the public key to server machine so go to do this:
+(in local machine) # "scp ~/.ssh/id_rsa.pub user@198.58.119.183:~/.ssh/autorized_keys"
+after the ':' is the folder in the server side to send the public key in
+(in server machine) giving perission # "sudo chmod 700 ~/.ssh/"
+then again # "sudo chmod 600 ~/.ssh/*"
+the '*' perission all files in .ssh
+{]
+[}three digits number of chmod 700
+Linux the way that
+the permissions work is this first
+number here is the permissions for the
+owner of either the directory or the
+file the second number here is the
+permissions for the group and the third
+one here is the permissions for everyone
+and the number are read, write, or/and execute
+{]
+[}not allow root login and password authentication just key base
+in server terminal # "sudo nano /etc/ssh/sshd_config"
+change
+# 'permitRootLogin yes'
+to 
+# 'permitRootLogin no'
+next comment out # '#PasswordAuthentication yes'
+then save and restart # "sudo systemctl restart sshd"
+{]
+[}set up firewall
+server terminal # "sudo apt-get install ufw"
+set up rules:
+# "sudo ufw default allow outgoing"
+# "sudo ufw default deny incoming"
+# "sudo ufw allow ssh"
+# "sudo ufw allow 8000" if deploy live "sudo ufw allow http/tcp"
+8000 is for testing the server like local server
+next is enable them
+# "sudo ufw enable"
+for status
+# "sudo ufw status"
+{]
+[}create an requirements.txt (local machine) and install in server
+if in VE activte it and then run "pip freeze > requirements.txt"
+in server terminal "pip install -r requirements.txt"
+{]
+[}push django project from local to server machine
+in local terminal # "scp -r django_project user@192.58.119.186:~/"
+after the ':' is the folder in the server side to send home folder
+{]
+[}how to install pip and VE in server
+# "sudo apt-get install python3-pip"
+# "sudo apt-get install python3-venv"
+{]
+[}When deploying live django project static is different how?
+You must have STATIC_ROOT so in setting.py
+add # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+then in server terminal # python manage.py collectstatic
+{]
+[}To test server in port 8000
+in server terminal "python manage.py runserver 0.0.0.0:8000"
+check crud and admin is work and make some test
+{]
+[}how to install apache ans wsgi
+in server terminal:
+"sudo apt-get install apache2"
+"sudo apt-get install libapache2-mod-wsgi-py3"
+{]
+[}after installing apache and wsgi how to deploy
+"cd /etc/apache2/sites-avaiable/"
+then copy conf file
+'sudo cp 000-default.conf django_project.conf'
+next edit
+'sudo nano django_project.conf'
+before the close tag </VirtualHot>
+# ...
+# 'Alias /static /home/user/django_project/static'
+# '<Directory /home/user/django_project/static>'
+    # 'Require all granted'
+# '</Directory>'
+# ... same with media like static
+# '<Directory /home/user/django_project/django_project>'
+    # '<Files wsgi.py>'
+    #     'Require all granted'
+    # '</Files>'
+# '</Directory>'
+# 'WSGIScriptAlias / /home/user/django_project/django_project/wsgi.py'
+# 'WSGIDaemonProccess django_app python-path=/home/user/django_project python-home=/home/user/django_project/venv'
+# 'WSGIProcessGroup django_app'
+# '</VirtualHot>'
+apache to enable site
+# 'sudo a2ensite django_project.conf'
+# 'sudo a2dissite 000-default.cong'
+{]
+[}how to change permissions when crud in project
+in server terminal # 'sudo chown :www-data django_project/db.sqlite3'
+this make Apache the group on that file
+# 'sudo chmod 664 django_project/dn.sqlite3'
+this 6 for the owner a 6 for group and 4 for everybody else 4 is read permissions
+# 'sudo chown :www-data django_project/'
+# 'sudo chmod 775 django_project/
+... same with media
+# 'sudo chown -R :www-data django_project/media/'
+# 'sudo chmod -R 775 django_project/media'
+{]
+[}how do you handle sensitive information on project in server?
+in terminal "sudo touch /etc/config.json"
+get secert key in project setting.py
+open config.json inside {} put
+# "SECRET":"secret_key","EMAIL_USER":"email_user","EMAIL_PASS":"email_pass"
+go back to project setting.py with nano and at top put:
+import json
+with open('/etc/config.json') as config_file:
+    config = json.load(config_file)
+...
+SECRET_KEY = config['SECRET_KEY']
+DEBUG = False
+# same with Emailuser an Emailpass
+{]
+[}how to restart the server apache?
+in server terminal "sudo service apache2 restart"
+{]

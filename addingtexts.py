@@ -1,4 +1,4 @@
-file = open("test.txt", "r")
+file = open("linuxQ.txt", "r")
 newtexts = ""
 
 def comments(line):
