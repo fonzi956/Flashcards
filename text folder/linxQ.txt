@@ -1,7 +1,3 @@
-[}How do you login in to server?
-in terminal # "ssh userORroot@192.58.119.183"
-it will ask for password 
-{]
 [}what do if it is the first time in the linux server
 in terminal # "apt-get update && apt-get upgrade"
 {]
@@ -30,6 +26,10 @@ after the ':' is the folder in the server side to send the public key in
 (in server machine) giving perission # "sudo chmod 700 ~/.ssh/"
 then again # "sudo chmod 600 ~/.ssh/*"
 the '*' perission all files in .ssh
+{]
+[}How do you login in to server?
+in terminal # "ssh userORroot@192.58.119.183"
+it will ask for password 
 {]
 [}three digits number of chmod 700
 Linux the way that
@@ -63,6 +63,14 @@ next is enable them
 for status
 # "sudo ufw status"
 {]
+[}To test server in port 8000
+in server terminal "python manage.py runserver 0.0.0.0:8000"
+check crud and admin is work and make some test
+{]
+[}how to install pip and VE in server
+# "sudo apt-get install python3-pip"
+# "sudo apt-get install python3-venv"
+{]
 [}create an requirements.txt (local machine) and install in server
 if in VE activte it and then run "pip freeze > requirements.txt"
 in server terminal "pip install -r requirements.txt"
@@ -71,18 +79,10 @@ in server terminal "pip install -r requirements.txt"
 in local terminal # "scp -r django_project user@192.58.119.186:~/"
 after the ':' is the folder in the server side to send home folder
 {]
-[}how to install pip and VE in server
-# "sudo apt-get install python3-pip"
-# "sudo apt-get install python3-venv"
-{]
 [}When deploying live django project static is different how?
 You must have STATIC_ROOT so in setting.py
 add # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 then in server terminal # python manage.py collectstatic
-{]
-[}To test server in port 8000
-in server terminal "python manage.py runserver 0.0.0.0:8000"
-check crud and admin is work and make some test
 {]
 [}how to install apache ans wsgi
 in server terminal:
